@@ -1,10 +1,10 @@
-# anypickdemo
+# AnyPick
 
-A new Flutter project.
+A Flutter app for food ordering.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is Flutter application for food ordering for near-by restaurents.
 
 A few resources to get you started if this is your first Flutter project:
 
