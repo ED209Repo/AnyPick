@@ -46,3 +46,14 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/apk/
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: flutter-pipeline
+          SLACK_COLOR: ${{ job.status }} '#2cde04'
+          SLACK_ICON: https://github.com/ED209Repo/AnyPick/blob/main/images/mainlogo.png?size=48
+          SLACK_MESSAGE: 'New Build for AnyPick Launched :rocket:'
+          SLACK_TITLE: Build Completed
+          SLACK_USERNAME: rtCamp
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
