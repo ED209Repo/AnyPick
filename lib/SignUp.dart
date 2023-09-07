@@ -173,8 +173,8 @@ class _SignupPageState extends State<SignupPage> {
 
                             selectvalue=value.toString();
                           });}),),
-                          Spacer(),
-                          Spacer(),
+                          const Spacer(),
+                          const Spacer(),
                         ],
 
                       ),
