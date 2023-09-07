@@ -4,7 +4,8 @@ name: Build Flutter APK's and App bundle
 on:
   # Triggers the workflow on push or pull request events but only for the "develop" branch
   push:
-     branches: ["qa"]
+    tags:
+      - '*'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -46,3 +47,14 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/apk/
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: flutter-pipeline
+          SLACK_COLOR: ${{ job.status }} '#2cde04'
+          SLACK_ICON: https://github.com/ED209Repo/AnyPick/blob/main/images/mainlogo.png?size=48
+          SLACK_MESSAGE: 'New Build for AnyPick Launched  :rocket:'
+          SLACK_TITLE: Build Completed
+          SLACK_USERNAME: Danial
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
