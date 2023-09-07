@@ -103,7 +103,7 @@ class _registerscreenState extends State<registerscreen> {
                       _phoneno = value!;
                     },
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(
