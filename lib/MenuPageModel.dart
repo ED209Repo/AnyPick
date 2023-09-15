@@ -49,14 +49,21 @@ class scrollList {
   final String imageUrl;
   final String dishType;
   final String description;
+  final List<String> options;
+  final List<String> flavors;
+  final List<String> AdsOn;
   int price;
   int count;
+
   scrollList({
   required this.title,
   required this.imageUrl,
   required this.dishType,
   required this.description,
   required this.price,
+    required this.options,
+    required this.flavors,
+    required this.AdsOn,
   this.count = 0,
 });
 }
@@ -68,6 +75,10 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Chocolate Chip', 'Cookies and Cream', 'Funfetti' ,'M and M' , 'Red Velvet' , 'Peanut Butter' , 'Snickerdoodle'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+      AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
+
     ),
     scrollList(
         title: 'Combo Burger',
@@ -75,6 +86,9 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Option 1', 'Option 2', 'Option 3'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+        AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
     ),
     scrollList(
         title: 'Combo Sandwich',
@@ -82,6 +96,9 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Option 33333', 'Option 2', 'Option 3'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+        AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
     ),
     scrollList(
         title: 'Oyster Dish',
@@ -89,6 +106,9 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Option 1', 'Option 2', 'Option 3'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+        AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
     ),
     // Add more menu items here
   ];

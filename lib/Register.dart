@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'OtpScreen.dart';
 import 'Widgets/AppColors.dart';
-import 'Widgets/CountryPicker.dart';  // Check this import
 import 'Widgets/CustomButton.dart';
 
 class registerscreen extends StatefulWidget {

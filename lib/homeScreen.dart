@@ -1,4 +1,6 @@
+import 'package:anypickdemo/AccountSettings.dart';
 import 'package:anypickdemo/Widgets/CustomButton2.dart';
+import 'package:anypickdemo/browseScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'Card_Swiper.dart';
@@ -42,9 +44,18 @@ class _ExamplePageState extends State<Example> {
     children: [
     Padding(
     padding: const EdgeInsets.only(left: 10, top: 10),
-    child: CircleAvatar(
-    radius: 25, // Adjust the radius as needed
-    backgroundImage: NetworkImage(profileImageUrl),
+    child: GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => AccountSettingsPage(),
+          ),
+        );
+      },
+      child: CircleAvatar(
+      radius: 25, // Adjust the radius as needed
+      backgroundImage: NetworkImage(profileImageUrl),
+      ),
     ),
     ),
     const SizedBox(width: 10),
@@ -75,7 +86,7 @@ class _ExamplePageState extends State<Example> {
     size: 35,
     ),
     onPressed: () {
-    // Handle search button press
+    Navigator.push(context, MaterialPageRoute(builder: (context) => BrowseScreen()));
     },
     ),
     IconButton(
