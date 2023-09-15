@@ -40,27 +40,22 @@ class _SignupPageState extends State<SignupPage> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              fontSize: 20,
+                              fontSize: 40,
                             ),),),
                         ],
                       ),
                       const SizedBox(height: 15.0),
-                      const Text("Create an Account",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 35,
-                        ),),
+
                       const SizedBox(height: 15.0),
                       const Row(
                         children:<Widget> [
                           Expanded(
-                            child:Text("Enter your Name , Email and Password for signup.",
-                              textAlign: TextAlign.start,
+                            child:Text("Enter your Data to Register an Account.",
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.grey,
+                                color: Colors.black,
                               ),),),
                         ],
                       ),
@@ -180,38 +175,43 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       const SizedBox(height: 15.0),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children:<Widget>[
-                          const  Text("Age"),
+
                           const SizedBox(width: 60),
-                          Center(
-                            child: TextButton(
-                              onPressed: pickDob,
-                              child: Text(
-                                myAge.isEmpty ? 'Select Date of Birth' : 'Date of Birth $SelectedDate', // Display selected date
-                                style: const TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  decorationThickness: 2.5,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16,
+                          Row(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: TextButton(
+                                  onPressed: pickDob,
+                                  child: Text(
+                                    myAge.isEmpty ? 'Select Date of Birth' : 'Date of Birth $SelectedDate',
+                                    style: const TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      decorationThickness: 2.5,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  style: ButtonStyle(
+                                    foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
+                                  ),
                                 ),
                               ),
-                              style: ButtonStyle(
-                                foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
-                              ),
-                            ),
+                            ],
                           ),
                           const Spacer(),
                         ],
                       ),
                       const SizedBox(height: 10.0),
-                      Text(myAge,
-                          textAlign: TextAlign.center),
+                      // Text(myAge,
+                      //     textAlign: TextAlign.center),
                       const SizedBox(height: 40.0),
                       SizedBox(
                         height: 40,
                         child: CustomButton(
-                          text: "SIGN UP",
+                          text: "Create Account",
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
