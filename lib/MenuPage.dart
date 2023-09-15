@@ -1,13 +1,13 @@
 import 'package:anypickdemo/MenuPageModel.dart';
 import 'package:flutter/material.dart';
 import 'homeScreen.dart';
-
+import 'menuSelection.dart';
 class MenuPage extends StatefulWidget {
   @override
   _MenuPageState createState() => _MenuPageState();
 }
-
 class _MenuPageState extends State<MenuPage> {
+
   int likeCount = 0;
   int heartCount = 0;
 
@@ -36,11 +36,6 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     final containerHeight = MediaQuery.of(context).size.height * 0.3;
     final double fontSize = MediaQuery.of(context).size.width < 600 ? 14 : 18;
-    final commonTextStyle = TextStyle(
-      fontSize: fontSize,
-      fontWeight: FontWeight.bold,
-      color: Colors.black,
-    );
 
     return Scaffold(
       body: Stack(
@@ -50,19 +45,39 @@ class _MenuPageState extends State<MenuPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-
                   height: containerHeight,
-                  child: PageView.builder(
-                    itemCount: ImageList.images.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        width: double.infinity,
-                        child: Image.network(
-                          ImageList.images[index].imageUrl,
-                          fit: BoxFit.cover,
+                  child: Stack(
+                    children: [
+                      PageView.builder(
+                        itemCount: ImageList.images.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            width: double.infinity,
+                            child: Image.network(
+                              ImageList.images[index].imageUrl,
+                              fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                      ),
+                      Positioned(
+                        top: 20,
+                        left: 10,
+                        child: GestureDetector(
+                          onTap: navigateToExamplePage,
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            color: Colors.grey.withOpacity(0.5), // Semi-transparent overlay
+                            child: const Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Colors.white,
+                              size: 20,
+                            ),
+                          ),
                         ),
-                      );
-                    },
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -191,31 +206,31 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                SingleChildScrollView(
+                const SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       SizedBox(width: 10),
-                      Text('Starter'),
+                      Text('Starter',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Main Course'),
+                      Text('Main Course',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Appetizers'),
+                      Text('Appetizers',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Seafood'),
+                      Text('Seafood',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Chicken & Lamb'),
+                      Text('Chicken & Lamb',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Fast Food'),
+                      Text('Fast Food',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Deserts'),
+                      Text('Deserts',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Chinese Food'),
+                      Text('Chinese Food',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Add ons'),
+                      Text('Add ons',style: commonTextStyle),
                       SizedBox(width: 20),
-                      Text('Cold Drinks'),
+                      Text('Cold Drinks',style: commonTextStyle),
                       SizedBox(width: 20),
                       // Add more Text widgets as needed
                     ],
@@ -256,11 +271,27 @@ class _MenuPageState extends State<MenuPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      item.title,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 22.0,
+                                    GestureDetector(
+                                      onTap: () {
+                                        // Navigate to the new page when the Text is clicked
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => menuSelection(
+                                                title: item.title,
+                                                description: item.description,
+                                                options: item.options,
+                                                flavors: item.flavors,
+                                                AdsOn: item.AdsOn),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        item.title,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22.0,
+                                        ),
                                       ),
                                     ),
                                     Text(
@@ -272,7 +303,7 @@ class _MenuPageState extends State<MenuPage> {
                                         color: Colors.grey,
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     Row(
                                       children: [
                                         Text(
@@ -296,27 +327,38 @@ class _MenuPageState extends State<MenuPage> {
                                             size: 32,
                                           ),
                                         ),
-                                        Text(
-                                          '${item.count}',
-                                          style: const TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            if (item.count > 0) {
-                                              setState(() {
-                                                item.count--;
-                                              });
-                                            }
-                                          },
-                                          icon: const Icon(
-                                            Icons.remove_outlined,
-                                            color: Colors.red,
-                                            size: 32,
-                                          ),
+                                        Row(
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.all(8.0), // Add padding to control the background size
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey.withOpacity(0.5), // Set the desired opacity
+                                                borderRadius: BorderRadius.circular(8.0), // Add border radius if needed
+                                              ),
+                                              child: Text(
+                                                '${item.count}',
+                                                style: const TextStyle(
+                                                  fontSize: 30,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white, // Text color
+                                                ),
+                                              ),
+                                            ),
+                                            IconButton(
+                                              onPressed: () {
+                                                if (item.count > 0) {
+                                                  setState(() {
+                                                    item.count--;
+                                                  });
+                                                }
+                                              },
+                                              icon: const Icon(
+                                                Icons.remove_outlined,
+                                                color: Colors.red,
+                                                size: 32,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -339,3 +381,9 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 }
+const commonTextStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+//

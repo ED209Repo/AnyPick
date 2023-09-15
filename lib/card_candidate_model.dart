@@ -73,8 +73,6 @@ final List<ExampleResturantModel> candidates = [
     heartCount: 0,
     color: const [Color(0xFF736EFE), Color(0xFF62E4EC)],
     imageUrl: 'images/Kfc logo.png'
-    // imageUrl: 'https://example.com/kfc_logo.png',
-    // if pictures get at runtime
     ,
     backgroundImage: 'images/kfc.jpg',
     dealNames: [
@@ -125,10 +123,7 @@ final List<ExampleResturantModel> candidates = [
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFF0BA4E0), Color(0xFFA9E4BD)],
-    imageUrl: 'images/burger lab.png'
-    // imageUrl: 'https://example.com/burger lab.png',
-    // if pictures get at runtime
-    ,
+    imageUrl: 'images/burger lab.png',
     backgroundImage: 'images/lab.jpg',
     dealNames: [
       'Big Mac Combo Deal',
