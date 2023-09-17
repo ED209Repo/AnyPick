@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'homeScreen.dart';
 import 'menuSelection.dart';
 class MenuPage extends StatefulWidget {
+  const MenuPage({Key? key}) : super(key: key);
+
   @override
   _MenuPageState createState() => _MenuPageState();
 }
@@ -44,14 +46,14 @@ class _MenuPageState extends State<MenuPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   height: containerHeight,
                   child: Stack(
                     children: [
                       PageView.builder(
                         itemCount: ImageList.images.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
+                          return SizedBox(
                             width: double.infinity,
                             child: Image.network(
                               ImageList.images[index].imageUrl,
@@ -155,7 +157,7 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                Container(
+                SizedBox(
                   height: 140,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -238,7 +240,7 @@ class _MenuPageState extends State<MenuPage> {
                 ),
                 const SizedBox(width: 20),
                 SingleChildScrollView(
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 250,
                     child: ListView.builder(
@@ -255,7 +257,7 @@ class _MenuPageState extends State<MenuPage> {
                           ),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 120.0,
                                 height: 120.0,
                                 child: ClipRRect(

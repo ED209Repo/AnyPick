@@ -72,7 +72,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                       child: const Icon(Icons.arrow_back_ios_new),
                     ),
                   ),
-                  Expanded(child: Text("Browse",
+                  const Expanded(child: Text("Browse",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -163,7 +163,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                       height: 200,
                       width: 150,
                       decoration: BoxDecoration(
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           // colorFilter:  ColorFilter.mode(Colors.black.withOpacity(0.5),
                           //     BlendMode.dstATop),
                           image: AssetImage('images/kfc.jpg'),
@@ -185,7 +185,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                         sigmaX: 5.0,
                           sigmaY: 5.0,
                         ),
-                        child: Container(
+                        child: SizedBox(
                           height: 500,
                           width: 200,
                           child:Column(
@@ -205,7 +205,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                               Padding(padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
                               child: Wrap(
                                 crossAxisAlignment: WrapCrossAlignment.center,
-                                children: [ Icon(Icons.timer_outlined,
+                                children: [ const Icon(Icons.timer_outlined,
                                 color: Colors.white,
                                 size: 15,),
                                   Text  (
@@ -220,7 +220,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                               child: Wrap(
                                 crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
-                                  Icon(Icons.location_on,
+                                  const Icon(Icons.location_on,
                                     color: Colors.white,
                                     size: 15,),
                                   Text(

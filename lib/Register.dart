@@ -15,7 +15,6 @@ class registerscreen extends StatefulWidget {
 class _registerscreenState extends State<registerscreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController phoneController = TextEditingController();
-  String _phoneno = '';
   Country selectedCountry = Country(
     phoneCode: "966",
     countryCode: "SA",
@@ -99,7 +98,6 @@ class _registerscreenState extends State<registerscreen> {
                       return null;
                     },
                     onSaved: (value) {
-                      _phoneno = value!;
                     },
                     style: const TextStyle(
                       fontSize: 20,
@@ -201,7 +199,7 @@ class _registerscreenState extends State<registerscreen> {
                           );
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => otpscreen(verificationId: " ")),
+                            MaterialPageRoute(builder: (context) => const otpscreen(verificationId: " ")),
                           );
                         } else {
                           showDialog(

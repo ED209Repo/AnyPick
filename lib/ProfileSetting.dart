@@ -5,6 +5,8 @@ import 'AccountSettings.dart';
 import 'Widgets/AppColors.dart';
 
 class ProfileSettingsPage extends StatefulWidget {
+  const ProfileSettingsPage({Key? key}) : super(key: key);
+
   @override
   _ProfileSettingsPageState createState() => _ProfileSettingsPageState();
 }
@@ -12,7 +14,7 @@ class ProfileSettingsPage extends StatefulWidget {
 class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
   String _fullname = '';
   String _email = '';
-  ImageProvider<Object> currentProfilePhoto = AssetImage('images/profile_photo.JPG');
+  ImageProvider<Object> currentProfilePhoto = const AssetImage('images/profile_photo.JPG');
   String? imagePath; // Store the path to the selected image
   File? pickedImage; // Store the picked image as a File
   String? selectedDateText; // Store the selected date text
@@ -194,31 +196,31 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                   });
                 }
               },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
+              ),
               child: Text(
                 selectedDateText ?? 'Change Date of Birth',
-                style: TextStyle(
+                style: const TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2.5,
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
               ),
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
-              ),
             ),
           ),
           // "Save Changes" button
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
+            child: SizedBox(
               width: 150, // Adjust the width as needed
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AccountSettingsPage(),
+                      builder: (context) => const AccountSettingsPage(),
                     ),
                   );
                 },

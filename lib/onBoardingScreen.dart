@@ -7,7 +7,7 @@ import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
 
 class OnboardScreen extends StatefulWidget {
-  OnboardScreen({Key? key}) : super(key: key);
+  const OnboardScreen({Key? key}) : super(key: key);
 
   @override
   _OnboardscreenState createState() => _OnboardscreenState();
@@ -23,7 +23,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Image.asset(
               'images/mainlogo.png',
               height: 150,
@@ -39,7 +39,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 10, bottom: 10),
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
             child: Text(
               "Find Your Desired Food Around You",
               style: TextStyle(
@@ -60,7 +60,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10,),
+            padding: const EdgeInsets.only(bottom: 10,),
             child: Image.asset(
               'images/whiteicon.png',
               height: 150,
@@ -76,7 +76,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 5, bottom: 10),
+            padding: const EdgeInsets.only(top: 5, bottom: 10),
             child: Text(
               "Pickup Your Food On The Go",
               style: TextStyle(
@@ -96,7 +96,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Image.asset(
               "images/mainlogo.png",
               height: 150,
@@ -104,7 +104,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 30),
+            padding: const EdgeInsets.only(bottom: 30),
             child: Image.asset(
               "images/image1.png",
               height: 180,
@@ -112,7 +112,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Text(
               "Welcome",
               style: TextStyle(
@@ -123,7 +123,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 10 , left: 10 , right: 10),
+            padding: const EdgeInsets.only(bottom: 10 , left: 10 , right: 10),
             child: Text(
               "It's a pleasure to meet you. We are excited that you're here so let's get started!",
               textAlign: TextAlign.center,
@@ -239,13 +239,13 @@ class _OnboardscreenState extends State<OnboardScreen> {
 
   void continueMethod(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => registerscreen()),
+      MaterialPageRoute(builder: (context) => const registerscreen()),
           (Route<dynamic> route) => false,
     );
   }
   void HomeMethod(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => Example()),
+      MaterialPageRoute(builder: (context) => const Example()),
           (Route<dynamic> route) => false,
     );
   }

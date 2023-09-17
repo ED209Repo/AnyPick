@@ -43,7 +43,7 @@ class _ExampleCardState extends State<ExampleCard> {
               Positioned(
                 top: 10, // Adjust this value as needed
                 left: 10, // Adjust this value as needed
-                child: Container(
+                child: SizedBox(
                   width: 110,
                   height: 110,
                   child: ClipOval(
@@ -76,7 +76,7 @@ class _ExampleCardState extends State<ExampleCard> {
                   children: [
                     Column(
                       children: [
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
                         Center(
                           child: Text(
                             widget.restaurant.name,

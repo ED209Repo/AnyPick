@@ -6,6 +6,8 @@ import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
 
 class SignupPage extends StatefulWidget {
+  const SignupPage({Key? key}) : super(key: key);
+
   @override
   _SignupPageState createState() => _SignupPageState();
 }
@@ -185,6 +187,9 @@ class _SignupPageState extends State<SignupPage> {
                                 alignment: Alignment.centerLeft,
                                 child: TextButton(
                                   onPressed: pickDob,
+                                  style: ButtonStyle(
+                                    foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
+                                  ),
                                   child: Text(
                                     myAge.isEmpty ? 'Select Date of Birth' : 'Date of Birth $SelectedDate',
                                     style: const TextStyle(
@@ -193,9 +198,6 @@ class _SignupPageState extends State<SignupPage> {
                                       fontWeight: FontWeight.w600,
                                       fontSize: 16,
                                     ),
-                                  ),
-                                  style: ButtonStyle(
-                                    foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
                                   ),
                                 ),
                               ),

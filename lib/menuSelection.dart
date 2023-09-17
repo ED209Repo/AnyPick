@@ -2,7 +2,6 @@ import 'package:anypickdemo/MenuPage.dart';
 import 'package:anypickdemo/MenuPageModel.dart';
 import 'package:anypickdemo/Widgets/CustomButton2.dart';
 import 'package:flutter/material.dart';
-import 'package:popover/popover.dart';
 
 
 class menuSelection extends StatefulWidget {
@@ -12,13 +11,13 @@ class menuSelection extends StatefulWidget {
   final List<String> flavors;
   final List<String> AdsOn;
 
-  menuSelection({
+  const menuSelection({Key? key, 
     required this.title,
     required this.description,
     required this.options,
     required this.flavors,
     required this.AdsOn,
-  });
+  }) : super(key: key);
 
   @override
   _menuSelectionState createState() => _menuSelectionState();
@@ -38,7 +37,7 @@ class _menuSelectionState extends State<menuSelection> {
       body: Column(
         children: [
           // Top container with an image and close button
-          Container(
+          SizedBox(
             height: containerHeight,
             child: Stack(
               children: [
@@ -46,7 +45,7 @@ class _menuSelectionState extends State<menuSelection> {
                 PageView.builder(
                   itemCount: ImageList.images.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
+                    return SizedBox(
                       width: double.infinity,
                       child: Image.network(
                         ImageList.images[index].imageUrl,
@@ -65,7 +64,7 @@ class _menuSelectionState extends State<menuSelection> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MenuPage(),
+                          builder: (context) => const MenuPage(),
                         ),
                       );
                     },
@@ -137,11 +136,11 @@ class _menuSelectionState extends State<menuSelection> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Calculate the position for the popup menu
-                      final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+                      final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
                       final double screenWidth = overlay.size.width;
                       final double screenHeight = overlay.size.height;
 
-                      final double menuWidth = 200; // Adjust this width as needed
+                      const double menuWidth = 200; // Adjust this width as needed
                       final double menuHeight = widget.options.length * 56.0; // Assuming each item is 56.0 in height
 
                       final double menuX = (screenWidth - menuWidth) / 2;
@@ -179,13 +178,13 @@ class _menuSelectionState extends State<menuSelection> {
                         ),
                       );
                     },
-                    child: const Text("Show Top Cookies"),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey,
+                      backgroundColor: Colors.grey,
                     ),
+                    child: const Text("Show Top Cookies"),
                   ),
                 ),
-                SizedBox(height: 12), // Spacer
+                const SizedBox(height: 12), // Spacer
                 // Choice of flavor
                 const Text(
                   'Choice of Flavor',
@@ -195,18 +194,18 @@ class _menuSelectionState extends State<menuSelection> {
                     fontSize: 18,
                   ),
                 ),
-                SizedBox(height: 12), // Spacer
+                const SizedBox(height: 12), // Spacer
                 // Button to select flavor
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: ElevatedButton(
                     onPressed: () {
                       // Calculate the position for the popup menu
-                      final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+                      final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
                       final double screenWidth = overlay.size.width;
                       final double screenHeight = overlay.size.height;
 
-                      final double menuWidth = 200; // Adjust this width as needed
+                      const double menuWidth = 200; // Adjust this width as needed
                       final double menuHeight = widget.flavors.length * 56.0; // Assuming each item is 56.0 in height
 
                       final double menuX = (screenWidth - menuWidth) / 2;
@@ -244,13 +243,13 @@ class _menuSelectionState extends State<menuSelection> {
                         ),
                       );
                     },
-                    child: const Text("Select Flavor"),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey,
+                      backgroundColor: Colors.grey,
                     ),
+                    child: const Text("Select Flavor"),
                   ),
                 ),
-                SizedBox(height: 10), // Spacer
+                const SizedBox(height: 10), // Spacer
                 // Choice of Ads On
                 const Text(
                   'Choice of Ads On',
@@ -260,18 +259,18 @@ class _menuSelectionState extends State<menuSelection> {
                     fontSize: 18,
                   ),
                 ),
-                SizedBox(height: 12), // Spacer
+                const SizedBox(height: 12), // Spacer
                 // Button to select Ads On
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: ElevatedButton(
                     onPressed: () {
                       // Calculate the position for the popup menu
-                      final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+                      final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
                       final double screenWidth = overlay.size.width;
                       final double screenHeight = overlay.size.height;
 
-                      final double menuWidth = 200; // Adjust this width as needed
+                      const double menuWidth = 200; // Adjust this width as needed
                       final double menuHeight = widget.AdsOn.length * 56.0; // Assuming each item is 56.0 in height
 
                       final double menuX = (screenWidth - menuWidth) / 2;
@@ -310,17 +309,17 @@ class _menuSelectionState extends State<menuSelection> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.grey,
+                      backgroundColor: Colors.grey,
                     ),
                     child: const Text("Select Ads On"),
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 CustomButton2
                   (text: "ADD TO ORDER",
                     onPressed: ()
                     {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> MenuPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const MenuPage()));
                     })
               ],
             ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'ProfileSetting.dart';
 class AccountSettingsPage extends StatefulWidget {
+  const AccountSettingsPage({Key? key}) : super(key: key);
+
   @override
   _AccountSettingsPageState createState() => _AccountSettingsPageState();
 }
@@ -83,7 +85,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProfileSettingsPage(),
+                  builder: (context) => const ProfileSettingsPage(),
                 ),
               );
             },
