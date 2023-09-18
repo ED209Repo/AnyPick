@@ -22,24 +22,24 @@ class MenuItem {
 class MenuPageModel {
   static List<MenuItem> items = [
     MenuItem(
-        title: 'Item 1',
+        title: 'Cookies',
         imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRldj56-OSaTw-EYr1aJBAkKXeF2s_XXbVbUA&usqp=CAU',
-        dishType: 'Dessert', // Replace with actual dish type
+        dishType: 'Chocolate', // Replace with actual dish type
     ),
     MenuItem(
-        title: 'Item 2',
+        title: 'Pizza',
         imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRldj56-OSaTw-EYr1aJBAkKXeF2s_XXbVbUA&usqp=CAU',
-        dishType: 'Dessert', // Replace with actual dish type
+        dishType: 'Italian', // Replace with actual dish type
     ),
     MenuItem(
-        title: 'Item 3',
+        title: 'Pasta',
         imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-gS-GT2kGRuYfS8SOTdpwGpNE9JdzZt2mbA&usqp=CAU',
-        dishType: 'Dessert', // Replace with actual dish type
+        dishType: 'White Sauce', // Replace with actual dish type
     ),
     MenuItem(
-        title: 'Item 4',
+        title: 'Burger',
         imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJeWVOiCuEGP_lX_3RLXbOfr8FDT8EIORkYQ&usqp=CAU',
-        dishType: 'Dessert', // Replace with actual dish type
+        dishType: 'Mighty Zinger', // Replace with actual dish type
     ),
     // Add more menu items here
   ];
@@ -49,14 +49,21 @@ class scrollList {
   final String imageUrl;
   final String dishType;
   final String description;
+  final List<String> options;
+  final List<String> flavors;
+  final List<String> AdsOn;
   int price;
   int count;
+
   scrollList({
   required this.title,
   required this.imageUrl,
   required this.dishType,
   required this.description,
   required this.price,
+    required this.options,
+    required this.flavors,
+    required this.AdsOn,
   this.count = 0,
 });
 }
@@ -68,6 +75,10 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Chocolate Chip', 'Cookies and Cream', 'Funfetti' ,'M and M' , 'Red Velvet' , 'Peanut Butter' , 'Snickerdoodle'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+      AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
+
     ),
     scrollList(
         title: 'Combo Burger',
@@ -75,6 +86,9 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Option 1', 'Option 2', 'Option 3'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+        AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
     ),
     scrollList(
         title: 'Combo Sandwich',
@@ -82,6 +96,9 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Option 33333', 'Option 2', 'Option 3'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+        AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
     ),
     scrollList(
         title: 'Oyster Dish',
@@ -89,6 +106,9 @@ class scrollListModel {
         dishType: 'Dessert', // Replace with actual dish type
         description: 'A bakery is an establishment that produces and sells flour-based food.',
         price: 5,
+      options: ['Option 1', 'Option 2', 'Option 3'],
+      flavors: ['Vanilla', 'Chocolate', 'Strawberry'],
+        AdsOn: ['Extra Ketchup','Mayo','Extra Topping'],
     ),
     // Add more menu items here
   ];

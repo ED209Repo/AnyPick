@@ -48,8 +48,8 @@ final List<ExampleResturantModel> candidates = [
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFFFF3868), Color(0xFFFFB49A)],
-    imageUrl: 'images/mc logo.png',
-    backgroundImage: 'images/mc.jpg',
+    imageUrl: 'images/mcdd.jpg',
+    backgroundImage: 'images/kfc.jpg',
     dealNames: [
       'Big Mac Combo Deal',
       'Chicken Sandwich Special',
@@ -72,10 +72,7 @@ final List<ExampleResturantModel> candidates = [
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFF736EFE), Color(0xFF62E4EC)],
-    imageUrl: 'images/Kfc logo.png'
-    // imageUrl: 'https://example.com/kfc_logo.png',
-    // if pictures get at runtime
-    ,
+    imageUrl: 'images/Kfc3.png',
     backgroundImage: 'images/kfc.jpg',
     dealNames: [
       'Big Mac Combo Deal',
@@ -100,8 +97,8 @@ final List<ExampleResturantModel> candidates = [
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFF2F80ED), Color(0xFF56CCF2)],
-    imageUrl: 'images/hardess logo.png',
-    backgroundImage: 'images/hardess.jpg',
+    imageUrl: 'images/kfc.jpg',
+    backgroundImage: 'images/kfc.jpg',
 
     dealNames: [
       'Big Mac Deal',
@@ -125,11 +122,8 @@ final List<ExampleResturantModel> candidates = [
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFF0BA4E0), Color(0xFFA9E4BD)],
-    imageUrl: 'images/burger lab.png'
-    // imageUrl: 'https://example.com/burger lab.png',
-    // if pictures get at runtime
-    ,
-    backgroundImage: 'images/lab.jpg',
+    imageUrl: 'images/kfc.jpg',
+    backgroundImage: 'images/kfc.jpg',
     dealNames: [
       'Big Mac Combo Deal',
       'Chicken Sandwich Special',
