@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:anypickdemo/Widgets/CustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'AccountSettings.dart';
 import 'Widgets/AppColors.dart';
 
 class ProfileSettingsPage extends StatefulWidget {
+  const ProfileSettingsPage({Key? key}) : super(key: key);
+
   @override
   _ProfileSettingsPageState createState() => _ProfileSettingsPageState();
 }
@@ -12,7 +15,7 @@ class ProfileSettingsPage extends StatefulWidget {
 class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
   String _fullname = '';
   String _email = '';
-  ImageProvider<Object> currentProfilePhoto = AssetImage('images/profile_photo.JPG');
+  ImageProvider<Object> currentProfilePhoto = const AssetImage('images/profile_photo.JPG');
   String? imagePath; // Store the path to the selected image
   File? pickedImage; // Store the picked image as a File
   String? selectedDateText; // Store the selected date text
@@ -31,40 +34,20 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(appBar: AppBar(
+        backgroundColor: AppColors.themeColor,
+        leading: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+        ),
+      title: Text("Profile Settings"),
+      centerTitle: true,
+      ),
       body: ListView(
         children: <Widget>[
-          // Title and Back Button Row
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    'Profile Settings',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Container with gradient, Circle Avatar, and Text
+          const SizedBox(height: 10),
           Container(
-            height: MediaQuery.of(context).size.height * 0.3,
+            height: MediaQuery.of(context).size.height * 0.2,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [Colors.white, Colors.white],
@@ -194,40 +177,43 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                   });
                 }
               },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
+              ),
               child: Text(
                 selectedDateText ?? 'Change Date of Birth',
-                style: TextStyle(
+                style: const TextStyle(
                   decoration: TextDecoration.underline,
                   decorationThickness: 2.5,
                   fontWeight: FontWeight.w600,
                   fontSize: 16,
                 ),
               ),
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
-              ),
             ),
           ),
           // "Save Changes" button
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              width: 150, // Adjust the width as needed
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AccountSettingsPage(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFF5A896),
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                ),
-                child: const Text('Save Changes'),
-              ),
+            padding: const EdgeInsets.only(top: 230, left: 10, right: 10),
+            child: SizedBox(
+              width: 150, 
+              child:CustomButton(text: 'Save Changes', onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const AccountSettingsPage()));
+              }) ,
+              // child: ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => const AccountSettingsPage(),
+              //       ),
+              //     );
+              //   },
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: const Color(0xFFF5A896),
+              //     padding: const EdgeInsets.symmetric(vertical: 20.0),
+              //   ),
+              //   child: const Text('Save Changes'),
+              // ),
             ),
           ),
         ],

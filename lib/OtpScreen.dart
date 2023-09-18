@@ -6,7 +6,7 @@ import 'Widgets/CustomButton.dart';
 
 class otpscreen extends StatefulWidget {
   final String verificationId;
-  otpscreen({Key? key, required this.verificationId}) : super(key: key);
+  const otpscreen({Key? key, required this.verificationId}) : super(key: key);
 
   @override
   State<otpscreen> createState() => _otpscreenState();
@@ -86,7 +86,7 @@ class _otpscreenState extends State<otpscreen> {
                       text: "Verify",
                       onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (
-                            context) => SignupPage()));
+                            context) => const SignupPage()));
                       }
                   ),
                 )

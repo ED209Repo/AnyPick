@@ -48,13 +48,13 @@ class _ExamplePageState extends State<Example> {
       onTap: (){
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => AccountSettingsPage(),
+            builder: (context) => const AccountSettingsPage(),
           ),
         );
       },
       child: CircleAvatar(
       radius: 25, // Adjust the radius as needed
-      backgroundImage: NetworkImage(profileImageUrl),
+      backgroundImage: AssetImage('images/profile.jpg'),
       ),
     ),
     ),
@@ -63,7 +63,7 @@ class _ExamplePageState extends State<Example> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
     Text(
-    'Hey  ' + userName,
+    'Hey  $userName',
     style: const TextStyle(
     color: Colors.black,
     fontSize: 14,
@@ -86,7 +86,7 @@ class _ExamplePageState extends State<Example> {
     size: 35,
     ),
     onPressed: () {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => BrowseScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const BrowseScreen()));
     },
     ),
     IconButton(
@@ -120,7 +120,7 @@ class _ExamplePageState extends State<Example> {
     ),
     ),
     CustomButton2(text: "Order", onPressed: (){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=> MenuPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> const MenuPage()));
     })
     ],
     ),
@@ -139,7 +139,7 @@ class _ExamplePageState extends State<Example> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => MenuPage(), // Replace with your MenuPage widget
+            builder: (context) => const MenuPage(), // Replace with your MenuPage widget
           ),
         );
         // Here you can write your code for open new view

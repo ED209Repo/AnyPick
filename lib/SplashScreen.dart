@@ -17,12 +17,12 @@ class _SplashscreenState extends State<Splashscreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 7000),
+      duration: const Duration(milliseconds: 7000),
     );
 
     _animationController.forward().then((value) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => OnboardScreen()),
+        MaterialPageRoute(builder: (context) => const OnboardScreen()),
       );
     });
   }
@@ -42,7 +42,7 @@ class _SplashscreenState extends State<Splashscreen>
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                   height: 150,
                   width: 150,
                   child: Image.asset("images/mainlogo.png")),
@@ -56,7 +56,7 @@ class _SplashscreenState extends State<Splashscreen>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => OnboardScreen(),
+                          builder: (context) => const OnboardScreen(),
                         ),
                       );
                     });

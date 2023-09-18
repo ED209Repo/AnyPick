@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
+import 'package:anypickdemo/MenuPage.dart';
 import 'package:flutter/material.dart';
-
+import 'package:sizer/sizer.dart';
 import 'BrowseScreenModel.dart';
 import 'Widgets/AppColors.dart';
 
@@ -52,35 +53,22 @@ class _BrowseScreenState extends State<BrowseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final containerHeight = MediaQuery.of(context).size.height * 0.3;
-    final double fontSize = MediaQuery.of(context).size.width < 600 ? 14 : 18;
-
+    return  Sizer(builder: (context, orientation, deviceType){
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.themeColor2,
+        leading: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+        ),
+      title: Text("Browse"),
+      centerTitle: true,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding:  EdgeInsets.symmetric(vertical: 0.h, horizontal: 2.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 3),
-              child: Row(
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: const Icon(Icons.arrow_back_ios_new),
-                    ),
-                  ),
-                  Expanded(child: Text("Browse",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),)),
-                ],
-              ),
-            ),
             const SizedBox(height: 20),
             TextField(
               controller: _searchController,
@@ -159,11 +147,13 @@ class _BrowseScreenState extends State<BrowseScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
+                    child: InkWell(
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>const MenuPage())),
                     child: Container(
                       height: 200,
                       width: 150,
                       decoration: BoxDecoration(
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           // colorFilter:  ColorFilter.mode(Colors.black.withOpacity(0.5),
                           //     BlendMode.dstATop),
                           image: AssetImage('images/kfc.jpg'),
@@ -185,7 +175,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                         sigmaX: 5.0,
                           sigmaY: 5.0,
                         ),
-                        child: Container(
+                        child: SizedBox(
                           height: 500,
                           width: 200,
                           child:Column(
@@ -205,7 +195,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                               Padding(padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
                               child: Wrap(
                                 crossAxisAlignment: WrapCrossAlignment.center,
-                                children: [ Icon(Icons.timer_outlined,
+                                children: [ const Icon(Icons.timer_outlined,
                                 color: Colors.white,
                                 size: 15,),
                                   Text  (
@@ -220,7 +210,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                               child: Wrap(
                                 crossAxisAlignment: WrapCrossAlignment.center,
                                 children: [
-                                  Icon(Icons.location_on,
+                                  const Icon(Icons.location_on,
                                     color: Colors.white,
                                     size: 15,),
                                   Text(
@@ -249,7 +239,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
                       ),
                   ]),
                   ),
-                  );
+                  ));
                 },
               ),
             ),
@@ -257,5 +247,6 @@ class _BrowseScreenState extends State<BrowseScreen> {
         ),
       ),
     );
-  }
-}
+});}}
+  
+
