@@ -63,7 +63,7 @@ class _MenuPageState extends State<MenuPage> {
                         },
                       ),
                       Positioned(
-                        top: 20,
+                        top: 50,
                         left: 10,
                         child: GestureDetector(
                           onTap: navigateToExamplePage,

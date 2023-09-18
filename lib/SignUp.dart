@@ -24,7 +24,6 @@ class _SignupPageState extends State<SignupPage> {
   @override
   void initState() {
     super.initState();
-    pickDob(); // Automatically open the date picker when the page loads
   }
 
   @override

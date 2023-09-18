@@ -1,56 +1,41 @@
+import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'Add_Vehicle_Page.dart';
 
 class VehicleManagementPage extends StatefulWidget {
   final List<Map<String, String>> vehicleList;
 
-  const VehicleManagementPage({Key? key, required this.vehicleList}) : super(key: key);
+  VehicleManagementPage({required this.vehicleList});
 
   @override
   _VehicleManagementPageState createState() => _VehicleManagementPageState();
 }
 
+
 class _VehicleManagementPageState extends State<VehicleManagementPage> {
+  List<Map<String, String>> vehicleList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: AppColors.themeColor,
+        leading: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+        ),
+      title: const Text("Vehicle  Management"),
+      centerTitle: true,
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Text(
-                    'Vehicle Management',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(width: 48.0),
-                ],
-              ),
-            ),
             Expanded(
               child: ListView.builder(
-                itemCount: widget.vehicleList.length + 1, // Add 1 for the button
+                itemCount: vehicleList.length + 1,
                 itemBuilder: (context, index) {
-                  if (index == widget.vehicleList.length) {
-                    // Display the button at the end
+                  if (index == vehicleList.length) {
                     return Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: TextButton(
@@ -62,7 +47,7 @@ class _VehicleManagementPageState extends State<VehicleManagementPage> {
                                 onVehicleAdded: (Map<String, String> vehicleData) {
                                   if (vehicleData != null) {
                                     setState(() {
-                                      widget.vehicleList.add(vehicleData);
+                                      vehicleList.add(vehicleData);
                                     });
                                   }
                                 },
@@ -70,22 +55,22 @@ class _VehicleManagementPageState extends State<VehicleManagementPage> {
                             ),
                           );
                         },
-                        child: Row(
+                        child: const Row(
                           children: [
-                            Icon(Icons.add, color: Color(0xFFF5A896), ),
+                            Icon(Icons.add, color: Color(0xFFF5A896)),
                             SizedBox(width: 8),
                             Text(
                               "Add Your Vehicle",
-                              style: TextStyle(color: Color(0xFFF5A896), ),
+                              style: TextStyle(color: Color(0xFFF5A896)),
                             ),
                           ],
                         ),
                       ),
                     );
                   } else {
-                    final vehicle = widget.vehicleList[index];
+                    final vehicle = vehicleList[index];
                     return ListTile(
-                      leading: Icon(Icons.directions_car),
+                      leading: const Icon(Icons.directions_car),
                       title: Text(vehicle['plateNumber'] ?? ''),
                       subtitle: Text('${vehicle['vehicleName']} - ${vehicle['color']}'),
                     );
@@ -98,12 +83,4 @@ class _VehicleManagementPageState extends State<VehicleManagementPage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(
-    MaterialApp(
-      home: VehicleManagementPage(vehicleList: []),
-    ),
-  );
 }

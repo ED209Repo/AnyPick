@@ -1,3 +1,4 @@
+import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'ProfileSetting.dart';
 import 'VehicleManagement.dart';
@@ -28,59 +29,20 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.themeColor,
+        leading: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+        ),
+      title: const Text("Account Settings"),
+      centerTitle: true,
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            // Back Button and Heading Row
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: <Widget>[
-                  IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back,
-                      color: Colors.black, // Use custom color
-                    ),
-                    onPressed: () {
-                      // Navigate back to the previous screen
-                      Navigator.pop(context);
-                    },
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'Account Settings',
-                        style: TextStyle(
-                          fontSize: 32.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Description
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Update your settings like Notifications, payments, profile edit, etc.',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.grey,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-
-            // Add some gap
-            const SizedBox(height: 20),
-
-            // Sections and Radio Buttons (On/Off)
+            const SizedBox(height: 10),
             buildListItemWithForwardButton(
               'Personal Info',
               Icons.person,
@@ -90,7 +52,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfileSettingsPage(),
+                    builder: (context) => const ProfileSettingsPage(),
                   ),
                 );
               },
@@ -125,7 +87,15 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 // Handle the item tap action here
               },
             ),
-            ListTile(
+             buildListItemWithForwardButton(
+              'Order History',
+              Icons.history,
+              'View Your Order History and Details ',
+                  () {
+                // Handle the item tap action here
+              },
+            ),
+            const ListTile(
               title: Text('Notifications'),
             ),
             // Notifications with Toggle Buttons (On/Off)
@@ -139,27 +109,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
               'Receive push notifications',
             ),
-            buildNotificationTile(
-              'SMS Notifications',
-              smsNotifications,
-                  (bool value) {
-                setState(() {
-                  smsNotifications = value;
-                });
-              },
-              'Receive SMS notifications',
-            ),
-            buildNotificationTile(
-              'Promotional Notifications',
-              promotionalNotifications,
-                  (bool value) {
-                setState(() {
-                  promotionalNotifications = value;
-                });
-              },
-              'Receive promotional notifications',
-            ),
-            ListTile(
+            const ListTile(
               title: Text('More'),
             ),
             // Add forward buttons to other items
@@ -181,8 +131,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
             ),
             ListTile(
               leading: Icon(Icons.logout, color: customColor), // Use custom color
-              title: Text('Logout'),
-              subtitle: Text('Sign out of your account'),
+              title: const Text('Logout'),
+              subtitle: const Text('Sign out of your account'),
             ),
           ],
         ),
@@ -221,7 +171,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
       ),
       title: Text(title),
       subtitle: Text(description),
-      trailing: Icon(
+      trailing: const Icon(
         Icons.arrow_forward_ios, // Use custom color for the forward button
       ),
       onTap: onTap,

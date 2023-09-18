@@ -28,37 +28,20 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.themeColor,
+        leading: GestureDetector(
+          onTap: () => Navigator.of(context).pop(),
+          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+        ),
+      title: const Text("Add Vehicle"),
+      centerTitle: true,
+      ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            const SizedBox(height: 16.0),
-            Row(
-              children: <Widget>[
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                const Expanded(
-                  child: Text(
-                    'Add Vehicle',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black, // Color change
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 40.0),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: TextFormField(
@@ -78,7 +61,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
               ),
             ),
 
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
 
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -98,7 +81,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                 ),
               ),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             DropdownButtonFormField<Map<String, dynamic>>(
               value: null, // Initial state with no color selected
               onChanged: (value) {
@@ -111,16 +94,16 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   value: color,
                   child: Text(
                     color['name'] as String,
-                    style: TextStyle(color: Colors.black), // Color of the item
+                    style: const TextStyle(color: Colors.black), // Color of the item
                   ),
                 );
               }).toList(),
-              hint: Text(
+              hint: const Text(
                 'Choose the color of your vehicle',
                 style: TextStyle(color: Colors.black), // Color of the hint
               ), // Hint text
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -131,7 +114,8 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                       vehicleName.isEmpty ||
                       colorName == 'Choose the color of your vehicle') {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
+                        backgroundColor: Colors.red,
                         content: Text('Please fill in all fields.'),
                         duration: Duration(seconds: 2),
                       ),
@@ -147,11 +131,11 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFF5A896), // Color change
+                  backgroundColor: const Color(0xFFF5A896), // Color change
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   minimumSize: Size(MediaQuery.of(context).size.width * 0.5, 0),
                 ),
-                child: Text(
+                child: const Text(
                   'Add Vehicle',
                   style: TextStyle(color: Colors.white), // Text color change
                 ),

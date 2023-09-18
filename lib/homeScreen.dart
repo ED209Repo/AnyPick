@@ -54,7 +54,7 @@ class _ExamplePageState extends State<Example> {
       },
       child: CircleAvatar(
       radius: 25, // Adjust the radius as needed
-      backgroundImage: NetworkImage(profileImageUrl),
+      backgroundImage: AssetImage('images/profile.jpg'),
       ),
     ),
     ),
