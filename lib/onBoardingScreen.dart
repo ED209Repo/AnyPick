@@ -203,7 +203,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
                             }),
                           ],
                         ),
-                         // Add spacing between buttons and indicators
+
                       ],
                     ),
                   ],
@@ -211,9 +211,6 @@ class _OnboardscreenState extends State<OnboardScreen> {
               ),
               const SizedBox(height: 15),
               Positioned(
-                // bottom: 10,
-                // left: 10,
-                // right: 10,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(

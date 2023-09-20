@@ -48,27 +48,22 @@ class _ExampleCardState extends State<ExampleCard> {
               Stack(
                 alignment: Alignment.topLeft,
                 children: [
-                  Column(
-                    children: [
-                      Positioned(
-                        top: 10, // Adjust this value as needed
-                        left: 10, // Adjust this value as needed
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-                          child: Container(
-                            width: 110,
-                            height: 110,
-                            child: ClipOval(
-                              child: Image(image: AssetImage('images/mcdd.jpg')),
-                            ),
-                          ),
+                  Positioned(
+                    top: 10,
+                    left: 10,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
+                      child: Container(
+                        width: 110,
+                        height: 110,
+                        child: const ClipOval(
+                          child: Image(image: AssetImage('images/mcdd.jpg')),
                         ),
                       ),
-                    ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(120, 10, 16, 0),
-                    // Adjust left padding as needed
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -106,7 +101,9 @@ class _ExampleCardState extends State<ExampleCard> {
                                   Text(
                                     widget.restaurant.likeCount.toString(),
                                     style: const TextStyle(
-                                        fontSize: 16, color: Colors.black),
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                   const SizedBox(width: 20),
                                   IconButton(
@@ -124,7 +121,9 @@ class _ExampleCardState extends State<ExampleCard> {
                                   Text(
                                     widget.restaurant.heartCount.toString(),
                                     style: const TextStyle(
-                                        fontSize: 16, color: Colors.black),
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -215,78 +214,156 @@ class _ExampleCardState extends State<ExampleCard> {
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 return Padding(
-                  padding: EdgeInsets.fromLTRB(22, 22, 22, 10),
+                  padding: const EdgeInsets.fromLTRB(22, 22, 22, 10),
                   child: ListView.builder(
-                    itemCount: widget.restaurant.dealNames.length,
+                    itemCount: widget.restaurant.dealDescription.length,
                     itemBuilder: (context, index) {
                       var dealName = widget.restaurant.dealNames[index];
                       var dealImage = widget.restaurant.dealImage[index];
-                      var isSelected =
-                      selectedDeals.contains(CartItem(dealName, dealImage));
-                      return CustomExpansionTile(
-                        title: Text(widget.restaurant.dealNames[index]),
-                        children: [
-                          Container(
-                            height: remainingHeight,
-                            decoration: BoxDecoration(
-                              //backgroundBlendMode: BlendMode.dstOver,
-                              borderRadius: BorderRadius.circular(12.0),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: widget.restaurant.color,
-                              ),
+                      final restaurant = candidates[index];
+                      var isSelected = selectedDeals.contains(CartItem(dealName, dealImage));
+                      return ExpansionTile(
+                        title: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.themeColor2,
+                            border: Border.all(
+                              color: Colors.white, // You can change the border color here
+                              width: 1.0, // You can adjust the border width as needed
                             ),
-                            child: Row(
-                              children: <Widget>[
-                              const SizedBox(width: 12),
-                              Container(
-                                width: 55.0,
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.network(dealImage),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          padding: const EdgeInsets.all(8.0), // You can adjust the padding as needed
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align title and cart icon
+                            children: [
+                              Text(
+                                widget.restaurant.dealNames[index],
+                                style: const TextStyle(
+                                  color: Colors.white, // Set the desired text color
+                                  fontSize: 18, // You can adjust the font size as needed
                                 ),
                               ),
-                              const SizedBox(width: 16.0),
-                              Container(
-                                width: 150,
-                                child: Text(
-                                  dealName,
-                                  style: const TextStyle(
+                              Expanded(
+                                child: IconButton(
+                                  onPressed: () {
+                                    // Handle cart icon press here
+                                  },
+                                  icon: Icon(
+                                    isSelected
+                                        ? Icons.shopping_cart
+                                        : Icons.shopping_cart_outlined,
                                     color: Colors.white,
-                                    fontSize: 20.0,
+                                    size: 28.0,
                                   ),
                                 ),
                               ),
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    if (isSelected) {
-                                      selectedDeals.add(CartItem(dealName, dealImage));
-                                    } else {
-                                      selectedDeals
-                                          .remove(CartItem(dealName, dealImage));
-                                    }
-                                  });
-                                },
-                                icon: Icon(
-                                  isSelected
-                                      ? Icons.shopping_cart
-                                      : Icons.shopping_cart_outlined,
-                                  color: Colors.white,
-                                  size: 28.0,
-                                ),
-                              ),
-                              const SizedBox(width: 22,)
                             ],
                           ),
                         ),
-                      ],
+                        children: [
+                          Container(
+                            // height: 130,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              color: AppColors.themeColor2,
+                            ),
+                            child: Stack(
+                              alignment: Alignment.centerRight, // Align the icons to the right
+                              children: [
+                                Row(
+                                  children: <Widget>[
+                                    const SizedBox(width: 12),
+                                    Container(
+                                      width: 55.0,
+                                      height: 50.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                      ),
+                                      child: ClipOval(
+                                        child: Image.network(dealImage),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16.0),
+                                    Container(
+                                      width: 150,
+                                      child: Flexible(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              widget.restaurant.dealDescription[index],
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16.0,
+                                              ),
+                                            ),
+                                            Text(
+                                              'SAR ${restaurant.price}',
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          restaurant.count++; // Use restaurant.count here
+                                        });
+                                      },
+                                      icon: const Icon(
+                                        Icons.add_outlined,
+                                        color: Colors.green,
+                                        size: 32,
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
+                                      child: Text(
+                                        '${restaurant.count}', // Use restaurant.count here
+                                        style: const TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        if (restaurant.count > 0) {
+                                          setState(() {
+                                            restaurant.count--; // Use restaurant.count here
+                                          });
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.remove_outlined,
+                                        color: Colors.red,
+                                        size: 32,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          )
+
+                        ],
                       );
                     },
                   ),
@@ -296,86 +373,6 @@ class _ExampleCardState extends State<ExampleCard> {
           ),
         ),
       ],
-    );
-  }
-}
-class CustomExpansionTile extends StatefulWidget {
-  final Widget title;
-  final Widget? leading;
-  final List<Widget> children;
-  final bool initiallyExpanded;
-  final Function(bool)? onExpansionChanged;
-
-  CustomExpansionTile({
-    required this.title,
-    this.leading,
-    required this.children,
-    this.initiallyExpanded = false,
-    this.onExpansionChanged,
-  });
-
-  @override
-  _CustomExpansionTileState createState() => _CustomExpansionTileState();
-}
-
-class _CustomExpansionTileState extends State<CustomExpansionTile> {
-  bool _isExpanded = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isExpanded = widget.initiallyExpanded;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 2.0,
-        ),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ListTile(
-            contentPadding: EdgeInsets.all(0),
-            leading: widget.leading,
-            title: InkWell(
-              onTap: () {
-                setState(() {
-                  _isExpanded = !_isExpanded;
-                  if (widget.onExpansionChanged != null) {
-                    widget.onExpansionChanged!(_isExpanded);
-                  }
-                });
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: 8),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: ClipOval(
-                      child:Image.asset('images/pizza.png') ),
-                  ), // Display leading if provided
-                  SizedBox(width: 10),
-                  widget.title,
-                  SizedBox(width: 10),
-                  Icon(Icons.shopping_cart),
-                ],
-              ),
-            ),
-          ),
-          if (_isExpanded)
-            Column(
-              children: widget.children,
-            ),
-        ],
-      ),
     );
   }
 }

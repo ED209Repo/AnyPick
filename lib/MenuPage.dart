@@ -284,7 +284,8 @@ class _MenuPageState extends State<MenuPage> {
                                                 description: item.description,
                                                 options: item.options,
                                                 flavors: item.flavors,
-                                                AdsOn: item.AdsOn),
+                                                AdsOn: item.AdsOn
+                                            ),
                                           ),
                                         );
                                       },
@@ -388,4 +389,3 @@ const commonTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: Colors.black,
 );
-//

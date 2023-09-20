@@ -104,10 +104,10 @@ class _registerscreenState extends State<registerscreen> {
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(
-                      hintText: "Enter your phone number",
+                      hintText: "xxx-xxx-xxx",
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 15,
+                        fontSize: 24,
                         color: AppColors.greyText,
                       ),
                       enabledBorder: OutlineInputBorder(

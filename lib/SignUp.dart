@@ -21,6 +21,7 @@ class _SignupPageState extends State<SignupPage> {
   String selectvalue= '';
   String myAge='';
   String SelectedDate='';
+  bool showvalue = false;
   @override
   void initState() {
     super.initState();
@@ -37,11 +38,11 @@ class _SignupPageState extends State<SignupPage> {
                     children: <Widget>[
                       const Row(
                         children:<Widget> [
-                          Expanded(child: Text("Sign Up",
+                          Expanded(child: Text("Create Account",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              fontSize: 40,
+                              fontSize: 32,
                             ),),),
                         ],
                       ),
@@ -57,7 +58,9 @@ class _SignupPageState extends State<SignupPage> {
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.black,
-                              ),),),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 15.0),
@@ -67,7 +70,6 @@ class _SignupPageState extends State<SignupPage> {
                             borderSide: BorderSide(
                               color: AppColors.themeColor,
                               width: 3,
-
                             ),
                           ),
                           labelText: 'UserName',
@@ -190,11 +192,11 @@ class _SignupPageState extends State<SignupPage> {
                                     foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
                                   ),
                                   child: Text(
-                                    myAge.isEmpty ? 'Select Date of Birth' : 'Date of Birth $SelectedDate',
+                                    myAge.isEmpty ? 'Date of Birth' : 'Date of Birth: $SelectedDate',
                                     style: const TextStyle(
-                                      decoration: TextDecoration.underline,
                                       decorationThickness: 2.5,
                                       fontWeight: FontWeight.w600,
+                                      color: Colors.black,
                                       fontSize: 16,
                                     ),
                                   ),
@@ -206,8 +208,24 @@ class _SignupPageState extends State<SignupPage> {
                         ],
                       ),
                       const SizedBox(height: 10.0),
-                      // Text(myAge,
-                      //     textAlign: TextAlign.center),
+                      Container(
+                        alignment: Alignment.bottomLeft,
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: showvalue,
+                              onChanged: (bool? value) {
+                                if (value != null) {
+                                  setState(() {
+                                    showvalue = value;
+                                  });
+                                }
+                              },
+                            ),
+                            Text('I accept all Terms and Conditions'), // Add a Text widget here
+                          ],
+                        ),
+                      ),
                       const SizedBox(height: 40.0),
                       SizedBox(
                         height: 40,
@@ -252,25 +270,13 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                       const SizedBox(height: 20.0),
-                      TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const Example()));
-                      },
-                          child:Text("Skip",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.themeColor,
-                            ),)),
+
                       const SizedBox(height: 15.0),
-                      const Text("By Signing up you agree to our Terms Conditions & Privacy Policy",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),),
-                    ]))));
+                    ]
+                )
+            )
+        )
+    );
   }
   Future<void> pickDob() async {
     DateTime? pickedDate = await showDatePicker(
