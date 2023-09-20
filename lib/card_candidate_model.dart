@@ -15,10 +15,13 @@ class ExampleResturantModel {
   String backgroundImage;
   List<String> dealNames;
   List<String> dealImage;
+  List<String> dealDescription;
+  int price;
   var likeIcons;
   var heartIcon;
   int likeCount;
   int heartCount;
+  int count;
 
   // test 123
 
@@ -31,10 +34,13 @@ class ExampleResturantModel {
     required this.backgroundImage,
     required this.dealNames,
     required this.dealImage,
+    required this.dealDescription,
+    required this.price,
     required this.likeIcons,
     required this.heartIcon,
     required this.likeCount,
     required this.heartCount,
+    this.count=0,
   });
 }
 
@@ -50,6 +56,7 @@ final List<ExampleResturantModel> candidates = [
     color: const [Color(0xFFFF3868), Color(0xFFFFB49A)],
     imageUrl: 'images/mcdd.jpg',
     backgroundImage: 'images/kfc.jpg',
+    price: 4,
     dealNames: [
       'Big Mac Combo Deal',
       'Chicken Sandwich Special',
@@ -61,6 +68,12 @@ final List<ExampleResturantModel> candidates = [
       'https://media.istockphoto.com/id/524304077/photo/mcdonalds-meal.jpg?s=612x612&w=0&k=20&c=K8D13dsJYseCVtkDljryrSoJ6XLD2NcX94OV_5onz3Q=',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
+    ],
+    dealDescription: [
+      'double layer of sear-sizzled 100% pure beef ',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'double layer of sear-sizzled 100% pure beef ',
     ],
   ),
   ExampleResturantModel(
@@ -74,6 +87,7 @@ final List<ExampleResturantModel> candidates = [
     color: const [Color(0xFF736EFE), Color(0xFF62E4EC)],
     imageUrl: 'images/Kfc3.png',
     backgroundImage: 'images/kfc.jpg',
+    price: 6,
     dealNames: [
       'Big Mac Combo Deal',
       'Chicken Sandwich Special',
@@ -85,6 +99,12 @@ final List<ExampleResturantModel> candidates = [
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
+    ],
+    dealDescription: [
+      'double layer of sear-sizzled 100% pure beef ',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'double layer of sear-sizzled 100% pure beef ',
     ],
 
   ),
@@ -99,7 +119,7 @@ final List<ExampleResturantModel> candidates = [
     color: const [Color(0xFF2F80ED), Color(0xFF56CCF2)],
     imageUrl: 'images/kfc.jpg',
     backgroundImage: 'images/kfc.jpg',
-
+    price: 8,
     dealNames: [
       'Big Mac Deal',
       'Chicken Sandwich Deal',
@@ -111,6 +131,12 @@ final List<ExampleResturantModel> candidates = [
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
+    ],
+    dealDescription: [
+      'double layer of sear-sizzled 100% pure beef ',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'double layer of sear-sizzled 100% pure beef ',
     ],
   ),
   ExampleResturantModel(
@@ -124,6 +150,7 @@ final List<ExampleResturantModel> candidates = [
     color: const [Color(0xFF0BA4E0), Color(0xFFA9E4BD)],
     imageUrl: 'images/kfc.jpg',
     backgroundImage: 'images/kfc.jpg',
+    price: 4,
     dealNames: [
       'Big Mac Combo Deal',
       'Chicken Sandwich Special',
@@ -135,6 +162,12 @@ final List<ExampleResturantModel> candidates = [
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
+    ],
+    dealDescription: [
+      'double layer of sear-sizzled 100% pure beef ',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'double layer of sear-sizzled 100% pure beef ',
     ],
 
   ),
@@ -147,11 +180,9 @@ final List<ExampleResturantModel> candidates = [
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFF2F80ED), Color(0xFF56CCF2)],
-    imageUrl: 'images/Gloria jeans.png'
-    // imageUrl: 'https://example.com/Gloria jeans.png',
-    // if pictures get at runtime
-    ,
+    imageUrl: 'images/Gloria jeans.png',
     backgroundImage: 'images/jeans.jpg',
+    price: 4,
     dealNames: [
       'Big Mac Combo Deal',
       'Chicken Sandwich Special',
@@ -163,6 +194,12 @@ final List<ExampleResturantModel> candidates = [
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
+    ],
+    dealDescription: [
+      'double layer of sear-sizzled 100% pure beef ',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'sauce and melted cheese, diced onion, crisp shredded',
+      'double layer of sear-sizzled 100% pure beef ',
     ],
   ),
 ];
