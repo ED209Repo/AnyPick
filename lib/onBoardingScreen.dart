@@ -23,7 +23,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 5),
             child: Image.asset(
               'images/mainlogo.png',
               height: 150,
@@ -31,15 +31,15 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 5),
             child: Image.asset(
               'images/onboarding1.png',
-              height: 300,
-              width: 300,
+              height: 250,
+              width: 250,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            padding: const EdgeInsets.only(bottom: 90),
             child: Text(
               "Find Your Desired Food Around You",
               style: TextStyle(
@@ -60,7 +60,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10,),
+            padding: const EdgeInsets.only(bottom: 5,),
             child: Image.asset(
               'images/whiteicon.png',
               height: 150,
@@ -68,15 +68,15 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 5),
             child: Image.asset(
               'images/onboarding2.png',
-              height: 300,
-              width: 300,
+              height: 250,
+              width: 250,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5, bottom: 10),
+            padding: const EdgeInsets.only(bottom: 90),
             child: Text(
               "Pickup Your Food On The Go",
               style: TextStyle(
@@ -104,11 +104,11 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 30),
+            padding: const EdgeInsets.only(bottom: 20),
             child: Image.asset(
               "images/image1.png",
-              height: 180,
-              width: 180,
+              height: 150,
+              width: 150,
             ),
           ),
           Padding(
@@ -123,7 +123,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10 , left: 10 , right: 10),
+            padding: const EdgeInsets.only(bottom: 115 , left: 10 , right: 10),
             child: Text(
               "It's a pleasure to meet you. We are excited that you're here so let's get started!",
               textAlign: TextAlign.center,
@@ -134,13 +134,6 @@ class _OnboardscreenState extends State<OnboardScreen> {
               ),
             ),
           ),
-          // Padding(
-          //   padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-          //   child: SizedBox(
-          //     width: double.infinity,
-          //     height: 40,
-          //   ),
-          // )
         ],
       ),
     ),
@@ -153,12 +146,6 @@ class _OnboardscreenState extends State<OnboardScreen> {
     return Scaffold(
         body: Stack(
             children: [
-              // TextButton(
-              //     onPressed:()=> continueMethod(context),
-              //     child: Text("Skip",
-              //       style: TextStyle(
-              //         color: AppColors.themeColor,
-              //       ),)),
               LiquidSwipe(
                 pages: pages,
                 enableLoop: false,
@@ -170,7 +157,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
                 },
               ),
               Positioned(
-                bottom: 50,
+                bottom: 90,
                 left: 10,
                 right: 10,
                 child: Column(
@@ -212,7 +199,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
               const SizedBox(height: 15),
               Positioned(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(bottom: 50),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
