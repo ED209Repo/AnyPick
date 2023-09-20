@@ -43,6 +43,7 @@ dependencies:
   pinput: ^3.0.1
   popover: ^0.2.8+2
   sizer: ^2.0.15
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:

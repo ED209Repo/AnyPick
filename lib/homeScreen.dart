@@ -52,7 +52,7 @@ class _ExamplePageState extends State<Example> {
           ),
         );
       },
-      child: CircleAvatar(
+      child: const CircleAvatar(
       radius: 25, // Adjust the radius as needed
       backgroundImage: AssetImage('images/profile.jpg'),
       ),
@@ -85,9 +85,12 @@ class _ExamplePageState extends State<Example> {
     color: AppColors.themeColor2,
     size: 35,
     ),
-    onPressed: () {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const BrowseScreen()));
-    },
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const TryScreen(),
+        ),
+      ),
     ),
     IconButton(
     icon: const Icon(
