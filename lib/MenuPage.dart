@@ -1,7 +1,10 @@
 import 'package:anypickdemo/MenuPageModel.dart';
+import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'homeScreen.dart';
 import 'menuSelection.dart';
+
+
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
 
@@ -9,10 +12,9 @@ class MenuPage extends StatefulWidget {
   _MenuPageState createState() => _MenuPageState();
 }
 class _MenuPageState extends State<MenuPage> {
-
+  int currentPageIndex = 0;
   int likeCount = 0;
   int heartCount = 0;
-
   void incrementLikeCount() {
     setState(() {
       likeCount++;
@@ -144,100 +146,88 @@ class _MenuPageState extends State<MenuPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 15),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(14, 0, 0, 0),
-                  child: Text(
-                    'Top Picks',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 12),
-                SizedBox(
-                  height: 140,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: MenuPageModel.items.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final menuItem = MenuPageModel.items[index];
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: Container(
-                          width: 120,
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          color: Colors.grey[300],
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Image.network(
-                                  menuItem.imageUrl,
-                                  fit: BoxFit.cover,
-                                  width: double.infinity,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  menuItem.title,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, bottom: 8.0),
-                                child: Text(
-                                  menuItem.dishType,
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                const SizedBox(height: 8),
+                // SizedBox(
+                //   height: 140,
+                //   child: ListView.builder(
+                //     scrollDirection: Axis.horizontal,
+                //     itemCount: MenuPageModel.items.length,
+                //     itemBuilder: (BuildContext context, int index) {
+                //       final menuItem = MenuPageModel.items[index];
+                //       return ClipRRect(
+                //         borderRadius: BorderRadius.circular(30),
+                //         child: Container(
+                //           width: 120,
+                //           margin: const EdgeInsets.symmetric(horizontal: 10),
+                //           color: Colors.grey[300],
+                //           child: Column(
+                //             crossAxisAlignment: CrossAxisAlignment.start,
+                //             children: [
+                //               Expanded(
+                //                 child: Image.network(
+                //                   menuItem.imageUrl,
+                //                   fit: BoxFit.cover,
+                //                   width: double.infinity,
+                //                 ),
+                //               ),
+                //               Padding(
+                //                 padding: const EdgeInsets.all(8.0),
+                //                 child: Text(
+                //                   menuItem.title,
+                //                   style: const TextStyle(
+                //                     fontWeight: FontWeight.bold,
+                //                   ),
+                //                 ),
+                //               ),
+                //               Padding(
+                //                 padding: const EdgeInsets.only(
+                //                     left: 8.0, bottom: 8.0),
+                //                 child: Text(
+                //                   menuItem.dishType,
+                //                   style: const TextStyle(
+                //                     color: Colors.grey,
+                //                     fontStyle: FontStyle.italic,
+                //                   ),
+                //                 ),
+                //               ),
+                //             ],
+                //           ),
+                //         ),
+                //       );
+                //     },
+                //   ),
+                // ),
                 const SizedBox(height: 20),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      SizedBox(width: 10),
-                      Text('Starter',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Main Course',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Appetizers',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Seafood',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Chicken & Lamb',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Fast Food',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Deserts',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Chinese Food',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Add ons',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      Text('Cold Drinks',style: commonTextStyle),
-                      SizedBox(width: 20),
-                      // Add more Text widgets as needed
-                    ],
-                  ),
-                ),
+                // const SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     mainAxisSize: MainAxisSize.max,
+                //     children: [
+                //       SizedBox(width: 10),
+                //       Text('Starter',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Main Course',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Appetizers',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Seafood',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Chicken & Lamb',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Fast Food',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Deserts',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Chinese Food',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Add ons',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       Text('Cold Drinks',style: commonTextStyle),
+                //       SizedBox(width: 20),
+                //       // Add more Text widgets as needed
+                //     ],
+                //   ),
+                // ),
                 const SizedBox(width: 20),
                 SingleChildScrollView(
                   child: SizedBox(
@@ -375,7 +365,38 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                 ),
+                 BottomNavigationBar(
+                  currentIndex: currentPageIndex,
+                  onTap: (index) {
+                    setState(() {
+                      currentPageIndex = index;
+                    });
+                  },
+                  items:  <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(
+                          Icons.local_pizza_outlined,
+                        size: 30,
+                          color: AppColors.themeColor2,
+                      ),
+                      label: 'Pizza',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.fastfood_outlined,
+                      size: 30,
+                      color: AppColors.themeColor2),
+                      label: 'Burgers',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.food_bank,
+                      size: 30,
+                          color: AppColors.themeColor2
+                      ),
+                      label: 'Main Course',
 
+                    ),
+                  ],
+                ),
               ],
             ),
           ),

@@ -59,7 +59,7 @@ final List<ExampleResturantModel> candidates = [
     price: 4,
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich ',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],
@@ -90,7 +90,7 @@ final List<ExampleResturantModel> candidates = [
     price: 6,
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],
@@ -122,7 +122,7 @@ final List<ExampleResturantModel> candidates = [
     price: 8,
     dealNames: [
       'Big Mac Deal',
-      'Chicken Sandwich Deal',
+      'Chicken Sandwich',
       'Vegetarian Delight',
       'Browine With ice cream',
     ],
@@ -153,7 +153,7 @@ final List<ExampleResturantModel> candidates = [
     price: 4,
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],
@@ -185,7 +185,7 @@ final List<ExampleResturantModel> candidates = [
     price: 4,
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich ',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],
