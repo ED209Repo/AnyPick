@@ -81,17 +81,12 @@ class _TryScreenState extends State<TryScreen> {
             ),
             title: Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Container(
-                height: 35,
-                  width: 35,
-                  child: Image.asset('images/store.png',
-                  color: AppColors.whitetext,)),
-              // child:Text("Browse",
-              //   style: TextStyle(
-              //     fontSize: 20,
-              //     fontWeight: FontWeight.bold,
-              //     color: AppColors.whitetext,
-              //   ),),
+              child: Text('Browse',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.whitetext,
+                fontSize: 20,
+              ),),
             ),
             centerTitle: true,
           )),
@@ -210,7 +205,7 @@ class _TryScreenState extends State<TryScreen> {
                                   height: 90.0,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(12.0),
-                                    child: Image.network(
+                                    child: Image.asset(
                                       browseItem.imageUrl,
                                       fit: BoxFit.cover,
                                     ),
@@ -292,11 +287,5 @@ final List<AdvertismentModel> items = [
   ),
   AdvertismentModel(
     imageUrl: 'images/deal4.jpg',
-  ),
-  AdvertismentModel(
-      imageUrl: 'images/deal5.jpg'
-  ),
-  AdvertismentModel(
-      imageUrl: 'images/deal6.png'
   ),
 ];

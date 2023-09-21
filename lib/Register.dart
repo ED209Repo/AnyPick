@@ -1,5 +1,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'OtpScreen.dart';
 import 'Widgets/AppColors.dart';
@@ -40,6 +41,26 @@ class _registerscreenState extends State<registerscreen> {
       ),
     );
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions:<Widget>[
+          DropdownButton<String>(
+            dropdownColor: AppColors.themeColor,
+            hint: Text('Select Language ') ,
+            style: TextStyle(
+              color:  AppColors.whitetext
+            ),
+            items: <String>['English', 'العربية'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (_) {},
+          )
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -79,6 +100,10 @@ class _registerscreenState extends State<registerscreen> {
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(9), // Set the max length to 10
+                      FilteringTextInputFormatter.digitsOnly, // Allow only digits
+                    ],
                     keyboardType: TextInputType.number,
                     cursorColor: AppColors.cursorColor,
                     onChanged: (value) {
@@ -141,7 +166,7 @@ class _registerscreenState extends State<registerscreen> {
                           child: Text(
                             "${selectedCountry.flagEmoji} ${selectedCountry.phoneCode}",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 19,
                               color: AppColors.blackColor,
                               fontWeight: FontWeight.bold,
                             ),
