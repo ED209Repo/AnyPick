@@ -49,13 +49,13 @@ class _ExampleCardState extends State<ExampleCard> {
                 alignment: Alignment.topLeft,
                 children: [
                   Positioned(
-                    top: 10,
+                    top: 0,
                     left: 10,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
                       child: Container(
-                        width: 110,
-                        height: 110,
+                        width: 90,
+                        height: 90,
                         child: const ClipOval(
                           child: Image(image: AssetImage('images/mcdd.jpg')),
                         ),
@@ -196,12 +196,11 @@ class _ExampleCardState extends State<ExampleCard> {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
+                // topLeft: Radius.circular(12),
+                // topRight: Radius.circular(12),
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
-              color: Colors.grey,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.2),
@@ -210,6 +209,10 @@ class _ExampleCardState extends State<ExampleCard> {
                   offset: const Offset(0, 3),
                 ),
               ],
+              image: const DecorationImage(
+                image: AssetImage('images/kfc.jpg'), // Replace with the path to your image
+                fit: BoxFit.cover, // Adjust the fit as needed
+              ),
             ),
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
@@ -286,83 +289,82 @@ class _ExampleCardState extends State<ExampleCard> {
                                     const SizedBox(width: 16.0),
                                     Container(
                                       width: 150,
-                                      child: Flexible(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              widget.restaurant.dealDescription[index],
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16.0,
-                                              ),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            widget.restaurant.dealDescription[index],
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16.0,
                                             ),
-                                            Text(
-                                              'SAR ${restaurant.price}',
-                                              style: const TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.green,
-                                              ),
+                                          ),
+                                          Text(
+                                            'SAR ${restaurant.price}',
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green,
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          restaurant.count++; // Use restaurant.count here
-                                        });
-                                      },
-                                      icon: const Icon(
-                                        Icons.add_outlined,
-                                        color: Colors.green,
-                                        size: 32,
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        borderRadius: BorderRadius.circular(8.0),
-                                      ),
-                                      child: Text(
-                                        '${restaurant.count}', // Use restaurant.count here
-                                        style: const TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        if (restaurant.count > 0) {
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(10, 0, 10,0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
                                           setState(() {
-                                            restaurant.count--; // Use restaurant.count here
+                                            restaurant.count++; // Use restaurant.count here
                                           });
-                                        }
-                                      },
-                                      icon: const Icon(
-                                        Icons.remove_outlined,
-                                        color: Colors.red,
-                                        size: 32,
+                                        },
+                                        icon: const Icon(
+                                          Icons.add_outlined,
+                                          color: Colors.green,
+                                          size: 32,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      Container(
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          borderRadius: BorderRadius.circular(8.0),
+                                        ),
+                                        child: Text(
+                                          '${restaurant.count}', // Use restaurant.count here
+                                          style: const TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          if (restaurant.count > 0) {
+                                            setState(() {
+                                              restaurant.count--; // Use restaurant.count here
+                                            });
+                                          }
+                                        },
+                                        icon: const Icon(
+                                          Icons.remove_outlined,
+                                          color: Colors.red,
+                                          size: 32,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-
                               ],
                             ),
-                          )
-
+                          ),
                         ],
                       );
                     },
