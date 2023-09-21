@@ -2,6 +2,8 @@
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=C:\src\flutter\flutter"
 export "FLUTTER_APPLICATION_PATH=C:\Users\DELL\Desktop\AnyPick"
+export "FLUTTER_ROOT=D:\flutter_windows_3.10.6-stable\flutter"
+export "FLUTTER_APPLICATION_PATH=D:\flutter_windows_3.10.6-stable\anypickdemo"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

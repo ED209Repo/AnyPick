@@ -44,6 +44,7 @@ dependencies:
   popover: ^0.2.8+2
   sizer: ^2.0.15
   fast_color_picker: ^0.1.1
+  card_swiper: ^3.0.1
 
 dev_dependencies:
   flutter_test:

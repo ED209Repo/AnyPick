@@ -125,7 +125,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 115 , left: 10 , right: 10),
             child: Text(
-              "It's a pleasure to meet you. We are excited that you're here so let's get started!",
+              "We are excited that you're here so let's get started!",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.normal,
@@ -157,7 +157,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
                 },
               ),
               Positioned(
-                bottom: 90,
+                bottom: 130,
                 left: 10,
                 right: 10,
                 child: Column(
@@ -199,7 +199,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
               const SizedBox(height: 15),
               Positioned(
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
+                  padding: const EdgeInsets.only(bottom: 100),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
