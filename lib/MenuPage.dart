@@ -1,6 +1,7 @@
 import 'package:anypickdemo/MenuPageModel.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
+import 'New_Menu_Page.dart';
 import 'homeScreen.dart';
 import 'menuSelection.dart';
 
@@ -265,16 +266,10 @@ class _MenuPageState extends State<MenuPage> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        // Navigate to the new page when the Text is clicked
-                                        Navigator.push(
-                                          context,
+                                        Navigator.of(context).push(
                                           MaterialPageRoute(
-                                            builder: (context) => menuSelection(
-                                                title: item.title,
-                                                description: item.description,
-                                                options: item.options,
-                                                flavors: item.flavors,
-                                                AdsOn: item.AdsOn
+                                            builder: (context) => DetailPage(
+                                              food: Food.generateRecommendFoods()[0], // Pass the Food object here
                                             ),
                                           ),
                                         );

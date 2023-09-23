@@ -19,12 +19,17 @@ class _ExampleCardState extends State<ExampleCard> {
     final appBarHeight = AppBar().preferredSize.height;
     final statusBarHeight = MediaQuery.of(context).padding.top;
     var remainingHeight = (screenHeight - (appBarHeight + statusBarHeight)) / 4;
-    remainingHeight -= 100;
+    remainingHeight = remainingHeight < 50 ? 50 : remainingHeight;
+
+    final itemHeight = 50.0; // Adjust this value as needed
+    final itemCount = widget.restaurant.dealNames.length;
+    final containerHeight = itemHeight * itemCount;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          height: 200,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
@@ -48,16 +53,15 @@ class _ExampleCardState extends State<ExampleCard> {
               Stack(
                 alignment: Alignment.topLeft,
                 children: [
-                  Positioned(
-                    top: 0,
-                    left: 10,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-                      child: Container(
-                        width: 90,
-                        height: 90,
-                        child: const ClipOval(
-                          child: Image(image: AssetImage('images/mcdd.jpg')),
+                  Padding(
+                    padding: const EdgeInsets.all(15), // Adjust padding as needed
+                    child: Container(
+                      width: 125, // Increase the width to 220
+                      height: 125, // Increase the height to 220
+                      child: const ClipOval(
+                        child: Image(
+                          image: AssetImage('images/mcdd.jpg'),
+                          fit: BoxFit.cover, // Ensure image covers the container
                         ),
                       ),
                     ),
@@ -65,24 +69,14 @@ class _ExampleCardState extends State<ExampleCard> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(120, 10, 16, 0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 15),
-                            Center(
-                              child: Text(
-                                widget.restaurant.name,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30,
-                                ),
-                              ),
-                            ),
                             const SizedBox(height: 5),
-                            Center(
+                            Container(
+                              alignment: Alignment.topRight,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -95,9 +89,10 @@ class _ExampleCardState extends State<ExampleCard> {
                                     icon: Icon(
                                       widget.restaurant.likeIcons,
                                       color: Colors.blue,
+                                      size: 20,
                                     ),
                                   ),
-                                  const SizedBox(width: 5),
+                                  const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.likeCount.toString(),
                                     style: const TextStyle(
@@ -105,7 +100,7 @@ class _ExampleCardState extends State<ExampleCard> {
                                       color: Colors.black,
                                     ),
                                   ),
-                                  const SizedBox(width: 20),
+                                  const SizedBox(width: 5),
                                   IconButton(
                                     onPressed: () {
                                       setState(() {
@@ -115,14 +110,66 @@ class _ExampleCardState extends State<ExampleCard> {
                                     icon: Icon(
                                       widget.restaurant.heartIcon,
                                       color: Colors.red,
+                                      size: 20,
                                     ),
                                   ),
-                                  const SizedBox(width: 5),
+                                  const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.heartCount.toString(),
                                     style: const TextStyle(
                                       fontSize: 16,
                                       color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Center(
+                              child: Text(
+                                widget.restaurant.name,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(28, 10, 0, 0), // Adjust padding as needed
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on, // Location Icon
+                                    color: AppColors.whitetext,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    widget.restaurant.city,
+                                    style: TextStyle(
+                                      color: AppColors.whitetext,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(28, 5, 0, 0), // Adjust padding as needed
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.access_time_filled_rounded, // Time Icon
+                                    color: AppColors.whitetext,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    widget.restaurant.job,
+                                    style: TextStyle(
+                                      color: AppColors.whitetext,
+                                      fontSize: 17,
                                     ),
                                   ),
                                 ],
@@ -135,48 +182,17 @@ class _ExampleCardState extends State<ExampleCard> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10), // Adjust spacing as needed
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 16, 0),
-                    // Adjust left padding as needed
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.restaurant.city,
-                          style: TextStyle(
-                            color: AppColors.whitetext,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          widget.restaurant.job,
-                          style: TextStyle(
-                            color: AppColors.whitetext,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10), // Adjust spacing as needed
+              // Adjust spacing as needed
             ],
           ),
         ),
+
         FractionallySizedBox(
           widthFactor: 1,
           child: Container(
             decoration: const BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-              ),
+
             ),
             height: 35,
             width: 500,
@@ -194,13 +210,13 @@ class _ExampleCardState extends State<ExampleCard> {
         ),
         Expanded(
           child: Container(
+            height: containerHeight,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                // topLeft: Radius.circular(12),
-                // topRight: Radius.circular(12),
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
+              color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.2),
@@ -209,166 +225,61 @@ class _ExampleCardState extends State<ExampleCard> {
                   offset: const Offset(0, 3),
                 ),
               ],
-              image: const DecorationImage(
-                image: AssetImage('images/kfc.jpg'), // Replace with the path to your image
-                fit: BoxFit.cover, // Adjust the fit as needed
-              ),
             ),
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(22, 22, 22, 10),
                   child: ListView.builder(
-                    itemCount: widget.restaurant.dealDescription.length,
+                    // physics: const NeverScrollableScrollPhysics(),
+                    itemCount: widget.restaurant.dealNames.length,
                     itemBuilder: (context, index) {
                       var dealName = widget.restaurant.dealNames[index];
                       var dealImage = widget.restaurant.dealImage[index];
-                      final restaurant = candidates[index];
                       var isSelected = selectedDeals.contains(CartItem(dealName, dealImage));
-                      return ExpansionTile(
-                        title: Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.themeColor2,
-                            border: Border.all(
-                              color: Colors.white, // You can change the border color here
-                              width: 1.0, // You can adjust the border width as needed
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          padding: const EdgeInsets.all(8.0), // You can adjust the padding as needed
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align title and cart icon
-                            children: [
-                              Text(
-                                widget.restaurant.dealNames[index],
-                                style: const TextStyle(
-                                  color: Colors.white, // Set the desired text color
-                                  fontSize: 18, // You can adjust the font size as needed
-                                ),
-                              ),
-                              Expanded(
-                                child: IconButton(
-                                  onPressed: () {
-                                    // Handle cart icon press here
-                                  },
-                                  icon: Icon(
-                                    isSelected
-                                        ? Icons.shopping_cart
-                                        : Icons.shopping_cart_outlined,
-                                    color: Colors.white,
-                                    size: 28.0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      return Column(
                         children: [
                           Container(
-                            // height: 130,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12.0),
-                              color: AppColors.themeColor2,
-                            ),
-                            child: Stack(
-                              alignment: Alignment.centerRight, // Align the icons to the right
+                            padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0), // Adjust the padding as needed
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align title and cart icon
                               children: [
-                                Row(
-                                  children: <Widget>[
-                                    const SizedBox(width: 12),
-                                    Container(
-                                      width: 55.0,
-                                      height: 50.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12.0),
-                                      ),
-                                      child: ClipOval(
-                                        child: Image.network(dealImage),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 16.0),
-                                    Container(
-                                      width: 150,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            widget.restaurant.dealDescription[index],
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 16.0,
-                                            ),
-                                          ),
-                                          Text(
-                                            'SAR ${restaurant.price}',
-                                            style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                Text(
+                                  widget.restaurant.dealNames[index],
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(10, 0, 10,0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            restaurant.count++; // Use restaurant.count here
-                                          });
-                                        },
-                                        icon: const Icon(
-                                          Icons.add_outlined,
-                                          color: Colors.green,
-                                          size: 32,
-                                        ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        // Handle cart icon press here
+                                      },
+                                      icon: Icon(
+                                        isSelected
+                                            ? Icons.shopping_cart
+                                            : Icons.shopping_cart,
+                                        color: Colors.black,
+                                        size: 28.0,
                                       ),
-                                      Container(
-                                        padding: const EdgeInsets.all(8.0),
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          borderRadius: BorderRadius.circular(8.0),
-                                        ),
-                                        child: Text(
-                                          '${restaurant.count}', // Use restaurant.count here
-                                          style: const TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {
-                                          if (restaurant.count > 0) {
-                                            setState(() {
-                                              restaurant.count--; // Use restaurant.count here
-                                            });
-                                          }
-                                        },
-                                        icon: const Icon(
-                                          Icons.remove_outlined,
-                                          color: Colors.red,
-                                          size: 32,
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
+                          const Divider(
+                            thickness: 0.5, // Adjust the thickness of the separator line as needed
+                            color: Colors.grey, // Adjust the color of the separator line as needed
+                          ),
                         ],
                       );
                     },
                   ),
+
                 );
               },
             ),
