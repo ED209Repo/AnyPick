@@ -41,10 +41,10 @@ class _OnboardscreenState extends State<OnboardScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 90),
             child: Text(
-              "Find Your Desired Food Around You",
+              "Find your desired food around you",
               style: TextStyle(
                 color: AppColors.greyText,
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -78,10 +78,10 @@ class _OnboardscreenState extends State<OnboardScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 90),
             child: Text(
-              "Pickup Your Food On The Go",
+              "Pickup your food on the go",
               style: TextStyle(
                 color: AppColors.whitetext,
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -112,24 +112,13 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 40 , left: 10 , right: 10),
             child: Text(
-              "Welcome",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: AppColors.blackColor,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 115 , left: 10 , right: 10),
-            child: Text(
-              "We are excited that you're here so let's get started!",
+              "We are excited, let's get started!",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.normal,
-                fontSize: 20,
+                fontSize: 14,
                 color: AppColors.blackColor,
               ),
             ),
@@ -157,17 +146,17 @@ class _OnboardscreenState extends State<OnboardScreen> {
                 },
               ),
               Positioned(
-                bottom: 130,
-                left: 10,
-                right: 10,
+                bottom: 180,
+                left: 30,
+                right: 30,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     (currentPage == 2 )
                         ? CustomButton(
-                      text: "SignUp",
-                      onPressed: () => continueMethod(context),
+                      text: "Continue",
+                      onPressed: () => HomeMethod(context),
                     )
                         : Column(
                       children: <Widget>[
@@ -199,22 +188,22 @@ class _OnboardscreenState extends State<OnboardScreen> {
               const SizedBox(height: 15),
               Positioned(
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 100),
+                  padding: const EdgeInsets.only(bottom: 80),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (currentPage == 2)
-                        TextButton(
-                          onPressed: () => HomeMethod(context),
-                          child: Text("Skip",
-                            style: TextStyle(
-                                color: AppColors.themeColor,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400
-                            ),),
-                        ),
-                    ],
+                    // children: [
+                    //   if (currentPage == 2)
+                    //     TextButton(
+                    //     //   onPressed: () => HomeMethod(context),
+                    //     //   child: Text("Skip",
+                    //     //     style: TextStyle(
+                    //     //         color: AppColors.themeColor,
+                    //     //         fontSize: 17,
+                    //     //         fontWeight: FontWeight.w400
+                    //     //     ),),
+                    //     // ),
+                    // ],
                   ),
                 ),
               )

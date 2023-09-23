@@ -232,7 +232,7 @@ class _MenuPageState extends State<MenuPage> {
                 SingleChildScrollView(
                   child: SizedBox(
                     width: double.infinity,
-                    height: 250,
+                    height: 420,
                     child: ListView.builder(
                       scrollDirection: Axis.vertical,
                       itemCount: scrollListModel.items.length,

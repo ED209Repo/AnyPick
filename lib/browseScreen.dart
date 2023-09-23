@@ -1,3 +1,4 @@
+import 'package:anypickdemo/MenuPage.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
@@ -91,176 +92,188 @@ class _TryScreenState extends State<TryScreen> {
             centerTitle: true,
           )),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 12),
-              TextField(
-                controller: _searchController,
-                onChanged: (query) {
-                  _performSearch(query);
-                },
-                decoration: InputDecoration(
-                  hintText: "Search Food",
-                  hintStyle: const TextStyle(
-                    color: Colors.black,
-                  ),
-                  prefixIcon: Icon(Icons.search, color: AppColors.themeColor2),
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.blackColor,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.themeColor2,
-                      width: 3,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Container(
-                height: 120.0,
-                child: Swiper(
-                  itemCount: items.length, // Use the length of the items list
-                  itemWidth: 300.0,
-                  viewportFraction: 1,
-                  scale: 0.9,
-                  autoplay: true,
-                  loop: true,
-                  duration: 200,
-                  itemBuilder: (BuildContext context, int index) {
-                    final advertisementModel = items[index];
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        advertisementModel.imageUrl, // Access the imageUrl property
-                        fit: BoxFit.fill,
-                      ),
-                    );
+        child: Stack(
+          children:[Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _searchController,
+                  onChanged: (query) {
+                    _performSearch(query);
                   },
+                  decoration: InputDecoration(
+                    hintText: "Search Food",
+                    hintStyle: const TextStyle(
+                      color: Colors.black,
+                    ),
+                    prefixIcon: Icon(Icons.search, color: AppColors.themeColor2),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.blackColor,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.themeColor2,
+                        width: 3,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    categoriesContainer(
-                      image: 'images/burger.png',
-                      name: "Burger",
-                    ),
-                    categoriesContainer(
-                      image: 'images/pizza.png',
-                      name: "Pizza",
-                    ),
-                    categoriesContainer(
-                      image: 'images/breakfast.png',
-                      name: "Breakfast",
-                    ),
-                    categoriesContainer(
-                      image: 'images/cake.png',
-                      name: "Bakery",
-                    ),
-                    categoriesContainer(
-                      image: 'images/dish.png',
-                      name: "Dish",
-                    ),
-                    categoriesContainer(
-                      image: 'images/burger.png',
-                      name: "All",
-                    ),
-                  ],
+                const SizedBox(height: 12),
+                Container(
+                  height: 120.0,
+                  child: Swiper(
+                    itemCount: items.length, // Use the length of the items list
+                    itemWidth: 300.0,
+                    viewportFraction: 1,
+                    scale: 0.9,
+                    autoplay: true,
+                    loop: true,
+                    duration: 200,
+                    itemBuilder: (BuildContext context, int index) {
+                      final advertisementModel = items[index];
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          advertisementModel.imageUrl, // Access the imageUrl property
+                          fit: BoxFit.fill,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        itemCount: filteredItems.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          final browseItem = filteredItems[index];
-                          return Container(
-                            margin: const EdgeInsets.all(8.0),
-                            padding: const EdgeInsets.all(12.0),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey),
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 90.0,
-                                  height: 90.0,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    child: Image.asset(
-                                      browseItem.imageUrl,
-                                      fit: BoxFit.cover,
+                const SizedBox(height: 12),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      categoriesContainer(
+                        image: 'images/burger.png',
+                        name: "Burger",
+                      ),
+                      categoriesContainer(
+                        image: 'images/pizza.png',
+                        name: "Pizza",
+                      ),
+                      categoriesContainer(
+                        image: 'images/breakfast.png',
+                        name: "Breakfast",
+                      ),
+                      categoriesContainer(
+                        image: 'images/cake.png',
+                        name: "Bakery",
+                      ),
+                      categoriesContainer(
+                        image: 'images/dish.png',
+                        name: "Dish",
+                      ),
+                      categoriesContainer(
+                        image: 'images/burger.png',
+                        name: "All",
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: filteredItems.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final browseItem = filteredItems[index];
+                            return Container(
+                              margin: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(12.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 90.0,
+                                    height: 90.0,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      child: Image.asset(
+                                        browseItem.imageUrl,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(width: 16.0),
-                                Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          browseItem.title,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 22.0,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          '${browseItem.Description}',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            fontStyle: FontStyle.italic,
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 17),
-                                        Wrap(
-                                          children:[
-                                            const Icon(Icons.timer_outlined,
-                                                color: Colors.grey,
-                                                size: 15),
-                                            Text(
-                                              ' ${browseItem.time}',
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
+                                  const SizedBox(width: 16.0),
+                                  Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+
+                                              Navigator.push(
+                                                context, 
+                                              MaterialPageRoute(
+                                                builder: ((context) => MenuPage()),
+                                                ));
+                                            },
+                                            child: Text(
+                                              browseItem.title,
                                               style: const TextStyle(
-                                                fontStyle: FontStyle.italic,
-                                                color: Colors.grey,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22.0,
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    )),
-                              ],
-                            ),
-                          );
-                        })
-                  ],
-                ),
-              )
-            ],
-          ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            '${browseItem.Description}',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 17),
+                                          Wrap(
+                                            children:[
+                                              const Icon(Icons.timer_outlined,
+                                                  color: Colors.grey,
+                                                  size: 15),
+                                              Text(
+                                                ' ${browseItem.time}',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                  fontStyle: FontStyle.italic,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )),
+                                ],
+                              ),
+                            );
+                          })
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),]
         ),
       ),
     );

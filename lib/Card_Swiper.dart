@@ -31,7 +31,7 @@ class _ExampleCardState extends State<ExampleCard> {
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
             ),
-            color: AppColors.themeColor2,
+            color: AppColors.themeColor,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),

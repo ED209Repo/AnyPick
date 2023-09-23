@@ -20,7 +20,7 @@ class BrowseItemModel {
     ),
     browseItem(
       title: 'KFC',
-      imageUrl: 'images/kfc logo.png',
+      imageUrl: 'images/kfc12.png',
       Description: 'Fast Food',
       time: '30 min',
     ),

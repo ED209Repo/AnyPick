@@ -63,19 +63,19 @@ class _ExamplePageState extends State<Example> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
     Text(
-    'Hey  $userName',
-    style: const TextStyle(
-    color: Colors.black,
-    fontSize: 14,
-    ),
-    ),
-    Text(
-    message,
+    'Hi $userName,',
     style: const TextStyle(
     color: Colors.black,
     fontSize: 18,
     ),
     ),
+    // Text(
+    // message,
+    // style: const TextStyle(
+    // color: Colors.black,
+    // fontSize: 18,
+    // ),
+    // ),
     ],),
     const Spacer(),
     const Spacer(),
