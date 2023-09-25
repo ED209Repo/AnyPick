@@ -1,7 +1,6 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
-
 import 'Register.dart';
 import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
@@ -96,7 +95,24 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(left: 200, bottom: 20),
+            child: DropdownButton<String>(
+              dropdownColor: AppColors.themeColor,
+              hint: const Text('Language ') ,
+              style: TextStyle(
+                  color:  AppColors.whitetext
+              ),
+              items: <String>['English', 'العربية'].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (_) {},
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 60),
             child: Image.asset(
               "images/mainlogo.png",
               height: 150,
@@ -104,7 +120,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 20),
+            padding: const EdgeInsets.only(bottom: 40),
             child: Image.asset(
               "images/image1.png",
               height: 150,
@@ -112,7 +128,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 40 , left: 10 , right: 10),
+            padding: const EdgeInsets.only(bottom: 140 , left: 10 , right: 10),
             child: Text(
               "We are excited, let's get started!",
               textAlign: TextAlign.center,
@@ -146,7 +162,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
                 },
               ),
               Positioned(
-                bottom: 180,
+                bottom: 100,
                 left: 30,
                 right: 30,
                 child: Column(
@@ -154,11 +170,9 @@ class _OnboardscreenState extends State<OnboardScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     (currentPage == 2 )
-                        ? CustomButton(
-                      text: "Continue",
-                      onPressed: () => HomeMethod(context),
-                    )
-                        : Column(
+                        ? CustomButton(text: 'Continue',
+                      onPressed: () => HomeMethod(context),) :
+                    Column(
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -181,32 +195,10 @@ class _OnboardscreenState extends State<OnboardScreen> {
                         ),
 
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
-              Positioned(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 80),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    // children: [
-                    //   if (currentPage == 2)
-                    //     TextButton(
-                    //     //   onPressed: () => HomeMethod(context),
-                    //     //   child: Text("Skip",
-                    //     //     style: TextStyle(
-                    //     //         color: AppColors.themeColor,
-                    //     //         fontSize: 17,
-                    //     //         fontWeight: FontWeight.w400
-                    //     //     ),),
-                    //     // ),
-                    // ],
-                  ),
-                ),
-              )
             ]));
   }
 

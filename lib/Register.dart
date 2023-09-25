@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'OtpScreen.dart';
 import 'Widgets/AppColors.dart';
-import 'Widgets/CustomButton.dart';
 
 class registerscreen extends StatefulWidget {
   const registerscreen({Key? key}) : super(key: key);
@@ -40,65 +39,48 @@ class _registerscreenState extends State<registerscreen> {
         offset: phoneController.text.length,
       ),
     );
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        actions:<Widget>[
-          DropdownButton<String>(
-            dropdownColor: AppColors.themeColor,
-            hint: Text('Select Language ') ,
-            style: TextStyle(
-              color:  AppColors.whitetext
-            ),
-            items: <String>['English', 'العربية'].map((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (_) {},
-          )
-        ],
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+    return Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Form(
               key: _formKey,
               child: Column(
-                children: [
-                  Container(
-                    width: 200,
-                    height: 200,
-                    padding: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.themeColor,
-                    ),
-                    child: Image.asset('images/image2.png'),
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 150.0),
+                        child: SizedBox(
+                            height: 80,
+                            width: 80,
+                            child: Image.asset("images/logo2.png")),
+                      ),
+                       Padding(
+                        padding: const EdgeInsets.only(left: 130, bottom: 50,),
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(context).pop(),
+                            child: const Icon(Icons.close,color: Colors.black,)),
+                      )
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Let's get started",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
-                      color: AppColors.blackColor,
-                    ),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 80.0),
+                        child: Text(
+                          "Enter your phone number",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.blackColor,
+                            fontSize: 22,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 20),
-                  Text(
-                    "Enter your phone number to use AnyPick and enjoy your food",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: AppColors.blackColor,
-                      fontSize: 15,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   TextFormField(
                     inputFormatters: [
                       LengthLimitingTextInputFormatter(9), // Set the max length to 10
@@ -206,61 +188,89 @@ class _registerscreenState extends State<registerscreen> {
                           : null,
                     ),
                   ),
-                  const SizedBox(height: 20.0),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: CustomButton(
-                      text: "SIGN UP",
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          Fluttertoast.showToast(
-                            msg: 'Code Sent Successfully',
-                            toastLength: Toast.LENGTH_LONG,
-                            gravity: ToastGravity.TOP,
-                            backgroundColor: AppColors.SplashColor,
-                            textColor: AppColors.blackColor,
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const otpscreen(verificationId: " ")),
-                          );
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                backgroundColor: AppColors.whitetext,
-                                title: const Text('Error'),
-                                content:
-                                const Text('Please Enter Correct Phone Number.'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text(
-                                      'OK',
-                                      style: TextStyle(
-                                        color: AppColors.blackColor,
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+                  const SizedBox(height: 30),
+                 Row(
+                   children: [
+                     Padding(
+                       padding: const EdgeInsets.only(left: 40, right: 15),
+                       child: ElevatedButton(
+                         style: ElevatedButton.styleFrom(
+                           primary: AppColors.themeColor,
+                           elevation: 3,
+                           shape: RoundedRectangleBorder(
+                               borderRadius: BorderRadius.circular(08.0)),
+                           minimumSize: const Size(300, 50), //////// HERE
+                         ),
+                         onPressed: () {
+                           if (_formKey.currentState!.validate()) {
+                             _formKey.currentState!.save();
+                             Fluttertoast.showToast(
+                               msg: 'Code Sent Successfully',
+                               toastLength: Toast.LENGTH_LONG,
+                               gravity: ToastGravity.TOP,
+                               backgroundColor: AppColors.SplashColor,
+                               textColor: AppColors.blackColor,
+                             );
+                             showModalBottomSheet<void>(
+                                 enableDrag: true,
+                                 isDismissible: true,
+                                 shape: const RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
+                                 context: context,
+                           builder: (BuildContext context) {
+                           return Container(
+                           height: MediaQuery.of(context).size.height * 0.6,
+                           width: double.infinity,
+                           child:otpscreen(verificationId: '',),
+                           );
+                           }
+                             ); } else {
+                             showDialog(
+                               context: context,
+                               builder: (BuildContext context) {
+                                 return AlertDialog(
+                                   backgroundColor: AppColors.whitetext,
+                                   title: const Text('Error'),
+                                   content:
+                                   const Text('Please Enter Correct Phone Number.'),
+                                   actions: <Widget>[
+                                     TextButton(
+                                       child: Text(
+                                         'OK',
+                                         style: TextStyle(
+                                           color: AppColors.blackColor,
+                                         ),
+                                       ),
+                                       onPressed: () {
+                                         Navigator.of(context).pop();
+                                       },
+                                     ),
+                                   ],
+                                 );
+                               },
+                             );
+                           }
+                         },
+                         child: const Text('SignUp'),
+                       ),
+                     ),
+
+                   ],
+                 ),
+                  const SizedBox(height: 30),
+                  const Text('By Continuing you agree to',
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),),
+                  Text('AnyPick Terms & Conditions',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      decorationThickness: 3,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.themeColor,
+                    ),),
+            ])),
+          );
   }
 }

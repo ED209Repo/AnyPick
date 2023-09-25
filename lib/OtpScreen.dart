@@ -17,29 +17,20 @@ class _otpscreenState extends State<otpscreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 35),
+    return Padding(
+            padding: const EdgeInsets.all(10),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: const Icon(Icons.arrow_back_ios_new),
-                  ),
-                ),
-                Container(
-                  width: 200,
-                  height: 200,
-                  padding: const EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.themeColor,
-                  ),
-                  child: Image.asset("images/image2.png"),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 150.0),
+                      child: SizedBox(
+                          height: 80,
+                          width: 80,
+                          child: Image.asset("images/logo2.png")),
+                    ),
+                  ],
                 ),
                 const Text(
                   "Verification Code",
@@ -92,9 +83,6 @@ class _otpscreenState extends State<otpscreen> {
                 )
               ],
             ),
-          ),
-        ),
-      ),
-    );
+          );
   }
 }
