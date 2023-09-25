@@ -18,7 +18,7 @@ class _otpscreenState extends State<otpscreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 Row(

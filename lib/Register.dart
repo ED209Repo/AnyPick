@@ -40,7 +40,7 @@ class _registerscreenState extends State<registerscreen> {
       ),
     );
     return Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(20.0),
             child: Form(
               key: _formKey,
               child: Column(
@@ -56,7 +56,7 @@ class _registerscreenState extends State<registerscreen> {
                             child: Image.asset("images/logo2.png")),
                       ),
                        Padding(
-                        padding: const EdgeInsets.only(left: 130, bottom: 50,),
+                        padding: const EdgeInsets.only(left: 65, bottom: 50,),
                         child: GestureDetector(
                           onTap: () => Navigator.of(context).pop(),
                             child: const Icon(Icons.close,color: Colors.black,)),
@@ -67,13 +67,13 @@ class _registerscreenState extends State<registerscreen> {
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 80.0),
+                        padding: const EdgeInsets.only(right: 60.0),
                         child: Text(
                           "Enter your phone number",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: AppColors.blackColor,
-                            fontSize: 22,
+                            fontSize: 20,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -111,10 +111,10 @@ class _registerscreenState extends State<registerscreen> {
                       fontWeight: FontWeight.bold,
                     ),
                     decoration: InputDecoration(
-                      hintText: "xxx-xxx-xxx",
+                      hintText: "59xxxxxxx",
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 24,
+                        fontSize: 22,
                         color: AppColors.greyText,
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -192,7 +192,7 @@ class _registerscreenState extends State<registerscreen> {
                  Row(
                    children: [
                      Padding(
-                       padding: const EdgeInsets.only(left: 40, right: 15),
+                       padding: const EdgeInsets.only(left: 10, right: 15),
                        child: ElevatedButton(
                          style: ElevatedButton.styleFrom(
                            primary: AppColors.themeColor,

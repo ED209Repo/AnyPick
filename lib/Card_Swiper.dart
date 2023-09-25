@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'New_Menu_Page.dart';
 import 'Widgets/AppColors.dart'; // Make sure this import is correct.
 import 'card_candidate_model.dart'; // Make sure this import is correct.
 
@@ -239,36 +240,54 @@ class _ExampleCardState extends State<ExampleCard> {
                       var isSelected = selectedDeals.contains(CartItem(dealName, dealImage));
                       return Column(
                         children: [
-                          Container(
-                            padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0), // Adjust the padding as needed
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align title and cart icon
-                              children: [
-                                Text(
-                                  widget.restaurant.dealNames[index],
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
+                          InkWell(
+                            onTap:(){
+                              showModalBottomSheet<dynamic>(
+                                backgroundColor: Colors.white,
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *0.9,
+                                    width: double.infinity,
+                                    child: DetailPage(food: Food.generateRecommendFoods()[0]),
+                                  );
+                                },
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0), // Adjust the padding as needed
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align title and cart icon
+                                children: [
+                                  Text(
+                                    widget.restaurant.dealNames[index],
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.centerRight,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        // Handle cart icon press here
-                                      },
-                                      icon: Icon(
-                                        isSelected
-                                            ? Icons.shopping_cart
-                                            : Icons.shopping_cart,
-                                        color: Colors.black,
-                                        size: 28.0,
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          // Handle cart icon press here
+                                        },
+                                        icon: Icon(
+                                          isSelected
+                                              ? Icons.shopping_cart
+                                              : Icons.shopping_cart,
+                                          color: Colors.black,
+                                          size: 28.0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                           const Divider(
