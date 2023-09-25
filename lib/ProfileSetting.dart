@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:anypickdemo/Widgets/CustomButton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'AccountSettings.dart';
@@ -34,15 +33,35 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: AppColors.themeColor,
         leading: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+          child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
         ),
-      title: Text("Profile Settings"),
-      centerTitle: true,
+        title: const Text("Profile Settings"),
+        centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AccountSettingsPage()),
+              );
+            },
+            style: TextButton.styleFrom(
+              primary: AppColors.whitetext,
+              textStyle: const TextStyle(
+                fontSize: 20,
+              )
+
+            ),
+            child: const Text("Save"),
+          ),
+        ],
       ),
+
       body: ListView(
         children: <Widget>[
           const SizedBox(height: 10),
@@ -166,6 +185,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               },
             ),
           ),
+          const SizedBox(height: 8),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextButton(
@@ -173,47 +193,25 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                 final selectedDate = await pickDob();
                 if (selectedDate != null) {
                   setState(() {
-                    selectedDateText = 'Date of Birth $selectedDate';
+                    selectedDateText = 'Date of Birth: $selectedDate';
                   });
                 }
               },
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
               ),
-              child: Text(
-                selectedDateText ?? 'Change Date of Birth',
-                style: const TextStyle(
-                  decoration: TextDecoration.underline,
-                  decorationThickness: 2.5,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
+              child: Container(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  selectedDateText ?? 'Date of Birth',
+                  style: const TextStyle(
+                    decorationThickness: 2.5,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
                 ),
               ),
-            ),
-          ),
-          // "Save Changes" button
-          Padding(
-            padding: const EdgeInsets.only(top: 230, left: 10, right: 10),
-            child: SizedBox(
-              width: 150, 
-              child:CustomButton(text: 'Save Changes', onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const AccountSettingsPage()));
-              }) ,
-              // child: ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(
-              //         builder: (context) => const AccountSettingsPage(),
-              //       ),
-              //     );
-              //   },
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: const Color(0xFFF5A896),
-              //     padding: const EdgeInsets.symmetric(vertical: 20.0),
-              //   ),
-              //   child: const Text('Save Changes'),
-              // ),
             ),
           ),
         ],

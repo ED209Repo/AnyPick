@@ -12,36 +12,33 @@ class ExampleResturantModel {
   String city;
   List<Color> color;
   String imageUrl;
-  String backgroundImage;
   List<String> dealNames;
   List<String> dealImage;
   var likeIcons;
   var heartIcon;
   int likeCount;
   int heartCount;
-
-  // test 123
-
+  int count;
   ExampleResturantModel({
     required this.name,
     required this.job,
     required this.city,
     required this.color,
     required this.imageUrl,
-    required this.backgroundImage,
     required this.dealNames,
     required this.dealImage,
     required this.likeIcons,
     required this.heartIcon,
     required this.likeCount,
     required this.heartCount,
+    this.count=0,
   });
 }
 
 final List<ExampleResturantModel> candidates = [
   ExampleResturantModel(
     name: 'Mcdonalds',
-    job: 'Available till 11:00 pm',
+    job: 'Closes at 11:00 pm',
     city: 'I-8',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite, // Add the heart icon here
@@ -49,10 +46,9 @@ final List<ExampleResturantModel> candidates = [
     heartCount: 0,
     color: const [Color(0xFFFF3868), Color(0xFFFFB49A)],
     imageUrl: 'images/mcdd.jpg',
-    backgroundImage: 'images/kfc.jpg',
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich ',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],
@@ -65,7 +61,7 @@ final List<ExampleResturantModel> candidates = [
   ),
   ExampleResturantModel(
     name: 'KFC',
-    job: 'Available till 11:59 pm',
+    job: 'Closes at 11:59 pm',
     city: 'F-7',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
@@ -73,10 +69,9 @@ final List<ExampleResturantModel> candidates = [
     heartCount: 0,
     color: const [Color(0xFF736EFE), Color(0xFF62E4EC)],
     imageUrl: 'images/Kfc3.png',
-    backgroundImage: 'images/kfc.jpg',
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],
@@ -90,7 +85,7 @@ final List<ExampleResturantModel> candidates = [
   ),
   ExampleResturantModel(
     name: 'Hardees',
-    job: 'Available till 1:00 Am',
+    job: 'Closes at 1:00 Am',
     city: 'I-10',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
@@ -98,11 +93,9 @@ final List<ExampleResturantModel> candidates = [
     heartCount: 0,
     color: const [Color(0xFF2F80ED), Color(0xFF56CCF2)],
     imageUrl: 'images/kfc.jpg',
-    backgroundImage: 'images/kfc.jpg',
-
     dealNames: [
       'Big Mac Deal',
-      'Chicken Sandwich Deal',
+      'Chicken Sandwich',
       'Vegetarian Delight',
       'Browine With ice cream',
     ],
@@ -115,7 +108,7 @@ final List<ExampleResturantModel> candidates = [
   ),
   ExampleResturantModel(
     name: 'Burger Lab',
-    job: 'Available till 11:00 pm',
+    job: 'Closes at 11:00 pm',
     city: 'F-10',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
@@ -123,10 +116,9 @@ final List<ExampleResturantModel> candidates = [
     heartCount: 0,
     color: const [Color(0xFF0BA4E0), Color(0xFFA9E4BD)],
     imageUrl: 'images/kfc.jpg',
-    backgroundImage: 'images/kfc.jpg',
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],
@@ -136,25 +128,20 @@ final List<ExampleResturantModel> candidates = [
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
       'https://i.ibb.co/WsB2tDb/Screenshot-2023-08-21-at-11-30-10-PM.png',
     ],
-
   ),
   ExampleResturantModel(
     name: 'Gloria Jeans',
-    job: 'Available till 2:00 Am',
+    job: 'Closes at 2:00 Am',
     city: 'F-6',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFF2F80ED), Color(0xFF56CCF2)],
-    imageUrl: 'images/Gloria jeans.png'
-    // imageUrl: 'https://example.com/Gloria jeans.png',
-    // if pictures get at runtime
-    ,
-    backgroundImage: 'images/jeans.jpg',
+    imageUrl: 'images/Gloria jeans.png',
     dealNames: [
       'Big Mac Combo Deal',
-      'Chicken Sandwich Special',
+      'Chicken Sandwich ',
       'Vegetarian Delight',
       'Dessert Paradise',
     ],

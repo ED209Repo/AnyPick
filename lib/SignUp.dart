@@ -14,6 +14,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _controller = TextEditingController(text: "Hello, World!");
   String _fullname ='';
   String _username ='';
   String _email ='';
@@ -21,6 +22,7 @@ class _SignupPageState extends State<SignupPage> {
   String selectvalue= '';
   String myAge='';
   String SelectedDate='';
+  bool showvalue = false;
   @override
   void initState() {
     super.initState();
@@ -37,42 +39,29 @@ class _SignupPageState extends State<SignupPage> {
                     children: <Widget>[
                       const Row(
                         children:<Widget> [
-                          Expanded(child: Text("Sign Up",
+                          Expanded(child: Text("Create Account",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              fontSize: 40,
+                              fontSize: 32,
                             ),),),
                         ],
                       ),
-                      const SizedBox(height: 15.0),
-
-                      const SizedBox(height: 15.0),
-                      const Row(
-                        children:<Widget> [
-                          Expanded(
-                            child:Text("Enter your Data to Register an Account.",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),),),
-                        ],
-                      ),
-                      const SizedBox(height: 15.0),
+                      const SizedBox(height: 20.0),
                       TextFormField(
+                        enabled: false,
+                        initialValue: '555123321',
                         decoration:  InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: AppColors.themeColor,
                               width: 3,
-
                             ),
                           ),
-                          labelText: 'UserName',
+                          labelText: 'Phone Number',
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
+                            fontSize: 16,
                           ),
                         ),
                         validator: (value) {
@@ -97,6 +86,7 @@ class _SignupPageState extends State<SignupPage> {
                           labelText: 'Full Name',
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
+                            fontSize: 16,
                           ),
                         ),
                         validator: (value) {
@@ -123,6 +113,7 @@ class _SignupPageState extends State<SignupPage> {
                           labelText: 'Email Address',
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
+                            fontSize: 16,
                           ),
                         ),
                         validator: (value) {
@@ -139,7 +130,10 @@ class _SignupPageState extends State<SignupPage> {
                         },
                       ),
                       const SizedBox(height: 20.0),
-                      const Text("Gender"),
+                      const Text("Gender",
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -174,12 +168,16 @@ class _SignupPageState extends State<SignupPage> {
                         ],
 
                       ),
-                      const SizedBox(height: 15.0),
+                      const SizedBox(height: 15),
+                      const Text('Date of Birth',
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),),
+                      const SizedBox(height: 10.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children:<Widget>[
-
-                          const SizedBox(width: 60),
+                          const SizedBox(width: 30),
                           Row(
                             children: [
                               Align(
@@ -190,11 +188,11 @@ class _SignupPageState extends State<SignupPage> {
                                     foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
                                   ),
                                   child: Text(
-                                    myAge.isEmpty ? 'Select Date of Birth' : 'Date of Birth $SelectedDate',
+                                    myAge.isEmpty ? 'Choose Date' : '$SelectedDate',
                                     style: const TextStyle(
-                                      decoration: TextDecoration.underline,
                                       decorationThickness: 2.5,
                                       fontWeight: FontWeight.w600,
+                                      color: Colors.black,
                                       fontSize: 16,
                                     ),
                                   ),
@@ -205,10 +203,7 @@ class _SignupPageState extends State<SignupPage> {
                           const Spacer(),
                         ],
                       ),
-                      const SizedBox(height: 10.0),
-                      // Text(myAge,
-                      //     textAlign: TextAlign.center),
-                      const SizedBox(height: 40.0),
+                      const SizedBox(height: 50.0),
                       SizedBox(
                         height: 40,
                         child: CustomButton(
@@ -251,26 +246,28 @@ class _SignupPageState extends State<SignupPage> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 20.0),
-                      TextButton(onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const Example()));
-                      },
-                          child:Text("Skip",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.themeColor,
-                            ),)),
-                      const SizedBox(height: 15.0),
-                      const Text("By Signing up you agree to our Terms Conditions & Privacy Policy",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey,
-                        ),),
-                    ]))));
+                      const SizedBox(height: 30.0),
+                      Column(
+                        children: [
+                          const Text('By Continuing you agree to',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),),
+                           Text('AnyPick Terms & Conditions',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            decorationThickness: 3,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.themeColor,
+                          ),),
+                        ],
+                      ),
+                    ]
+                )
+            )
+        )
+    );
   }
   Future<void> pickDob() async {
     DateTime? pickedDate = await showDatePicker(

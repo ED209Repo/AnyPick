@@ -1,252 +1,304 @@
-import 'dart:ui' as ui;
 import 'package:anypickdemo/MenuPage.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+
 import 'BrowseScreenModel.dart';
 import 'Widgets/AppColors.dart';
 
-class BrowseScreen extends StatefulWidget {
-  const BrowseScreen({Key? key});
+class TryScreen extends StatefulWidget {
+  const TryScreen({Key? key});
 
   @override
-  State<BrowseScreen> createState() => _BrowseScreenState();
+  State<TryScreen> createState() => _TryScreenState();
 }
 
-class _BrowseScreenState extends State<BrowseScreen> {
+Widget categoriesContainer({required String image, required String name}) {
+  return Column(
+    children: [
+      SizedBox(
+        width: 80,
+        height: 80,
+        child: Card(
+          color: Colors.grey,
+          semanticContainer: true,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          elevation: 10,
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+          child: Container(
+            padding: const EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 1.0,),
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage(image),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+      ),
+      Text(name,
+        style: const TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.bold,
+        ),),
+    ],
+  );
+}
+
+
+class _TryScreenState extends State<TryScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<browseItem> filteredItems = List.from(BrowseItemModel.items);
 
-  Widget categoriesContainer({required String image, required String name}) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(left: 10),
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage(image)),
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(15),
-          ),
-        ),
-        const SizedBox(height: 7),
-        Text(
-          name,
-          style: TextStyle(
-            color: AppColors.blackColor,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
-        ),
-      ],
-    );
-  }
-
   void _performSearch(String query) {
     setState(() {
-      filteredItems = BrowseItemModel.items
-          .where((item) =>
-          item.title.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+      if (query.isEmpty) {
+        filteredItems = List.from(BrowseItemModel.items);
+      } else {
+        filteredItems = BrowseItemModel.items
+            .where((item) =>
+        item.title.toLowerCase().contains(query.toLowerCase()) ||
+            item.Description.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+      }
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    return  Sizer(builder: (context, orientation, deviceType){
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.themeColor2,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
-        ),
-      title: Text("Browse"),
-      centerTitle: true,
-      ),
-      body: Padding(
-        padding:  EdgeInsets.symmetric(vertical: 0.h, horizontal: 2.h),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 20),
-            TextField(
-              controller: _searchController,
-              onChanged: (query) {
-                _performSearch(query);
-              },
-              decoration: InputDecoration(
-                hintText: "Search Food",
-                hintStyle: const TextStyle(
-                  color: Colors.black,
-                ),
-                prefixIcon: Icon(Icons.search, color: AppColors.themeColor2),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColors.themeColor2,
-                    width: 3,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColors.themeColor2,
-                    width: 3,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
+    return  Scaffold(
+      appBar: PreferredSize(preferredSize: Size.fromHeight(65),
+          child: AppBar(
+            backgroundColor: AppColors.themeColor2,
+            leading: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
               ),
             ),
-            const SizedBox(height: 15),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  categoriesContainer(
-                    image: 'images/burger.png',
-                    name: "Burger",
-                  ),
-                  categoriesContainer(
-                    image: 'images/pizza.png',
-                    name: "Pizza",
-                  ),
-                  categoriesContainer(
-                    image: 'images/breakfast.png',
-                    name: "Breakfast",
-                  ),
-                  categoriesContainer(
-                    image: 'images/cake.png',
-                    name: "Bakery",
-                  ),
-                  categoriesContainer(
-                    image: 'images/dish.png',
-                    name: "Dish",
-                  ),
-                  categoriesContainer(
-                    image: 'images/burger.png',
-                    name: "All",
-                  ),
-                ],
-              ),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text('Browse',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: AppColors.whitetext,
+                fontSize: 20,
+              ),),
             ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.7,
-                ),
-                itemCount: filteredItems.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final browseItem = filteredItems[index];
-                  return Card(
-                    elevation: 2.0,
-                    margin: const EdgeInsets.all(5.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+            centerTitle: true,
+          )),
+      body: SingleChildScrollView(
+        child: Stack(
+          children:[Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _searchController,
+                  onChanged: (query) {
+                    _performSearch(query);
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Search Food",
+                    hintStyle: const TextStyle(
+                      color: Colors.black,
                     ),
-                    child: InkWell(
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>const MenuPage())),
-                    child: Container(
-                      height: 200,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          // colorFilter:  ColorFilter.mode(Colors.black.withOpacity(0.5),
-                          //     BlendMode.dstATop),
-                          image: AssetImage('images/kfc.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                        border: Border.all(color: Colors.black),
-                        borderRadius: BorderRadius.circular(12),
+                    prefixIcon: Icon(Icons.search, color: AppColors.themeColor2),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.blackColor,
+                        width: 1,
                       ),
-                      child: Stack(
-                        children: [
-                      Padding(
-                        padding: const EdgeInsets.only(),
-                        child: Center(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                        // <-- clips to the 200x200 [Container] below
-                        child: BackdropFilter(
-                        filter: ui.ImageFilter.blur(
-                        sigmaX: 5.0,
-                          sigmaY: 5.0,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.themeColor2,
+                        width: 3,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  height: 120.0,
+                  child: Swiper(
+                    itemCount: items.length, // Use the length of the items list
+                    itemWidth: 300.0,
+                    viewportFraction: 1,
+                    scale: 0.9,
+                    autoplay: true,
+                    loop: true,
+                    duration: 200,
+                    itemBuilder: (BuildContext context, int index) {
+                      final advertisementModel = items[index];
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          advertisementModel.imageUrl, // Access the imageUrl property
+                          fit: BoxFit.fill,
                         ),
-                        child: SizedBox(
-                          height: 500,
-                          width: 200,
-                          child:Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  browseItem.title,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      categoriesContainer(
+                        image: 'images/burger.png',
+                        name: "Burger",
+                      ),
+                      categoriesContainer(
+                        image: 'images/pizza.png',
+                        name: "Pizza",
+                      ),
+                      categoriesContainer(
+                        image: 'images/breakfast.png',
+                        name: "Breakfast",
+                      ),
+                      categoriesContainer(
+                        image: 'images/cake.png',
+                        name: "Bakery",
+                      ),
+                      categoriesContainer(
+                        image: 'images/dish.png',
+                        name: "Dish",
+                      ),
+                      categoriesContainer(
+                        image: 'images/burger.png',
+                        name: "All",
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: filteredItems.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final browseItem = filteredItems[index];
+                            return Container(
+                              margin: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(12.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                              Padding(padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                children: [ const Icon(Icons.timer_outlined,
-                                color: Colors.white,
-                                size: 15,),
-                                  Text  (
-                                    browseItem.time,
-                                    style: TextStyle(
-                                      color: AppColors.whitetext,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                              ],),),
-                              Padding(padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
-                              child: Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
+                              child: Row(
                                 children: [
-                                  const Icon(Icons.location_on,
-                                    color: Colors.white,
-                                    size: 15,),
-                                  Text(
-                                    browseItem.Location,
-                                    style: TextStyle(
-                                      color: AppColors.whitetext,
-                                      fontSize: 15,
+                                  SizedBox(
+                                    width: 90.0,
+                                    height: 90.0,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      child: Image.asset(
+                                        browseItem.imageUrl,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                              ]),),
-                            ],
-                          ),
-                          // const SizedBox(height: 5),
-                          // Text(
-                          //   browseItem.time,
-                          //   style: TextStyle(
-                          //     color: AppColors.whitetext,
-                          //     fontSize: 15,
-                          //   ),
-                          // ),
-                          // const SizedBox(height: 5),
-                        ),
-                    ),
+                                  const SizedBox(width: 16.0),
+                                  Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: (){
+
+                                              Navigator.push(
+                                                context, 
+                                              MaterialPageRoute(
+                                                builder: ((context) => MenuPage()),
+                                                ));
+                                            },
+                                            child: Text(
+                                              browseItem.title,
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 22.0,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            '${browseItem.Description}',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontStyle: FontStyle.italic,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 17),
+                                          Wrap(
+                                            children:[
+                                              const Icon(Icons.timer_outlined,
+                                                  color: Colors.grey,
+                                                  size: 15),
+                                              Text(
+                                                ' ${browseItem.time}',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                  fontStyle: FontStyle.italic,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      )),
+                                ],
+                              ),
+                            );
+                          })
+                    ],
                   ),
-                  ),
-                      ),
-                  ]),
-                  ),
-                  ));
-                },
-              ),
+                )
+              ],
             ),
-          ],
+          ),]
         ),
       ),
     );
-});}}
-  
+  }
+}
+class AdvertismentModel {
+  String imageUrl;
 
+  AdvertismentModel({
+    required this.imageUrl,
+  });
+}
+
+final List<AdvertismentModel> items = [
+  AdvertismentModel(
+    imageUrl: 'images/deal1.jpg',
+  ),
+  AdvertismentModel(
+    imageUrl: 'images/deal2.jpg',
+
+  ),
+  AdvertismentModel(
+    imageUrl: 'images/deal3.jpg',
+  ),
+  AdvertismentModel(
+    imageUrl: 'images/deal4.jpg',
+  ),
+];

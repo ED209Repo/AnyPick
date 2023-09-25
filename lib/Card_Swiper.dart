@@ -19,19 +19,24 @@ class _ExampleCardState extends State<ExampleCard> {
     final appBarHeight = AppBar().preferredSize.height;
     final statusBarHeight = MediaQuery.of(context).padding.top;
     var remainingHeight = (screenHeight - (appBarHeight + statusBarHeight)) / 4;
-    remainingHeight -= 100;
+    remainingHeight = remainingHeight < 50 ? 50 : remainingHeight;
+
+    final itemHeight = 50.0; // Adjust this value as needed
+    final itemCount = widget.restaurant.dealNames.length;
+    final containerHeight = itemHeight * itemCount;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          height: 200,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
             ),
-            color: AppColors.themeColor2,
+            color: AppColors.themeColor,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
@@ -48,46 +53,30 @@ class _ExampleCardState extends State<ExampleCard> {
               Stack(
                 alignment: Alignment.topLeft,
                 children: [
-                  Column(
-                    children: [
-                      Positioned(
-                        top: 10, // Adjust this value as needed
-                        left: 10, // Adjust this value as needed
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-                          child: Container(
-                            width: 110,
-                            height: 110,
-                            child: ClipOval(
-                              child: Image(image: AssetImage('images/mcdd.jpg')),
-                            ),
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.all(15), // Adjust padding as needed
+                    child: Container(
+                      width: 125, // Increase the width to 220
+                      height: 125, // Increase the height to 220
+                      child: const ClipOval(
+                        child: Image(
+                          image: AssetImage('images/mcdd.jpg'),
+                          fit: BoxFit.cover, // Ensure image covers the container
                         ),
                       ),
-                    ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(120, 10, 16, 0),
-                    // Adjust left padding as needed
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 15),
-                            Center(
-                              child: Text(
-                                widget.restaurant.name,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30,
-                                ),
-                              ),
-                            ),
                             const SizedBox(height: 5),
-                            Center(
+                            Container(
+                              alignment: Alignment.topRight,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -100,15 +89,18 @@ class _ExampleCardState extends State<ExampleCard> {
                                     icon: Icon(
                                       widget.restaurant.likeIcons,
                                       color: Colors.blue,
+                                      size: 20,
                                     ),
                                   ),
-                                  const SizedBox(width: 5),
+                                  const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.likeCount.toString(),
                                     style: const TextStyle(
-                                        fontSize: 16, color: Colors.black),
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
                                   ),
-                                  const SizedBox(width: 20),
+                                  const SizedBox(width: 5),
                                   IconButton(
                                     onPressed: () {
                                       setState(() {
@@ -118,13 +110,67 @@ class _ExampleCardState extends State<ExampleCard> {
                                     icon: Icon(
                                       widget.restaurant.heartIcon,
                                       color: Colors.red,
+                                      size: 20,
                                     ),
                                   ),
-                                  const SizedBox(width: 5),
+                                  const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.heartCount.toString(),
                                     style: const TextStyle(
-                                        fontSize: 16, color: Colors.black),
+                                      fontSize: 16,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Center(
+                              child: Text(
+                                widget.restaurant.name,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(28, 10, 0, 0), // Adjust padding as needed
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on, // Location Icon
+                                    color: AppColors.whitetext,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    widget.restaurant.city,
+                                    style: TextStyle(
+                                      color: AppColors.whitetext,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(28, 5, 0, 0), // Adjust padding as needed
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.access_time_filled_rounded, // Time Icon
+                                    color: AppColors.whitetext,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    widget.restaurant.job,
+                                    style: TextStyle(
+                                      color: AppColors.whitetext,
+                                      fontSize: 17,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -136,48 +182,17 @@ class _ExampleCardState extends State<ExampleCard> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10), // Adjust spacing as needed
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 16, 0),
-                    // Adjust left padding as needed
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.restaurant.city,
-                          style: TextStyle(
-                            color: AppColors.whitetext,
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          widget.restaurant.job,
-                          style: TextStyle(
-                            color: AppColors.whitetext,
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 10), // Adjust spacing as needed
+              // Adjust spacing as needed
             ],
           ),
         ),
+
         FractionallySizedBox(
           widthFactor: 1,
           child: Container(
             decoration: const BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-              ),
+
             ),
             height: 35,
             width: 500,
@@ -195,14 +210,13 @@ class _ExampleCardState extends State<ExampleCard> {
         ),
         Expanded(
           child: Container(
+            height: containerHeight,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
-              color: Colors.grey,
+              color: Colors.white,
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.2),
@@ -215,167 +229,63 @@ class _ExampleCardState extends State<ExampleCard> {
             child: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
                 return Padding(
-                  padding: EdgeInsets.fromLTRB(22, 22, 22, 10),
+                  padding: const EdgeInsets.fromLTRB(22, 22, 22, 10),
                   child: ListView.builder(
+                    // physics: const NeverScrollableScrollPhysics(),
                     itemCount: widget.restaurant.dealNames.length,
                     itemBuilder: (context, index) {
                       var dealName = widget.restaurant.dealNames[index];
                       var dealImage = widget.restaurant.dealImage[index];
-                      var isSelected =
-                      selectedDeals.contains(CartItem(dealName, dealImage));
-                      return CustomExpansionTile(
-                        title: Text(widget.restaurant.dealNames[index]),
+                      var isSelected = selectedDeals.contains(CartItem(dealName, dealImage));
+                      return Column(
                         children: [
                           Container(
-                            height: remainingHeight,
-                            decoration: BoxDecoration(
-                              //backgroundBlendMode: BlendMode.dstOver,
-                              borderRadius: BorderRadius.circular(12.0),
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: widget.restaurant.color,
-                              ),
-                            ),
+                            padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0), // Adjust the padding as needed
                             child: Row(
-                              children: <Widget>[
-                              const SizedBox(width: 12),
-                              Container(
-                                width: 55.0,
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.network(dealImage),
-                                ),
-                              ),
-                              const SizedBox(width: 16.0),
-                              Container(
-                                width: 150,
-                                child: Text(
-                                  dealName,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align title and cart icon
+                              children: [
+                                Text(
+                                  widget.restaurant.dealNames[index],
                                   style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
+                                    color: Colors.black,
+                                    fontSize: 18,
                                   ),
                                 ),
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    if (isSelected) {
-                                      selectedDeals.add(CartItem(dealName, dealImage));
-                                    } else {
-                                      selectedDeals
-                                          .remove(CartItem(dealName, dealImage));
-                                    }
-                                  });
-                                },
-                                icon: Icon(
-                                  isSelected
-                                      ? Icons.shopping_cart
-                                      : Icons.shopping_cart_outlined,
-                                  color: Colors.white,
-                                  size: 28.0,
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        // Handle cart icon press here
+                                      },
+                                      icon: Icon(
+                                        isSelected
+                                            ? Icons.shopping_cart
+                                            : Icons.shopping_cart,
+                                        color: Colors.black,
+                                        size: 28.0,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 22,)
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          const Divider(
+                            thickness: 0.5, // Adjust the thickness of the separator line as needed
+                            color: Colors.grey, // Adjust the color of the separator line as needed
+                          ),
+                        ],
                       );
                     },
                   ),
+
                 );
               },
             ),
           ),
         ),
       ],
-    );
-  }
-}
-class CustomExpansionTile extends StatefulWidget {
-  final Widget title;
-  final Widget? leading;
-  final List<Widget> children;
-  final bool initiallyExpanded;
-  final Function(bool)? onExpansionChanged;
-
-  CustomExpansionTile({
-    required this.title,
-    this.leading,
-    required this.children,
-    this.initiallyExpanded = false,
-    this.onExpansionChanged,
-  });
-
-  @override
-  _CustomExpansionTileState createState() => _CustomExpansionTileState();
-}
-
-class _CustomExpansionTileState extends State<CustomExpansionTile> {
-  bool _isExpanded = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isExpanded = widget.initiallyExpanded;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 2.0,
-        ),
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          ListTile(
-            contentPadding: EdgeInsets.all(0),
-            leading: widget.leading,
-            title: InkWell(
-              onTap: () {
-                setState(() {
-                  _isExpanded = !_isExpanded;
-                  if (widget.onExpansionChanged != null) {
-                    widget.onExpansionChanged!(_isExpanded);
-                  }
-                });
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: 8),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    child: ClipOval(
-                      child:Image.asset('images/pizza.png') ),
-                  ), // Display leading if provided
-                  SizedBox(width: 10),
-                  widget.title,
-                  SizedBox(width: 10),
-                  Icon(Icons.shopping_cart),
-                ],
-              ),
-            ),
-          ),
-          if (_isExpanded)
-            Column(
-              children: widget.children,
-            ),
-        ],
-      ),
     );
   }
 }

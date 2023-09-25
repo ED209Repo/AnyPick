@@ -2,7 +2,8 @@ import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'ProfileSetting.dart';
 import 'VehicleManagement.dart';
-
+import 'New_Payment_Page.dart';
+import 'Language_Page.dart';
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
 
@@ -62,7 +63,12 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               Icons.payment,
               'Manage your payment methods',
                   () {
-                // Handle the item tap action here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentMethodPage(paymentMethods: []), // Initialize with your payment methods data
+                  ),
+                );
               },
             ),
             buildListItemWithForwardButton(
@@ -126,6 +132,20 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               Icons.help,
               'Frequently asked questions',
                   () {
+                // Handle the item tap action here
+              },
+            ),
+            buildListItemWithForwardButton(
+              'Language', // New "Language" option
+              Icons.language, // Use the language icon
+              'Change app language', // Description
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  LanguagePage(),
+                  ),
+                );
                 // Handle the item tap action here
               },
             ),

@@ -1,7 +1,6 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
-
 import 'Register.dart';
 import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
@@ -23,7 +22,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 5),
             child: Image.asset(
               'images/mainlogo.png',
               height: 150,
@@ -31,20 +30,20 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 5),
             child: Image.asset(
               'images/onboarding1.png',
-              height: 300,
-              width: 300,
+              height: 250,
+              width: 250,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            padding: const EdgeInsets.only(bottom: 90),
             child: Text(
-              "Find Your Desired Food Around You",
+              "Find your desired food around you",
               style: TextStyle(
                 color: AppColors.greyText,
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: FontWeight.normal,
               ),
             ),
@@ -60,7 +59,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10,),
+            padding: const EdgeInsets.only(bottom: 5,),
             child: Image.asset(
               'images/whiteicon.png',
               height: 150,
@@ -68,20 +67,20 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 5),
             child: Image.asset(
               'images/onboarding2.png',
-              height: 300,
-              width: 300,
+              height: 250,
+              width: 250,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 5, bottom: 10),
+            padding: const EdgeInsets.only(bottom: 90),
             child: Text(
-              "Pickup Your Food On The Go",
+              "Pickup your food on the go",
               style: TextStyle(
                 color: AppColors.whitetext,
-                fontSize: 20,
+                fontSize: 14,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -96,7 +95,24 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(left: 200, bottom: 20),
+            child: DropdownButton<String>(
+              dropdownColor: AppColors.themeColor,
+              hint: const Text('Language ') ,
+              style: TextStyle(
+                  color:  AppColors.whitetext
+              ),
+              items: <String>['English', 'العربية'].map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (_) {},
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 60),
             child: Image.asset(
               "images/mainlogo.png",
               height: 150,
@@ -104,43 +120,25 @@ class _OnboardscreenState extends State<OnboardScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 30),
+            padding: const EdgeInsets.only(bottom: 40),
             child: Image.asset(
               "images/image1.png",
-              height: 180,
-              width: 180,
+              height: 150,
+              width: 150,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 140 , left: 10 , right: 10),
             child: Text(
-              "Welcome",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-                color: AppColors.blackColor,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10 , left: 10 , right: 10),
-            child: Text(
-              "It's a pleasure to meet you. We are excited that you're here so let's get started!",
+              "We are excited, let's get started!",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.normal,
-                fontSize: 20,
+                fontSize: 14,
                 color: AppColors.blackColor,
               ),
             ),
           ),
-          // Padding(
-          //   padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-          //   child: SizedBox(
-          //     width: double.infinity,
-          //     height: 40,
-          //   ),
-          // )
         ],
       ),
     ),
@@ -153,12 +151,6 @@ class _OnboardscreenState extends State<OnboardScreen> {
     return Scaffold(
         body: Stack(
             children: [
-              // TextButton(
-              //     onPressed:()=> continueMethod(context),
-              //     child: Text("Skip",
-              //       style: TextStyle(
-              //         color: AppColors.themeColor,
-              //       ),)),
               LiquidSwipe(
                 pages: pages,
                 enableLoop: false,
@@ -170,19 +162,17 @@ class _OnboardscreenState extends State<OnboardScreen> {
                 },
               ),
               Positioned(
-                bottom: 50,
-                left: 10,
-                right: 10,
+                bottom: 100,
+                left: 30,
+                right: 30,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     (currentPage == 2 )
-                        ? CustomButton(
-                      text: "SignUp",
-                      onPressed: () => continueMethod(context),
-                    )
-                        : Column(
+                        ? CustomButton(text: 'Continue',
+                      onPressed: () => HomeMethod(context),) :
+                    Column(
                       children: <Widget>[
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -203,37 +193,12 @@ class _OnboardscreenState extends State<OnboardScreen> {
                             }),
                           ],
                         ),
-                         // Add spacing between buttons and indicators
+
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
-              Positioned(
-                // bottom: 10,
-                // left: 10,
-                // right: 10,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (currentPage == 2)
-                        TextButton(
-                          onPressed: () => HomeMethod(context),
-                          child: Text("Skip",
-                            style: TextStyle(
-                                color: AppColors.themeColor,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w400
-                            ),),
-                        ),
-                    ],
-                  ),
-                ),
-              )
             ]));
   }
 
@@ -245,9 +210,8 @@ class _OnboardscreenState extends State<OnboardScreen> {
   }
   void HomeMethod(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => const Example()),
-          (Route<dynamic> route) => false,
-    );
-  }
+        MaterialPageRoute(builder: (context) => const Example()),
+            (Route<dynamic> route) => false,
+        );
+    }
 }
-

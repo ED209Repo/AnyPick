@@ -1,11 +1,10 @@
+import 'package:fast_color_picker/fast_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'Widgets/AppColors.dart';
-
 class AddVehiclePage extends StatefulWidget {
   final Function(Map<String, String> vehicleData) onVehicleAdded;
 
   const AddVehiclePage({Key? key, required this.onVehicleAdded}) : super(key: key);
-
   @override
   _AddVehiclePageState createState() => _AddVehiclePageState();
 }
@@ -13,17 +12,7 @@ class AddVehiclePage extends StatefulWidget {
 class _AddVehiclePageState extends State<AddVehiclePage> {
   final TextEditingController plateNumberController = TextEditingController();
   final TextEditingController vehicleNameController = TextEditingController();
-  String selectedColor = 'Choose the color of your vehicle'; // Initial state
-
-  // Color options
-  final List<Map<String, dynamic>> colorOptions = [
-    {'name': 'White', 'color': Colors.white},
-    {'name': 'Red', 'color': Colors.red},
-    {'name': 'Blue', 'color': Colors.blue},
-    {'name': 'Green', 'color': Colors.green},
-    {'name': 'Yellow', 'color': Colors.yellow},
-    {'name': 'Orange', 'color': Colors.orange},
-  ];
+  Color selectedColor = Colors.white; // Initial state
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +21,10 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
         backgroundColor: AppColors.themeColor,
         leading: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+          child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
         ),
-      title: const Text("Add Vehicle"),
-      centerTitle: true,
+        title: const Text("Add Vehicle"),
+        centerTitle: true,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -82,37 +71,27 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
               ),
             ),
             const SizedBox(height: 20.0),
-            DropdownButtonFormField<Map<String, dynamic>>(
-              value: null, // Initial state with no color selected
-              onChanged: (value) {
-                setState(() {
-                  selectedColor = value!['name'] as String;
-                });
-              },
-              items: colorOptions.map((color) {
-                return DropdownMenuItem<Map<String, dynamic>>(
-                  value: color,
-                  child: Text(
-                    color['name'] as String,
-                    style: const TextStyle(color: Colors.black), // Color of the item
-                  ),
-                );
-              }).toList(),
-              hint: const Text(
-                'Choose the color of your vehicle',
-                style: TextStyle(color: Colors.black), // Color of the hint
-              ), // Hint text
+            // Color picker
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: FastColorPicker(
+                selectedColor: selectedColor,
+                onColorSelected: (Color color) {
+                  setState(() {
+                    selectedColor = color;
+                  });
+                },
+              ),
             ),
+
             const SizedBox(height: 20.0),
             Center(
               child: ElevatedButton(
                 onPressed: () {
                   final plateNumber = plateNumberController.text;
                   final vehicleName = vehicleNameController.text;
-                  final colorName = selectedColor;
-                  if (plateNumber.isEmpty ||
-                      vehicleName.isEmpty ||
-                      colorName == 'Choose the color of your vehicle') {
+                  final colorName = selectedColor.toString();
+                  if (plateNumber.isEmpty || vehicleName.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         backgroundColor: Colors.red,
