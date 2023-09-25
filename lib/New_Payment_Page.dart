@@ -161,8 +161,8 @@ class _AddCardPageState extends State<AddCardPage> {
                                 width: 3,
                               ),
                             ),
-                            labelText: "Valid Thru",
-                            hintText: "****",
+                            labelText: "MM/YY",
+                            hintText: "MM/YY",
                             labelStyle: TextStyle(
                               color: AppColors.blackColor,
                             ),

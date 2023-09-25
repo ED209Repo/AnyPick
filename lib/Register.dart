@@ -53,7 +53,7 @@ class _registerscreenState extends State<registerscreen> {
                         child: SizedBox(
                             height: 80,
                             width: 80,
-                            child: Image.asset("images/logo2.png")),
+                            child: Image.asset("images/Logoo.png")),
                       ),
                        Padding(
                         padding: const EdgeInsets.only(left: 65, bottom: 50,),
