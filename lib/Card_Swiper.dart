@@ -54,14 +54,14 @@ class _ExampleCardState extends State<ExampleCard> {
                 alignment: Alignment.topLeft,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(15), // Adjust padding as needed
+                    padding: const EdgeInsets.all(15),
                     child: Container(
-                      width: 125, // Increase the width to 220
-                      height: 125, // Increase the height to 220
+                      width: 115,
+                      height: 115,
                       child: const ClipOval(
                         child: Image(
                           image: AssetImage('images/mcdd.jpg'),
-                          fit: BoxFit.cover, // Ensure image covers the container
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
@@ -131,48 +131,8 @@ class _ExampleCardState extends State<ExampleCard> {
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 30,
+                                  fontSize: 26,
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(28, 10, 0, 0), // Adjust padding as needed
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_on, // Location Icon
-                                    color: AppColors.whitetext,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    widget.restaurant.city,
-                                    style: TextStyle(
-                                      color: AppColors.whitetext,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(28, 5, 0, 0), // Adjust padding as needed
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.access_time_filled_rounded, // Time Icon
-                                    color: AppColors.whitetext,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(width: 5),
-                                  Text(
-                                    widget.restaurant.job,
-                                    style: TextStyle(
-                                      color: AppColors.whitetext,
-                                      fontSize: 17,
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ],
@@ -182,7 +142,40 @@ class _ExampleCardState extends State<ExampleCard> {
                   ),
                 ],
               ),
-              // Adjust spacing as needed
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+                child: Row( // Wrap job and city in a Row
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      color: AppColors.whitetext,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      widget.restaurant.city,
+                      style: TextStyle(
+                        color: AppColors.whitetext,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(width: 10), // Add spacing between job and city
+                    Icon(
+                      Icons.access_time_filled_rounded,
+                      color: AppColors.whitetext,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      widget.restaurant.job,
+                      style: TextStyle(
+                        color: AppColors.whitetext,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -198,7 +191,7 @@ class _ExampleCardState extends State<ExampleCard> {
             width: 500,
             child: Center(
               child: Text(
-                "Top Picks",
+                "First Choice",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,

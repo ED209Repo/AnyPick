@@ -38,8 +38,8 @@ class ExampleResturantModel {
 final List<ExampleResturantModel> candidates = [
   ExampleResturantModel(
     name: 'Mcdonalds',
-    job: 'Closes at 11:00 pm',
-    city: 'I-8',
+    job: '11:00 pm',
+    city: '25 Km',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite, // Add the heart icon here
     likeCount: 0,
@@ -61,8 +61,8 @@ final List<ExampleResturantModel> candidates = [
   ),
   ExampleResturantModel(
     name: 'KFC',
-    job: 'Closes at 11:59 pm',
-    city: 'F-7',
+    job: '11:59 pm',
+    city: '15 Km',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
     likeCount: 0,
@@ -85,8 +85,8 @@ final List<ExampleResturantModel> candidates = [
   ),
   ExampleResturantModel(
     name: 'Hardees',
-    job: 'Closes at 1:00 Am',
-    city: 'I-10',
+    job: '1:00 Am',
+    city: '25 Km',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
     likeCount: 0,
@@ -108,8 +108,8 @@ final List<ExampleResturantModel> candidates = [
   ),
   ExampleResturantModel(
     name: 'Burger Lab',
-    job: 'Closes at 11:00 pm',
-    city: 'F-10',
+    job: '11:00 pm',
+    city: '25 Km',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
     likeCount: 0,
@@ -131,8 +131,8 @@ final List<ExampleResturantModel> candidates = [
   ),
   ExampleResturantModel(
     name: 'Gloria Jeans',
-    job: 'Closes at 2:00 Am',
-    city: 'F-6',
+    job: '2:00 Am',
+    city: '15 Km',
     likeIcons: Icons.thumb_up, // Add the like icon here
     heartIcon: Icons.favorite,
     likeCount: 0,
