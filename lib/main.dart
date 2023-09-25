@@ -1,11 +1,13 @@
 import 'package:anypickdemo/MenuPage.dart';
 import 'package:anypickdemo/SplashScreen.dart';
 import 'package:flutter/material.dart';
+
+import 'onBoardingScreen.dart';
 void main() {
   runApp(
-    const MaterialApp(
+     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splashscreen(),
+      home: OnboardScreen(),
     ),
   );
 }

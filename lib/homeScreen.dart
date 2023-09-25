@@ -49,6 +49,14 @@ class _ExamplePageState extends State<Example> {
   }
   @override
   Widget build(BuildContext context) {
+    final currentTime = DateTime.now();
+    final currentHour = currentTime.hour;
+    String message = "";
+    if (currentHour >= 0 && currentHour < 12) {
+      message = "Good Morning!";
+    } else {
+      message = "Good Evening!";
+    }
     phoneController.selection = TextSelection.fromPosition(
       TextPosition(
         offset: phoneController.text.length,
@@ -64,38 +72,39 @@ class _ExamplePageState extends State<Example> {
           Padding(
             padding: const EdgeInsets.only(left: 10, top: 10),
             child: GestureDetector(
-              onTap: () {
+              onTap: (){
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const AccountSettingsPage(),
                   ),
                 );
               },
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end, // Align text at the bottom
-                children: [
-                  const Align(
-                    alignment: Alignment.bottomLeft, // Align the picture at the bottom left
-                    child: CircleAvatar(
-                      radius: 25, // Adjust the radius as needed
-                      backgroundImage: AssetImage('images/profile.jpg'),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Align(
-                    alignment: Alignment.bottomRight, // Align the text at the bottom right
-                    child: Text(
-                      'Hey $userName,',
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                ],
+              child: const CircleAvatar(
+                radius: 25, // Adjust the radius as needed
+                backgroundImage: AssetImage('images/profile.jpg'),
               ),
             ),
           ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                '$userName',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
+              ),
+            ],),
+          const Spacer(),
           const Spacer(),
           IconButton(
             icon: Icon(
@@ -103,27 +112,20 @@ class _ExamplePageState extends State<Example> {
               color: AppColors.themeColor2,
               size: 35,
             ),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const TryScreen(),
-              ),
-            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const TryScreen()));
+            },
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 4, 0),
-            child: IconButton(
-              icon: const Icon(
-                Icons.location_on,
-                color: Colors.red,
-                size: 35,
-              ),
-              onPressed: () {
-                // Handle search button press
-              },
+          IconButton(
+            icon: const Icon(
+              Icons.location_on,
+              color: Colors.red,
+              size: 35,
             ),
+            onPressed: () {
+              // Handle search button press
+            },
           ),
-
         ],
       ),
       Flexible(
@@ -148,7 +150,7 @@ class _ExamplePageState extends State<Example> {
           text: "Order",
           onPressed: () {
             showModalBottomSheet<void>(
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
               context: context,
               builder: (BuildContext context) {
@@ -170,10 +172,10 @@ class _ExamplePageState extends State<Example> {
                                   child: Image.asset("images/mainlogo.png")),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 80, bottom: 50,),
+                              padding: const EdgeInsets.only(left: 80, bottom: 50,),
                               child: GestureDetector(
                                   onTap: () => Navigator.of(context).pop(),
-                                  child: Icon(Icons.close,color: Colors.black,)),
+                                  child: const Icon(Icons.close,color: Colors.black,)),
                             )
                           ],
                         ),
@@ -313,7 +315,7 @@ class _ExamplePageState extends State<Example> {
                                   elevation: 3,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(08.0)),
-                                  minimumSize: Size(300, 50), //////// HERE
+                                  minimumSize: const Size(300, 50), //////// HERE
                                 ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
@@ -356,7 +358,7 @@ class _ExamplePageState extends State<Example> {
                                     );
                                   }
                                 },
-                                child: Text('SignUp'),
+                                child: const Text('SignUp'),
                               ),
                             ),
 
