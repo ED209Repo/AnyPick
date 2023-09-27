@@ -223,26 +223,7 @@ class _SignupPageState extends State<SignupPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => const Example()),
-                              );
-                            } else {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('Error'),
-                                    content:const  Text('Please fill in all the fields.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: const Text('OK'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
+                              );}
                           },
                         ),
                       ),

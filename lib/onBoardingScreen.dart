@@ -88,29 +88,31 @@ class _OnboardscreenState extends State<OnboardScreen> {
         ],
       ),
     ),
+    Padding(
+      padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
+      child: Container(
+        alignment: Alignment.topRight,
+        child: DropdownButton<String>(
+          dropdownColor: AppColors.themeColor,
+         icon: const Icon(
+           Icons.language_rounded,
+         ),
+          items: <String>['English', 'العربية'].map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          onChanged: (_) {},
+        ),
+      ),
+    ),
     Container(
       width: double.infinity,
       color: AppColors.whitetext,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 200, bottom: 20),
-            child: DropdownButton<String>(
-              dropdownColor: AppColors.themeColor,
-              hint: const Text('Language ') ,
-              style: TextStyle(
-                  color:  AppColors.whitetext
-              ),
-              items: <String>['English', 'العربية'].map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (_) {},
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.only(bottom: 60),
             child: Image.asset(

@@ -266,13 +266,27 @@ class _MenuPageState extends State<MenuPage> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => DetailPage(
-                                              food: Food.generateRecommendFoods()[0], // Pass the Food object here
-                                            ),
-                                          ),
+                                        showModalBottomSheet<dynamic>(
+                                          backgroundColor: Colors.white,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return Container(
+                                              height: MediaQuery.of(context).size.height * 1,
+                                              width: double.infinity,
+                                              child: DetailPage(food: Food.generateRecommendFoods()[0]),
+                                            );
+                                          },
                                         );
+                                        // Navigator.of(context).push(
+                                        //   MaterialPageRoute(
+                                        //     builder: (context) => DetailPage(
+                                        //       food: Food.generateRecommendFoods()[0], // Pass the Food object here
+                                        //     ),
+                                        //   ),
+                                        // );
                                       },
                                       child: Text(
                                         item.title,
