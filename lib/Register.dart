@@ -45,41 +45,44 @@ class _registerscreenState extends State<registerscreen> {
               key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 150.0),
-                        child: SizedBox(
-                            height: 80,
-                            width: 80,
-                            child: Image.asset("images/logo2.png")),
+                      Row(
+                        children: [
+                           SizedBox(
+                                height: 80,
+                                width: 80,
+                                child: Image.asset("images/logo2.png")),
+                             Spacer(),
+                             Spacer(),
+                             Spacer(),
+                             GestureDetector(
+                              onTap: () => Navigator.of(context).pop(),
+                                child: const Icon(Icons.close,color: Colors.black,)),
+
+                        ],
                       ),
-                       Padding(
-                        padding: const EdgeInsets.only(left: 65, bottom: 50,),
-                        child: GestureDetector(
-                          onTap: () => Navigator.of(context).pop(),
-                            child: const Icon(Icons.close,color: Colors.black,)),
-                      )
                     ],
                   ),
                   const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 60.0),
-                        child: Text(
-                          "Enter your phone number",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.blackColor,
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
+                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                         children: [
+                           Text(
+                              "Enter your phone number",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.blackColor,
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                         ],
+                       ),
+
                   const SizedBox(height: 15),
                   TextFormField(
                     inputFormatters: [
@@ -88,6 +91,8 @@ class _registerscreenState extends State<registerscreen> {
                     ],
                     keyboardType: TextInputType.number,
                     cursorColor: AppColors.cursorColor,
+                    autofocus: true,
+                    textInputAction: TextInputAction.done,
                     onChanged: (value) {
                       print(value);
                       setState(() {
@@ -114,7 +119,7 @@ class _registerscreenState extends State<registerscreen> {
                       hintText: "59xxxxxxx",
                       hintStyle: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 22,
+                        fontSize: 20,
                         color: AppColors.greyText,
                       ),
                       enabledBorder: OutlineInputBorder(
@@ -130,7 +135,7 @@ class _registerscreenState extends State<registerscreen> {
                         ),
                       ),
                       prefixIcon: Container(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                         child: InkWell(
                           onTap: () {
                             showCountryPicker(
@@ -148,7 +153,7 @@ class _registerscreenState extends State<registerscreen> {
                           child: Text(
                             "${selectedCountry.flagEmoji} ${selectedCountry.phoneCode}",
                             style: TextStyle(
-                              fontSize: 19,
+                              fontSize: 20,
                               color: AppColors.blackColor,
                               fontWeight: FontWeight.bold,
                             ),
@@ -189,13 +194,9 @@ class _registerscreenState extends State<registerscreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                 Row(
-                   children: [
-                     Padding(
-                       padding: const EdgeInsets.only(left: 10, right: 15),
-                       child: ElevatedButton(
+                 ElevatedButton(
                          style: ElevatedButton.styleFrom(
-                           primary: AppColors.themeColor,
+                           backgroundColor: AppColors.themeColor,
                            elevation: 3,
                            shape: RoundedRectangleBorder(
                                borderRadius: BorderRadius.circular(08.0)),
@@ -211,65 +212,42 @@ class _registerscreenState extends State<registerscreen> {
                                backgroundColor: AppColors.SplashColor,
                                textColor: AppColors.blackColor,
                              );
-                             showModalBottomSheet<void>(
+                             showModalBottomSheet<dynamic>(
                                  enableDrag: true,
                                  isDismissible: true,
+                                 isScrollControlled: true,
                                  shape: const RoundedRectangleBorder(
                                      borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
                                  context: context,
                            builder: (BuildContext context) {
                            return Container(
-                           height: MediaQuery.of(context).size.height * 0.6,
+                           height: MediaQuery.of(context).size.height * 0.8,
                            width: double.infinity,
-                           child:otpscreen(verificationId: '',),
+                           child:const otpscreen(verificationId: '',),
                            );
                            }
-                             ); } else {
-                             showDialog(
-                               context: context,
-                               builder: (BuildContext context) {
-                                 return AlertDialog(
-                                   backgroundColor: AppColors.whitetext,
-                                   title: const Text('Error'),
-                                   content:
-                                   const Text('Please Enter Correct Phone Number.'),
-                                   actions: <Widget>[
-                                     TextButton(
-                                       child: Text(
-                                         'OK',
-                                         style: TextStyle(
-                                           color: AppColors.blackColor,
-                                         ),
-                                       ),
-                                       onPressed: () {
-                                         Navigator.of(context).pop();
-                                       },
-                                     ),
-                                   ],
-                                 );
-                               },
-                             );
-                           }
+                             ); }
                          },
                          child: const Text('SignUp'),
                        ),
-                     ),
-
-                   ],
-                 ),
                   const SizedBox(height: 30),
-                  const Text('By Continuing you agree to',
-                    style: TextStyle(
-                      fontSize: 17,
-                    ),),
-                  Text('AnyPick Terms & Conditions',
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      decorationThickness: 3,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.themeColor,
-                    ),),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('By Continuing you agree to',
+                        style: TextStyle(
+                          fontSize: 17,
+                        ),),
+                      Text('AnyPick Terms & Conditions',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 3,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.themeColor,
+                        ),),
+                    ],
+                  ),
             ])),
           );
   }

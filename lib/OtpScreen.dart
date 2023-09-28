@@ -54,6 +54,8 @@ class _otpscreenState extends State<otpscreen> {
                   controller: otpController,
                   length: 6,
                   showCursor: true,
+                  autofocus: true,
+                  textInputAction: TextInputAction.done,
                   defaultPinTheme: PinTheme(
                     width: 60,
                     height: 60,

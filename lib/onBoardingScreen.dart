@@ -166,7 +166,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
                 left: 30,
                 right: 30,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     (currentPage == 2 )

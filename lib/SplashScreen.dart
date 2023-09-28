@@ -40,7 +40,7 @@ class _SplashscreenState extends State<Splashscreen>
         child: Container(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
                   height: 150,

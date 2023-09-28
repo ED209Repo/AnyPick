@@ -52,6 +52,8 @@ class _ExamplePageState extends State<Example> {
       body: Container(
         child: SafeArea(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
                 children: [
@@ -144,7 +146,7 @@ class _ExamplePageState extends State<Example> {
                     context: context,
                     builder: (BuildContext context) {
                       return Container(
-                        height: MediaQuery.of(context).size.height * 0.6,
+                        height: MediaQuery.of(context).size.height * 0.8,
                             width: double.infinity,
                             child: registerscreen(),
                       );
