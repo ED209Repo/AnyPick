@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Cart_screen.dart';
 import 'New_Menu_Page.dart';
 import 'Widgets/AppColors.dart'; // Make sure this import is correct.
 import 'card_candidate_model.dart'; // Make sure this import is correct.
@@ -267,7 +268,12 @@ class _ExampleCardState extends State<ExampleCard> {
                                       alignment: Alignment.centerRight,
                                       child: IconButton(
                                         onPressed: () {
-                                          // Handle cart icon press here
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => CartScreen(),
+                                            ),
+                                          );
                                         },
                                         icon: Icon(
                                           isSelected
