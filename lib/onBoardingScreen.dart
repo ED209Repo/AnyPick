@@ -117,32 +117,42 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(padding: const EdgeInsets.fromLTRB(320,0,0,0),
-              child: Consumer<LanguageChangeController>(builder: (context,provider,child){
-                return PopupMenuButton(
-                  icon: const Icon(Icons.language_rounded),
-                    onSelected: (Language item){
-                      if(Language.English.name==item.name){
-                        provider.changeLanguage(const Locale('en'));
-                      } else{
-                        provider.changeLanguage(const Locale('ar'));
-                      }
-                    },
-                    itemBuilder: (BuildContext context)=> <PopupMenuEntry<Language>>[
-                      const PopupMenuItem(
-                          value: Language.English,
-                          child: Text("Enlgish")),
-                      const PopupMenuItem(
-                          value: Language.Arabic,
-                          child: Text("العربية")),
-                    ]
-                );
-              })),
-            ],
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
+            child: Container(
+              alignment: Alignment.topRight,
+              child: PopupMenuButton<String>(
+                icon: Icon(
+                  Icons.language_rounded,
+                  color: Colors.black, // You can customize the icon color
+                ),
+                itemBuilder: (BuildContext context) {
+                  return <PopupMenuEntry<String>>[
+                    PopupMenuItem<String>(
+                      value: 'English',
+                      child: Text('English'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'العربية',
+                      child: Text('العربية'),
+                    ),
+                  ];
+                },
+                onSelected: (_) {
+                  // Handle language selection here
+                },
+                offset: Offset(0, 40), // You can adjust the position of the menu
+              )
+
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 60),
+            child: Image.asset(
+              "images/mainlogo.png",
+              height: 150,
+              width: 150,
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,

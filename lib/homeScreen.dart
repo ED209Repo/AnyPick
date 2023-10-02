@@ -20,13 +20,16 @@ class Example extends StatefulWidget {
 class _ExamplePageState extends State<Example> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController phoneController = TextEditingController();
-  final String profileImageUrl = 'images/profile.jpg'; // Replace with your image URL
+  final String profileImageUrl =
+      'images/profile.jpg'; // Replace with your image URL
   final String userName = 'Danial'; // Replace with the user's name
   final CardSwiperController controller = CardSwiperController();
   final cards = candidates.map(ExampleCard.new).toList();
+
   bool isPhoneValid() {
     return phoneController.text.length == 9;
   }
+
   @override
   void dispose() {
     controller.dispose();
@@ -45,16 +48,15 @@ class _ExamplePageState extends State<Example> {
     }
 
     return Scaffold(
-    body: Container(
-    child: SafeArea(
-    child: Column(
-    children: [
+        body: Container(
+            child: SafeArea(
+                child: Column(children: [
       Row(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 10, top: 10),
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const AccountSettingsPage(),
@@ -85,7 +87,8 @@ class _ExamplePageState extends State<Example> {
                   fontSize: 18,
                 ),
               ),
-            ],),
+            ],
+          ),
           const Spacer(),
           const Spacer(),
           IconButton(
@@ -95,7 +98,8 @@ class _ExamplePageState extends State<Example> {
               size: 35,
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const TryScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const TryScreen()));
             },
           ),
           IconButton(
@@ -111,76 +115,91 @@ class _ExamplePageState extends State<Example> {
         ],
       ),
       Flexible(
-    child: CardSwiper(
-    controller: controller,
-    cardsCount: cards.length,
-    onSwipe: _onSwipe,
-    onUndo: _onUndo,
-    numberOfCardsDisplayed: 2,
-    backCardOffset: const Offset(40, 40),
-    padding: const EdgeInsets.only(top: 10, bottom: 50,left: 15 , right: 15),
-    cardBuilder: (
-    context,
-    index,
-    horizontalThresholdPercentage,
-    verticalThresholdPercentage,
-    ) =>
-    cards[index],
-    ),
-    ),
+        child: CardSwiper(
+          controller: controller,
+          cardsCount: cards.length,
+          onSwipe: _onSwipe,
+          onUndo: _onUndo,
+          numberOfCardsDisplayed: 2,
+          backCardOffset: const Offset(40, 40),
+          padding:
+              const EdgeInsets.only(top: 10, bottom: 50, left: 15, right: 15),
+          cardBuilder: (
+            context,
+            index,
+            horizontalThresholdPercentage,
+            verticalThresholdPercentage,
+          ) =>
+              cards[index],
+        ),
+      ),
       Padding(
-
         padding: const EdgeInsets.all(10),
-        child: CustomButton2(
-            text: AppLocalizations.of(context)!.cart,
-            onPressed: () {showModalBottomSheet<dynamic>(
-    backgroundColor: Colors.white,
-    isScrollControlled: true,
-    shape: const RoundedRectangleBorder(
-    borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
-    context: context,
-    builder: (BuildContext context) {
-    return Container(
-    height: MediaQuery.of(context).size.height * 0.6,
-    width: double.infinity,
-    child: registerscreen(),
-    );
-    },
-    );
-            },
+        child: ElevatedButton(
+          child: Text(
+            AppLocalizations.of(context)!.cart,
+            style: TextStyle(fontSize: 18),
+          ),
+          style: ElevatedButton.styleFrom(
+            primary: AppColors.themeColor,
+            elevation: 3,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(15))),
+            minimumSize: const Size(350, 50),
+          ),
+          onPressed: () {
+            showModalBottomSheet<dynamic>(
+              backgroundColor: Colors.white,
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20))),
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  width: double.infinity,
+                  child: registerscreen(),
+                );
+              },
+            );
+          },
         ),
       ),
     ]))));
   }
 
   bool _onSwipe(
-      int previousIndex,
-      int? currentIndex,
-      CardSwiperDirection direction,
-      ) {
+    int previousIndex,
+    int? currentIndex,
+    CardSwiperDirection direction,
+  ) {
     direction.name == "top"
         ? //--- true if UP swipe
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      setState(() {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const MenuPage(),
-          ),
-        );
-      });
-    })
+        Future.delayed(const Duration(milliseconds: 1000), () {
+            setState(() {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MenuPage(),
+                ),
+              );
+            });
+          })
         : debugPrint(
-      'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
-    );
+            'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
+          );
     return true;
   }
 
   bool _onUndo(
-      int? previousIndex,
-      int currentIndex,
-      CardSwiperDirection direction,
-      ) {
+    int? previousIndex,
+    int currentIndex,
+    CardSwiperDirection direction,
+  ) {
     debugPrint(
       'The card $currentIndex was undid from the ${direction.name}',
     );

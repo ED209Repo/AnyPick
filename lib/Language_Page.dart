@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'Widgets/AppColors.dart';
 
@@ -14,6 +15,10 @@ class _LanguagePageState extends State<LanguagePage> {
       _selectedLocale = locale;
     });
   }
+  final List<String> Item = [
+    'English',
+    'عربي',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -43,41 +48,76 @@ class _LanguagePageState extends State<LanguagePage> {
       ),
       body: Column(
         children: <Widget>[
-          SizedBox(height: 40.0), // Add gap from the app bar
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
-            alignment: Alignment.center,
-            child: Text(
-              'Select Language:',
-              style: TextStyle(fontSize: 20.0),
+          const SizedBox(height: 30),
+            const Text('Select Language',
+              style: TextStyle(
+              color: Colors.black,
+              fontSize: 22,
             ),
-          ),
-          SizedBox(height: 10.0), // Add some vertical gap
-          DropdownButtonFormField<String>(
-            value: _selectedLocale.languageCode, // Use the language code as the selected value
-            onChanged: (languageCode) {
-              Locale? selectedLocale;
-              if (languageCode == 'ar') {
-                selectedLocale = Locale('ar');
-              } else {
-                selectedLocale = Locale('en');
-              }
-              if (selectedLocale != null) {
-                _setLocale(selectedLocale);
-              }
-            },
-            items: [
-              DropdownMenuItem<String>(
-                value: 'en',
-                child: Text('English'),
+            ),
+            SizedBox(height: 14),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: DropdownButtonFormField2<String>(
+                isExpanded: true,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.symmetric(vertical: 16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(
+                      color: AppColors.themeColor,
+                      width: 3,
+                    ),
+                  ),
+                ),
+                hint: const Text(
+                  'Choose Language',
+                  style: TextStyle(fontSize: 14),
+                ),
+                items: Item.map((item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(
+                    item,
+                    style: const TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                ))
+                    .toList(),
+                validator: (value) {
+                  if (value == null) {
+                    return 'Please select Language';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  //Do something when selected item is changed.
+                },
+                // onSaved: (value) {
+                //   selectedValue = value.toString();
+                // },
+                buttonStyleData: const ButtonStyleData(
+                  padding: EdgeInsets.only(right: 8),
+                ),
+                iconStyleData: const IconStyleData(
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: 24,
+                ),
+                dropdownStyleData: DropdownStyleData(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
+                menuItemStyleData: const MenuItemStyleData(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                ),
               ),
-              DropdownMenuItem<String>(
-                value: 'ar',
-                child: Text('عربي'),
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+
       ),
     );
   }

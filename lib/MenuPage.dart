@@ -2,9 +2,12 @@ import 'package:anypickdemo/MenuPageModel.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'New_Menu_Page.dart';
+import 'ProductPage.dart';
+import 'ProductPageModel.dart';
 import 'homeScreen.dart';
 import 'menuSelection.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 
 class MenuPage extends StatefulWidget {
@@ -277,17 +280,10 @@ class _MenuPageState extends State<MenuPage> {
                                             return Container(
                                               height: MediaQuery.of(context).size.height * 1,
                                               width: double.infinity,
-                                              child: DetailPage(food: Food.generateRecommendFoods()[0]),
+                                              child: FoodDetailPage(food: Food.generateRecommendFoods()[0]),
                                             );
                                           },
                                         );
-                                        // Navigator.of(context).push(
-                                        //   MaterialPageRoute(
-                                        //     builder: (context) => DetailPage(
-                                        //       food: Food.generateRecommendFoods()[0], // Pass the Food object here
-                                        //     ),
-                                        //   ),
-                                        // );
                                       },
                                       child: Text(
                                         item.title,
