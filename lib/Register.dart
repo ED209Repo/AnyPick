@@ -52,6 +52,7 @@ class _registerscreenState extends State<registerscreen> {
         key: _formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Row(
               children: [
