@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'New_Menu_Page.dart';
+import 'ProductPage.dart';
+import 'ProductPageModel.dart';
 import 'Widgets/AppColors.dart'; // Make sure this import is correct.
 import 'card_candidate_model.dart'; // Make sure this import is correct.
+
 
 class ExampleCard extends StatefulWidget {
   final ExampleResturantModel restaurant;
@@ -68,7 +70,7 @@ class _ExampleCardState extends State<ExampleCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(120, 10, 16, 0),
+                    padding: const EdgeInsets.fromLTRB(130, 10, 30, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -186,13 +188,12 @@ class _ExampleCardState extends State<ExampleCard> {
           child: Container(
             decoration: const BoxDecoration(
               color: Colors.black,
-
             ),
             height: 35,
             width: 500,
             child: Center(
               child: Text(
-                "First Choice",
+                "Top Picks",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -243,9 +244,9 @@ class _ExampleCardState extends State<ExampleCard> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height *0.9,
+                                    height: MediaQuery.of(context).size.height * 0.9,
                                     width: double.infinity,
-                                    child: DetailPage(food: Food.generateRecommendFoods()[0]),
+                                    child: FoodDetailPage(food: Food.generateRecommendFoods()[0]),
                                   );
                                 },
                               );

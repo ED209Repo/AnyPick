@@ -46,6 +46,8 @@ dependencies:
   fast_color_picker: ^0.1.1
   card_swiper: ^3.0.1
   flutterme_credit_card: ^1.0.2
+  dropdown_button2: ^2.3.9
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:

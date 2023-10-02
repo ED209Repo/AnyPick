@@ -88,31 +88,42 @@ class _OnboardscreenState extends State<OnboardScreen> {
         ],
       ),
     ),
-    Padding(
-      padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
-      child: Container(
-        alignment: Alignment.topRight,
-        child: DropdownButton<String>(
-          dropdownColor: AppColors.themeColor,
-         icon: const Icon(
-           Icons.language_rounded,
-         ),
-          items: <String>['English', 'العربية'].map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          onChanged: (_) {},
-        ),
-      ),
-    ),
+
     Container(
       width: double.infinity,
       color: AppColors.whitetext,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
+            child: Container(
+              alignment: Alignment.topRight,
+              child: PopupMenuButton<String>(
+                icon: Icon(
+                  Icons.language_rounded,
+                  color: Colors.black, // You can customize the icon color
+                ),
+                itemBuilder: (BuildContext context) {
+                  return <PopupMenuEntry<String>>[
+                    PopupMenuItem<String>(
+                      value: 'English',
+                      child: Text('English'),
+                    ),
+                    PopupMenuItem<String>(
+                      value: 'العربية',
+                      child: Text('العربية'),
+                    ),
+                  ];
+                },
+                onSelected: (_) {
+                  // Handle language selection here
+                },
+                offset: Offset(0, 40), // You can adjust the position of the menu
+              )
+
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(bottom: 60),
             child: Image.asset(
