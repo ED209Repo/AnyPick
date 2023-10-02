@@ -146,14 +146,6 @@ class _OnboardscreenState extends State<OnboardScreen> {
 
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 60),
-            child: Image.asset(
-              "images/mainlogo.png",
-              height: 150,
-              width: 150,
-            ),
-          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.stretch,
