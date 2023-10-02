@@ -1,6 +1,9 @@
+import 'package:anypickdemo/homeScreen.dart';
 import 'package:anypickdemo/onBoardingScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class Splashscreen extends StatefulWidget {
   const Splashscreen({Key? key}) : super(key: key);
 
@@ -20,10 +23,21 @@ class _SplashscreenState extends State<Splashscreen>
       duration: const Duration(milliseconds: 7000),
     );
 
-    _animationController.forward().then((value) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const OnboardScreen()),
-      );
+    _animationController.forward().then((value) async {
+      final preferences = await SharedPreferences.getInstance();
+      final String? phoneNumber = preferences.getString('phoneNumber');
+
+      if (phoneNumber != null && phoneNumber.isNotEmpty) {
+        // User's phone number exists in stored data, navigate to the home screen
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => Example()),
+        );
+      } else {
+        // User's phone number doesn't exist in stored data, navigate to onboarding
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const OnboardScreen()),
+        );
+      }
     });
   }
 
@@ -52,13 +66,21 @@ class _SplashscreenState extends State<Splashscreen>
                 onLoaded: (composition) {
                   _animationController
                     ..duration = composition.duration
-                    ..forward().then((value) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const OnboardScreen(),
-                        ),
-                      );
+                    ..forward().then((value) async {
+                      final preferences = await SharedPreferences.getInstance();
+                      final String? phoneNumber = preferences.getString('phoneNumber');
+
+                      if (phoneNumber != null && phoneNumber.isNotEmpty) {
+                        // User's phone number exists in stored data, navigate to the home screen
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => Example()),
+                        );
+                      } else {
+                        // User's phone number doesn't exist in stored data, navigate to onboarding
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => const OnboardScreen()),
+                        );
+                      }
                     });
                 },
               ),

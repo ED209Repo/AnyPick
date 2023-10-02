@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'Widgets/AppColors.dart';
 import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
@@ -37,11 +37,11 @@ class _SignupPageState extends State<SignupPage> {
                 key: _formKey,
                 child: ListView(
                     children: <Widget>[
-                      const Row(
+                       Row(
                         children:<Widget> [
-                          Expanded(child: Text("Create Account",
+                          Expanded(child: Text(AppLocalizations.of(context)!.createanaccount,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style:const  TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 32,
                             ),),),
@@ -58,7 +58,7 @@ class _SignupPageState extends State<SignupPage> {
                               width: 3,
                             ),
                           ),
-                          labelText: 'Phone Number',
+                          labelText: AppLocalizations.of(context)!.phonenumber,
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 16,
@@ -66,7 +66,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter a username';
+                            return 'Please enter a phone number';
                           }
                           return null;
                         },
@@ -83,7 +83,7 @@ class _SignupPageState extends State<SignupPage> {
                               width: 3,
                             ),
                           ),
-                          labelText: 'Full Name',
+                          labelText: AppLocalizations.of(context)!.fullname,
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 16,
@@ -91,7 +91,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter your full name';
+                            return AppLocalizations.of(context)!.pleaseenteryourfullname;
                           }
                           return null;
                         },
@@ -110,7 +110,7 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                           ),
 
-                          labelText: 'Email Address',
+                          labelText: AppLocalizations.of(context)!.emailaddress,
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 16,
@@ -118,10 +118,10 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter an email address';
+                            return AppLocalizations.of(context)!.pleaseneteryouremail;
                           }
                           if (!value.contains('@')) {
-                            return 'Please enter a valid email';
+                            return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
                           }
                           return null;
                         },
@@ -130,8 +130,8 @@ class _SignupPageState extends State<SignupPage> {
                         },
                       ),
                       const SizedBox(height: 20.0),
-                      const Text("Gender",
-                      style: TextStyle(
+                       Text(AppLocalizations.of(context)!.gender,
+                      style: const TextStyle(
                         fontSize: 17,
                       ),),
                       Row(
@@ -169,8 +169,8 @@ class _SignupPageState extends State<SignupPage> {
 
                       ),
                       const SizedBox(height: 15),
-                      const Text('Date of Birth',
-                      style: TextStyle(
+                       Text(AppLocalizations.of(context)!.dob,
+                      style: const TextStyle(
                         fontSize: 17,
                       ),),
                       const SizedBox(height: 10.0),
@@ -188,7 +188,7 @@ class _SignupPageState extends State<SignupPage> {
                                     foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
                                   ),
                                   child: Text(
-                                    myAge.isEmpty ? 'Choose Date' : '$SelectedDate',
+                                    myAge.isEmpty ? AppLocalizations.of(context)!.choosedate : '$SelectedDate',
                                     style: const TextStyle(
                                       decorationThickness: 2.5,
                                       fontWeight: FontWeight.w600,
@@ -207,7 +207,7 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(
                         height: 40,
                         child: CustomButton(
-                          text: "Create Account",
+                          text: AppLocalizations.of(context)!.createanaccount,
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
@@ -230,11 +230,11 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(height: 30.0),
                       Column(
                         children: [
-                          const Text('By Continuing you agree to',
-                          style: TextStyle(
+                           Text(AppLocalizations.of(context)!.bycontinuingyouagreeto,
+                          style: const TextStyle(
                             fontSize: 17,
                           ),),
-                           Text('AnyPick Terms & Conditions',
+                           Text(AppLocalizations.of(context)!.anypicktermsconditions,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationThickness: 3,

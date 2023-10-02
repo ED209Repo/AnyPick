@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'New_Menu_Page.dart';
 import 'homeScreen.dart';
 import 'menuSelection.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class MenuPage extends StatefulWidget {
@@ -388,20 +389,20 @@ class _MenuPageState extends State<MenuPage> {
                         size: 30,
                           color: AppColors.themeColor2,
                       ),
-                      label: 'Pizza',
+                      label: AppLocalizations.of(context)!.pizza,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.fastfood_outlined,
                       size: 30,
                       color: AppColors.themeColor2),
-                      label: 'Burgers',
+                      label: AppLocalizations.of(context)!.burgers,
                     ),
                     BottomNavigationBarItem(
                       icon: Icon(Icons.food_bank,
                       size: 30,
                           color: AppColors.themeColor2
                       ),
-                      label: 'Main Course',
+                      label: AppLocalizations.of(context)!.maincourse,
 
                     ),
                   ],

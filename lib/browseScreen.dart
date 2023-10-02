@@ -1,7 +1,7 @@
 import 'package:anypickdemo/MenuPage.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'BrowseScreenModel.dart';
 import 'Widgets/AppColors.dart';
 
@@ -82,7 +82,7 @@ class _TryScreenState extends State<TryScreen> {
             ),
             title: Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Text('Browse',
+              child: Text(AppLocalizations.of(context)!.browse,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: AppColors.whitetext,
@@ -104,7 +104,7 @@ class _TryScreenState extends State<TryScreen> {
                     _performSearch(query);
                   },
                   decoration: InputDecoration(
-                    hintText: "Search Food",
+                    hintText: AppLocalizations.of(context)!.searchfood,
                     hintStyle: const TextStyle(
                       color: Colors.black,
                     ),

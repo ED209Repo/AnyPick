@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'SignUp.dart';
 import 'Widgets/AppColors.dart';
 import 'Widgets/CustomButton.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class otpscreen extends StatefulWidget {
   final String verificationId;
   const otpscreen({Key? key, required this.verificationId}) : super(key: key);
@@ -32,16 +33,16 @@ class _otpscreenState extends State<otpscreen> {
                     ),
                   ],
                 ),
-                const Text(
-                  "Verification Code",
-                  style: TextStyle(
+                 Text(
+                  AppLocalizations.of(context)!.verificationcode,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  "Enter the OTP  sent to your phone number",
+                  AppLocalizations.of(context)!.entertheotpsenttoyourphonenumber,
                   style: TextStyle(
                     fontWeight: FontWeight.normal,
                     color: AppColors.blackColor,
@@ -74,8 +75,8 @@ class _otpscreenState extends State<otpscreen> {
                   width: double.infinity,
                   height: 50,
                   child: CustomButton(
-                      text: "Verify",
-                      onPressed: () {
+                      text: AppLocalizations.of(context)!.verify,
+                      onPressed: ()  {
                         Navigator.push(context, MaterialPageRoute(builder: (
                             context) => const SignupPage()));
                       }

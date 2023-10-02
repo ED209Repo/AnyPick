@@ -8,6 +8,7 @@ import 'MenuPage.dart';
 import 'Register.dart';
 import 'Widgets/AppColors.dart';
 import 'card_candidate_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Example extends StatefulWidget {
   const Example({Key? key}) : super(key: key);
@@ -38,9 +39,9 @@ class _ExamplePageState extends State<Example> {
     final currentHour = currentTime.hour;
     String message = "";
     if (currentHour >= 0 && currentHour < 12) {
-      message = "Good Morning!";
+      message = AppLocalizations.of(context)!.goodmorning;
     } else {
-      message = "Good Evening!";
+      message = AppLocalizations.of(context)!.goodevening;
     }
 
     return Scaffold(
@@ -131,7 +132,7 @@ class _ExamplePageState extends State<Example> {
 
         padding: const EdgeInsets.all(10),
         child: CustomButton2(
-            text: "Cart",
+            text: AppLocalizations.of(context)!.cart,
             onPressed: () {showModalBottomSheet<dynamic>(
     backgroundColor: Colors.white,
     isScrollControlled: true,
