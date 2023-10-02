@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'AccountSettings.dart';
 import 'Widgets/AppColors.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ProfileSettingsPage extends StatefulWidget {
   const ProfileSettingsPage({Key? key}) : super(key: key);
 
@@ -40,7 +40,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
           onTap: () => Navigator.of(context).pop(),
           child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
         ),
-        title: const Text("Profile Settings"),
+        title:  Text(AppLocalizations.of(context)!.profilesetting),
         centerTitle: true,
         actions: [
           TextButton(
@@ -57,7 +57,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               )
 
             ),
-            child: const Text("Save"),
+            child:  Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -137,14 +137,14 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     width: 3,
                   ),
                 ),
-                labelText: 'Full Name',
+                labelText: AppLocalizations.of(context)!.fullname,
                 labelStyle: TextStyle(
                   color: AppColors.blackColor,
                 ),
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your full name';
+                  return AppLocalizations.of(context)!.pleaseenteryourfullname;
                 }
                 return null;
               },
@@ -166,17 +166,17 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     width: 3,
                   ),
                 ),
-                labelText: 'Email Address',
+                labelText: AppLocalizations.of(context)!.emailaddress,
                 labelStyle: TextStyle(
                   color: AppColors.blackColor,
                 ),
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter an email address';
+                  return AppLocalizations.of(context)!.pleaseneteryouremail;
                 }
                 if (!value.contains('@')) {
-                  return 'Please enter a valid email';
+                  return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
                 }
                 return null;
               },
@@ -203,7 +203,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               child: Container(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  selectedDateText ?? 'Date of Birth',
+                  selectedDateText ?? AppLocalizations.of(context)!.dob,
                   style: const TextStyle(
                     decorationThickness: 2.5,
                     fontWeight: FontWeight.w600,

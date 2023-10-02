@@ -5,6 +5,7 @@ import 'ProfileSetting.dart';
 import 'VehicleManagement.dart';
 import 'New_Payment_Page.dart';
 import 'Language_Page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
 
@@ -37,7 +38,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           onTap: () => Navigator.of(context).pop(),
           child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
         ),
-      title: const Text("Account Settings"),
+      title:  Text(AppLocalizations.of(context)!.accountsetting),
       centerTitle: true,
       ),
       body: SafeArea(
@@ -46,9 +47,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           children: <Widget>[
             const SizedBox(height: 10),
             buildListItemWithForwardButton(
-              'Personal Info',
+              AppLocalizations.of(context)!.personalinfo,
               Icons.person,
-              'Change your account information',
+              AppLocalizations.of(context)!.changeyouraccountinfo,
                   () {
                 // Navigate to the ProfileSettingsPage when the item is tapped
                 Navigator.push(
@@ -60,9 +61,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
             ),
             buildListItemWithForwardButton(
-              'Payment Methods',
+              AppLocalizations.of(context)!.paymentmethods,
               Icons.payment,
-              'Manage your payment methods',
+              AppLocalizations.of(context)!.manageyourmethod,
                   () {
                 Navigator.push(
                   context,
@@ -73,17 +74,17 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
             ),
             buildListItemWithForwardButton(
-              'Locations',
+              AppLocalizations.of(context)!.location,
               Icons.location_on,
-              'Manage your saved locations',
+              AppLocalizations.of(context)!.manageyoursavelocation,
                   () {
                 // Handle the item tap action here
               },
             ),
             buildListItemWithForwardButton(
-              'Vehicle Management',
+              AppLocalizations.of(context)!.vehiclemanagement,
               Icons.directions_car,
-              'Manage your vehicles',
+              AppLocalizations.of(context)!.manageyourvehicle,
                   () {
                 Navigator.push(
                   context,
@@ -95,51 +96,51 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
             ),
              buildListItemWithForwardButton(
-              'Order History',
+               AppLocalizations.of(context)!.orderhistory,
               Icons.history,
-              'View Your Order History and Details ',
+               AppLocalizations.of(context)!.viewyourorderhistory,
                   () {
                 // Handle the item tap action here
               },
             ),
-            const ListTile(
-              title: Text('Notifications'),
+             ListTile(
+              title: Text(AppLocalizations.of(context)!.notifications),
             ),
             // Notifications with Toggle Buttons (On/Off)
             buildNotificationTile(
-              'Push Notifications',
+              AppLocalizations.of(context)!.pushNotification,
               pushNotifications,
                   (bool value) {
                 setState(() {
                   pushNotifications = value;
                 });
               },
-              'Receive push notifications',
+              AppLocalizations.of(context)!.recievePushnotification,
             ),
-            const ListTile(
-              title: Text('More'),
+             ListTile(
+              title: Text(AppLocalizations.of(context)!.more),
             ),
             // Add forward buttons to other items
             buildListItemWithForwardButton(
-              'Rate Us',
+              AppLocalizations.of(context)!.rateus,
               Icons.star,
-              'Rate our app',
+              AppLocalizations.of(context)!.rateourapp,
                   () {
                 // Handle the item tap action here
               },
             ),
             buildListItemWithForwardButton(
-              'FAQ',
+              AppLocalizations.of(context)!.faq,
               Icons.help,
-              'Frequently asked questions',
+              AppLocalizations.of(context)!.frequentlyaskedquestions,
                   () {
                 // Handle the item tap action here
               },
             ),
             buildListItemWithForwardButton(
-              'Language', // New "Language" option
+              AppLocalizations.of(context)!.language, // New "Language" option
               Icons.language, // Use the language icon
-              'Change app language', // Description
+              AppLocalizations.of(context)!.changeapplanguage, // Description
                   () {
                 Navigator.push(
                   context,
@@ -152,8 +153,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
             ),
             ListTile(
               leading: Icon(Icons.logout, color: customColor), // Use custom color
-              title: const Text('Logout'),
-              subtitle: const Text('Sign out of your account'),
+              title:  Text(AppLocalizations.of(context)!.logout),
+              subtitle:  Text(AppLocalizations.of(context)!.signoutyouraccount),
             ),
           ],
         ),

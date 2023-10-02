@@ -1,6 +1,7 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'Add_Vehicle_Page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VehicleManagementPage extends StatefulWidget {
   final List<Map<String, String>> vehicleList;
@@ -24,7 +25,7 @@ class _VehicleManagementPageState extends State<VehicleManagementPage> {
           onTap: () => Navigator.of(context).pop(),
           child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
         ),
-      title: const Text("Vehicle  Management"),
+      title:  Text(AppLocalizations.of(context)!.vehiclemanagement),
       centerTitle: true,
       ),
       body: SafeArea(
@@ -55,13 +56,13 @@ class _VehicleManagementPageState extends State<VehicleManagementPage> {
                             ),
                           );
                         },
-                        child: const Row(
+                        child:  Row(
                           children: [
-                            Icon(Icons.add, color: Color(0xFFF5A896)),
-                            SizedBox(width: 8),
+                            const Icon(Icons.add, color: Color(0xFFF5A896)),
+                            const SizedBox(width: 8),
                             Text(
-                              "Add Your Vehicle",
-                              style: TextStyle(color: Color(0xFFF5A896)),
+                              AppLocalizations.of(context)!.addvehicale,
+                              style: const TextStyle(color: Color(0xFFF5A896)),
                             ),
                           ],
                         ),

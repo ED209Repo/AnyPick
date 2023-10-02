@@ -8,6 +8,7 @@ import 'MenuPage.dart';
 import 'Register.dart';
 import 'Widgets/AppColors.dart';
 import 'card_candidate_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Example extends StatefulWidget {
   const Example({Key? key}) : super(key: key);
@@ -34,131 +35,122 @@ class _ExamplePageState extends State<Example> {
 
   @override
   Widget build(BuildContext context) {
-    phoneController.selection = TextSelection.fromPosition(
-      TextPosition(
-        offset: phoneController.text.length,
-      ),
-    );
     final currentTime = DateTime.now();
     final currentHour = currentTime.hour;
     String message = "";
     if (currentHour >= 0 && currentHour < 12) {
-      message = "Good Morning!";
+      message = AppLocalizations.of(context)!.goodmorning;
     } else {
-      message = "Good Evening!";
+      message = AppLocalizations.of(context)!.goodevening;
     }
 
     return Scaffold(
-      body: Container(
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const AccountSettingsPage(),
-                          ),
-                        );
-                      },
-                      child: const CircleAvatar(
-                        radius: 25, // Adjust the radius as needed
-                        backgroundImage: AssetImage('images/profile.jpg'),
-                      ),
-                    ),
+    body: Container(
+    child: SafeArea(
+    child: Column(
+    children: [
+      Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10, top: 10),
+            child: GestureDetector(
+              onTap: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AccountSettingsPage(),
                   ),
-                  const SizedBox(width: 10),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hi $userName',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Spacer(),
-                  const Spacer(),
-                  IconButton(
-                    icon: Icon(
-                      Icons.search,
-                      color: AppColors.themeColor2,
-                      size: 35,
-                    ),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TryScreen(),
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.location_on,
-                      color: Colors.red,
-                      size: 35,
-                    ),
-                    onPressed: () {
-                      // Handle search button press
-                    },
-                  ),
-                ],
+                );
+              },
+              child: const CircleAvatar(
+                radius: 25, // Adjust the radius as needed
+                backgroundImage: AssetImage('images/profile.jpg'),
               ),
-              Flexible(
-                child: CardSwiper(
-                  controller: controller,
-                  cardsCount: cards.length,
-                  onSwipe: _onSwipe,
-                  onUndo: _onUndo,
-                  numberOfCardsDisplayed: 3,
-                  backCardOffset: const Offset(40, 40),
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                    bottom: 40,
-                    left: 15,
-                    right: 15,
-                  ),
-                  cardBuilder: (
-                      context,
-                      index,
-                      horizontalThresholdPercentage,
-                      verticalThresholdPercentage,
-                      ) => cards[index],
+            ),
+          ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                message,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
                 ),
               ),
-              CustomButton2(
-                text: "Order",
-                onPressed: () {
-                  showModalBottomSheet<dynamic>(
-                    backgroundColor: Colors.white,
-                    isScrollControlled: true,
-                      shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Container(
-                        height: MediaQuery.of(context).size.height * 0.8,
-                            width: double.infinity,
-                            child: registerscreen(),
-                      );
-                    },
-                  );
-                },
+              Text(
+                '$userName',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
               ),
-            ],
+            ],),
+          const Spacer(),
+          const Spacer(),
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: AppColors.themeColor2,
+              size: 35,
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const TryScreen()));
+            },
           ),
+          IconButton(
+            icon: const Icon(
+              Icons.location_on,
+              color: Colors.red,
+              size: 35,
+            ),
+            onPressed: () {
+              // Handle search button press
+            },
+          ),
+        ],
+      ),
+      Flexible(
+    child: CardSwiper(
+    controller: controller,
+    cardsCount: cards.length,
+    onSwipe: _onSwipe,
+    onUndo: _onUndo,
+    numberOfCardsDisplayed: 2,
+    backCardOffset: const Offset(40, 40),
+    padding: const EdgeInsets.only(top: 10, bottom: 50,left: 15 , right: 15),
+    cardBuilder: (
+    context,
+    index,
+    horizontalThresholdPercentage,
+    verticalThresholdPercentage,
+    ) =>
+    cards[index],
+    ),
+    ),
+      Padding(
+
+        padding: const EdgeInsets.all(10),
+        child: CustomButton2(
+            text: AppLocalizations.of(context)!.cart,
+            onPressed: () {showModalBottomSheet<dynamic>(
+    backgroundColor: Colors.white,
+    isScrollControlled: true,
+    shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
+    context: context,
+    builder: (BuildContext context) {
+    return Container(
+    height: MediaQuery.of(context).size.height * 0.6,
+    width: double.infinity,
+    child: registerscreen(),
+    );
+    },
+    );
+            },
         ),
       ),
-    );
+    ]))));
   }
 
   bool _onSwipe(

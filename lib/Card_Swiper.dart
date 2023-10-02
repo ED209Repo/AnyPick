@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'Cart_screen.dart';
 import 'New_Menu_Page.dart';
 import 'Widgets/AppColors.dart'; // Make sure this import is correct.
-import 'card_candidate_model.dart'; // Make sure this import is correct.
+import 'card_candidate_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';// Make sure this import is correct.
 
 class ExampleCard extends StatefulWidget {
   final ExampleResturantModel restaurant;
@@ -193,7 +194,7 @@ class _ExampleCardState extends State<ExampleCard> {
             width: 500,
             child: Center(
               child: Text(
-                "First Choice",
+                AppLocalizations.of(context)!.firstchoice,
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
