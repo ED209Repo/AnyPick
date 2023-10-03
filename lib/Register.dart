@@ -46,6 +46,8 @@ class _registerscreenState extends State<registerscreen> {
         offset: phoneController.text.length,
       ),
     );
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double buttonHeight = screenHeight * 0.08;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Form(
@@ -63,6 +65,9 @@ class _registerscreenState extends State<registerscreen> {
                       width: 80,
                       child: Image.asset("images/Logoo.png")),
                 ),
+                Spacer(),
+                Spacer(),
+                Spacer(),
                 Padding(
                   padding: const EdgeInsets.only(
                     left: 65,
@@ -202,11 +207,7 @@ class _registerscreenState extends State<registerscreen> {
               ),
             ),
             const SizedBox(height: 30),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 15),
-                  child:ElevatedButton(
+            ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: AppColors.themeColor,
                       elevation: 3,
@@ -243,7 +244,7 @@ class _registerscreenState extends State<registerscreen> {
                           context: context,
                           builder: (BuildContext context) {
                             return Container(
-                              height: MediaQuery.of(context).size.height * 0.6,
+                              height: MediaQuery.of(context).size.height * 0.8,
                               width: double.infinity,
                               child: otpscreen(
                                 verificationId: '',
@@ -256,25 +257,27 @@ class _registerscreenState extends State<registerscreen> {
                     child: Text(AppLocalizations.of(context)!.signup),
                   ),
 
+            const SizedBox(height: 30),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  AppLocalizations.of(context)!.bycontinuingyouagreeto,
+                  style: TextStyle(
+                    fontSize: 17,
+                  ),
+                ),
+                Text(
+                  AppLocalizations.of(context)!.anypicktermsconditions,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    decorationThickness: 3,
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.themeColor,
+                  ),
                 ),
               ],
-            ),
-            const SizedBox(height: 30),
-            Text(
-              AppLocalizations.of(context)!.bycontinuingyouagreeto,
-              style: TextStyle(
-                fontSize: 17,
-              ),
-            ),
-            Text(
-              AppLocalizations.of(context)!.anypicktermsconditions,
-              style: TextStyle(
-                decoration: TextDecoration.underline,
-                decorationThickness: 3,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-                color: AppColors.themeColor,
-              ),
             ),
           ],
         ),
