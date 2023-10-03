@@ -21,165 +21,137 @@ class _OnboardscreenState extends State<OnboardScreen> {
     Container(
       width: double.infinity,
       color: AppColors.whitetext,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Image.asset(
-              'images/mainlogo.png',
-              height: 150,
-              width: 150,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Image.asset(
-              'images/onboarding1.png',
-              height: 250,
-              width: 250,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 90),
-            child: Text(
-              "Find your desired food around you",
-              style: TextStyle(
-                color: AppColors.greyText,
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
+      child: Padding(
+        padding: const EdgeInsets.only(top:80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Image.asset(
+                'images/mainlogo.png',
+                height: 150,
+                width: 150,
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Image.asset(
+                'images/onboarding1.png',
+                height: 250,
+                width: 250,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 90),
+              child: Text(
+                "Find your desired food around you",
+                style: TextStyle(
+                  color: AppColors.greyText,
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     ),
     Container(
       width: double.infinity,
-      height: double.infinity,
       color: AppColors.themeColor2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5,),
-            child: Image.asset(
-              'images/whiteicon.png',
-              height: 150,
-              width: 150,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Image.asset(
-              'images/onboarding2.png',
-              height: 250,
-              width: 250,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 90),
-            child: Text(
-              "Pickup your food on the go",
-              style: TextStyle(
-                color: AppColors.whitetext,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5,),
+              child: Image.asset(
+                'images/whiteicon.png',
+                height: 150,
+                width: 150,
               ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Image.asset(
+                'images/onboarding2.png',
+                height: 250,
+                width: 250,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 90),
+              child: Text(
+                "Pickup your food on the go",
+                style: TextStyle(
+                  color: AppColors.whitetext,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     ),
-    // Padding(
-    //   padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
-    //   child: Container(
-    //     alignment: Alignment.topRight,
-    //     child: DropdownButton<String>(
-    //       dropdownColor: AppColors.themeColor,
-    //      icon: const Icon(
-    //        Icons.language_rounded,
-    //      ),
-    //       items: <String>['English', 'العربية'].map((String value) {
-    //         return DropdownMenuItem<String>(
-    //           value: value,
-    //           child: Text(value),
-    //         );
-    //       }).toList(),
-    //       onChanged: (_) {},
-    //     ),
-    //   ),
-    // ),
     Container(
-      width: double.infinity,
       color: AppColors.whitetext,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Padding(padding: const EdgeInsets.fromLTRB(320,0,0,0),
+              child: Consumer<LanguageChangeController>(builder: (context,provider,child){
+                return PopupMenuButton(
+                    icon: const Icon(Icons.language_rounded),
+                    onSelected: (Language item){
+                      if(Language.English.name==item.name){
+                        provider.changeLanguage(const Locale('en'));
+                      } else{
+                        provider.changeLanguage(const Locale('ar'));
+                      }
+                    },
+                    itemBuilder: (BuildContext context)=> <PopupMenuEntry<Language>>[
+                      const PopupMenuItem(
+                          value: Language.English,
+                          child: Text("Enlgish")),
+                      const PopupMenuItem(
+                          value: Language.Arabic,
+                          child: Text("العربية")),
+                    ]
+                );
+              })),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
-            child: Container(
-              alignment: Alignment.topRight,
-              child: PopupMenuButton<String>(
-                icon: Icon(
-                  Icons.language_rounded,
-                  color: Colors.black, // You can customize the icon color
-                ),
-                itemBuilder: (BuildContext context) {
-                  return <PopupMenuEntry<String>>[
-                    PopupMenuItem<String>(
-                      value: 'English',
-                      child: Text('English'),
-                    ),
-                    PopupMenuItem<String>(
-                      value: 'العربية',
-                      child: Text('العربية'),
-                    ),
-                  ];
-                },
-                onSelected: (_) {
-                  // Handle language selection here
-                },
-                offset: Offset(0, 40), // You can adjust the position of the menu
-              )
-
+            padding: const EdgeInsets.only(bottom: 60,top: 43),
+            child: Image.asset(
+              "images/mainlogo.png",
+              height: 150,
+              width: 150,
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 60,top: 43),
-                child: Image.asset(
-                  "images/mainlogo.png",
-                  height: 150,
-                  width: 150,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 40),
-                child: Image.asset(
-                  "images/image1.png",
-                  height: 150,
-                  width: 150,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 140 , left: 10 , right: 10),
-                child: Text(
-                  "We are excited, let's get started!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 14,
-                    color: AppColors.blackColor,
-                  ),
-                ),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: 40),
+            child: Image.asset(
+              "images/image1.png",
+              height: 150,
+              width: 150,
+            ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 140 , left: 10 , right: 10),
+            child: Text(
+              "We are excited, let's get started!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                fontSize: 14,
+                color: AppColors.blackColor,
+              ),
+            ),
+          ),
+
         ],
       ),
     ),

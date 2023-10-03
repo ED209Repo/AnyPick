@@ -1,8 +1,9 @@
 import 'package:anypickdemo/AccountSettings.dart';
-import 'package:anypickdemo/Widgets/CustomButton2.dart';
+import 'package:anypickdemo/bottomCart.dart';
 import 'package:anypickdemo/browseScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Card_Swiper.dart';
 import 'MenuPage.dart';
 import 'Register.dart';
@@ -19,22 +20,20 @@ class Example extends StatefulWidget {
 
 class _ExamplePageState extends State<Example> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController phoneController = TextEditingController();
   final String profileImageUrl =
       'images/profile.jpg'; // Replace with your image URL
-  final String userName = 'Danial'; // Replace with the user's name
+   String userName = 'Danial'; // Replace with the user's name
+
   final CardSwiperController controller = CardSwiperController();
   final cards = candidates.map(ExampleCard.new).toList();
 
-  bool isPhoneValid() {
-    return phoneController.text.length == 9;
-  }
 
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,38 +50,41 @@ class _ExamplePageState extends State<Example> {
         body: Container(
             child: SafeArea(
                 child: Column(children: [
-      Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10, top: 10),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const AccountSettingsPage(),
+                   Row(
+                      children: [
+                          Padding(
+                                padding: const EdgeInsets.only(left: 10, top: 10),
+                                   child: GestureDetector(
+                                      onTap: () {
+                                      Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                     builder: (context) => const AccountSettingsPage(),
                   ),
                 );
               },
-              child: const CircleAvatar(
-                radius: 25, // Adjust the radius as needed
-                backgroundImage: AssetImage('images/profile.jpg'),
+                                       child: const CircleAvatar(
+                                        radius: 25, // Adjust the radius as needed
+                                       backgroundImage: AssetImage('images/profile.jpg'),
               ),
             ),
           ),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                message,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                ),
-              ),
-              Text(
-                '$userName',
-                style: const TextStyle(
+                                        const SizedBox(width: 10),
+                                            Column(
+
+                                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+
+                                                 Text(
+                                                  message,
+                                               style: const TextStyle(
+                                               color: Colors.black,
+                                              fontSize: 14,
+                                            ),
+                                             ),
+                                                  Text(
+
+                                                   '$userName',
+                                             style: const TextStyle(
                   color: Colors.black,
                   fontSize: 18,
                 ),
@@ -136,10 +138,6 @@ class _ExamplePageState extends State<Example> {
       Padding(
         padding: const EdgeInsets.all(10),
         child: ElevatedButton(
-          child: Text(
-            AppLocalizations.of(context)!.cart,
-            style: TextStyle(fontSize: 18),
-          ),
           style: ElevatedButton.styleFrom(
             primary: AppColors.themeColor,
             elevation: 3,
@@ -149,8 +147,11 @@ class _ExamplePageState extends State<Example> {
                     topLeft: Radius.circular(15))),
             minimumSize: const Size(350, 50),
           ),
-          onPressed: () {
-            showModalBottomSheet<dynamic>(
+          onPressed: ()  async {
+            final preferences = await SharedPreferences.getInstance();
+            final String? phoneNumber = preferences.getString('phoneNumber');
+
+            phoneNumber != null ? showModalBottomSheet<dynamic>(
               backgroundColor: Colors.white,
               isScrollControlled: true,
               shape: const RoundedRectangleBorder(
@@ -160,16 +161,37 @@ class _ExamplePageState extends State<Example> {
               context: context,
               builder: (BuildContext context) {
                 return Container(
-                  height: MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.7,
                   width: double.infinity,
-                  child: registerscreen(),
+                  child: const BottomSheetCart(),
+                );
+              },
+            ) : showModalBottomSheet<dynamic>(
+              backgroundColor: Colors.white,
+              isScrollControlled: true,
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20))),
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  width: double.infinity,
+                  child: const registerscreen(),
                 );
               },
             );
+
           },
+          child: Text(
+            AppLocalizations.of(context)!.cart,
+            style: const TextStyle(fontSize: 18),
+          ),
         ),
       ),
-    ]))));
+    ]
+    ))));
   }
 
   bool _onSwipe(
