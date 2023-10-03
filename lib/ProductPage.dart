@@ -1,3 +1,4 @@
+import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'ProductPageModel.dart';
 
@@ -89,11 +90,12 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackground, // Use an appropriate color
+      backgroundColor: AppColors.themeColor, // Use an appropriate color
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
+              height: 20,
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).padding.top + 30,
                 left: 25,
@@ -141,7 +143,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(50),
                             ),
-                            color: kPrimaryColor, // Use an appropriate color
+                            color: kBackground, // Use an appropriate color
                           ),
                         ),
                       ),
@@ -176,7 +178,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
             ),
             Container(
               padding: const EdgeInsets.all(25),
-              color: kPrimaryColor, // Use an appropriate color
+              color: kBackground, // Use an appropriate color
               child: Column(
                 children: [
                   Text(
@@ -235,7 +237,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             height: 40,
                             width: 120,
                             decoration: BoxDecoration(
-                              color: kBackground.withOpacity(0.1),
+                              color: Colors.grey.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: Row(
@@ -263,7 +265,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                             height: 40,
                             width: 100,
                             decoration: BoxDecoration(
-                              color: kBackground, // Use an appropriate color
+                              color: AppColors.themeColor, // Use an appropriate color
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: Row(
@@ -354,14 +356,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                     height: 19,
                   ),
                   const SizedBox(height: 20),
-                  const Row(
-                    children: [
-                      Text(
-                        'About',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-                    ],
-                  ),
                   const SizedBox(height: 10),
                   // Text(
                   //   widget.food.about!,
