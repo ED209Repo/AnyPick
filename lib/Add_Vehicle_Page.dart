@@ -2,6 +2,8 @@ import 'package:fast_color_picker/fast_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'Widgets/AppColors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'Widgets/custombackbutton.dart';
 class AddVehiclePage extends StatefulWidget {
   final Function(Map<String, String> vehicleData) onVehicleAdded;
 
@@ -20,9 +22,8 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
+        leading: CustomBackButton(
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title:  Text(AppLocalizations.of(context)!.addvehicale),
         centerTitle: true,

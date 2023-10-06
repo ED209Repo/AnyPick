@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterme_credit_card/flutterme_credit_card.dart';
 import 'Widgets/AppColors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'Widgets/custombackbutton.dart';
 class PaymentMethodPage extends StatefulWidget {
   final List<Map<String, String>> paymentMethods;
 
@@ -20,6 +22,9 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
         backgroundColor: AppColors.themeColor,
         title:  Text(AppLocalizations.of(context)!.paymentmethod),
         centerTitle: true,
+        leading: CustomBackButton(
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: SafeArea(
         child: Column(
@@ -101,6 +106,9 @@ class _AddCardPageState extends State<AddCardPage> {
         backgroundColor: AppColors.themeColor,
         title:  Text(AppLocalizations.of(context)!.addyourcard),
         centerTitle: true,
+        leading: CustomBackButton(
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

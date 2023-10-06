@@ -4,7 +4,9 @@ import 'package:anypickdemo/processing.dart';
 import 'package:flutter/material.dart';
 import 'Cart_model.dart';
 import 'Widgets/AppColors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'Widgets/custombackbutton.dart';
 class QuantityControl extends StatefulWidget {
   final int initialQuantity;
   final Function(int) onChanged;
@@ -47,7 +49,7 @@ class _QuantityControlState extends State<QuantityControl> {
         height: 40,
         width: 100,
         decoration: BoxDecoration(
-          color: AppColors.themeColor2.withOpacity(1),
+          color: AppColors.themeColor.withOpacity(1),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -60,10 +62,12 @@ class _QuantityControlState extends State<QuantityControl> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
+            SizedBox(width: 0.5),
             Text(
               _quantity.toString(),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
             ),
+            SizedBox(width: 0.5),
             GestureDetector(
               onTap: incrementQuantity,
               child: Text(
@@ -152,18 +156,17 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double buttonHeight = screenHeight * 0.08; // Adjust the fraction as needed
+    final double buttonHeight = screenHeight * 0.06; // Adjust the fraction as needed
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.themeColor2,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
+        appBar: AppBar(
+          backgroundColor: AppColors.themeColor,
+          title: Text(AppLocalizations.of(context)!.cart),
+          centerTitle: true,
+          leading: CustomBackButton(
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
-        title: const Text("Cart"),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -199,13 +202,13 @@ class CartScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.add,
-                      color: AppColors.themeColor2,
+                      color: AppColors.themeColor,
                     ),
                     SizedBox(width: 8),
                     Text(
-                      'Add Payment Method',
+                      AppLocalizations.of(context)!.chooseyourpaymentmethod,
                       style: TextStyle(
-                        color: AppColors.themeColor2,
+                        color: AppColors.themeColor,
                       ),
                     ),
 
@@ -241,13 +244,13 @@ class CartScreen extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.directions_car_sharp,
-                      color: AppColors.themeColor2, // Set the icon color explicitly
+                      color: AppColors.themeColor, // Set the icon color explicitly
                     ),
                     SizedBox(width: 8),
                     Text(
-                      'Choose Your Vehicle',
+                      AppLocalizations.of(context)!.chooseyourvehicle,
                       style: TextStyle(
-                        color: AppColors.themeColor2,
+                        color: AppColors.themeColor,
                       ),
                     ),
                   ],
@@ -275,10 +278,9 @@ class CartScreen extends StatelessWidget {
                     );
                     // Implement your proceed payment or repeat order logic here
                   },
-                  child: const Text('Proceed Payment'),
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor2),
+                    backgroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -288,6 +290,12 @@ class CartScreen extends StatelessWidget {
                       Size(double.infinity, buttonHeight),
                     ),
                   ),
+                  child: Text(AppLocalizations.of(context)!.proceedpayment,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),),
                 ),
               ),
             ),
@@ -300,7 +308,7 @@ class CartScreen extends StatelessWidget {
   Widget _buildListWithBackground(List<FoodItem> items) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.themeColor2.withOpacity(0.2),
+        color: Colors.white70,
         borderRadius: BorderRadius.circular(20),
       ),
       child: FoodItemList(items: items), // Use the FoodItemList widget here

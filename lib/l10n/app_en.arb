@@ -72,7 +72,15 @@
   "pushNotification":"Push Notifications",
   "recievePushnotification":"Receive push notifications",
   "paymentmethod":"Payment Method",
-  "addnewcard":"Add a new card"
-
+  "addnewcard":"Add a new card",
+  "yourpaymentisbeingprocessed": "Your payment is being processed",
+  "paymentverified": "Payment verified",
+  "chooseyourpaymentmethod": "Choose your payment method",
+  "chooseyourvehicle": "Choose your vehicle",
+  "proceedpayment": "Proceed Payment",
+  "orderplaced": "Your order is placed successfully",
+  "orderplaced2": "Thank you for your order. Your order will be ready within the given time. Make sure you have given the right details of your car",
+  "gotohome": "Go to homepage",
+  "checkout": "Checkout"
 
   }

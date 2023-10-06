@@ -72,5 +72,14 @@
                "pushNotification":"دفع الإخطارات",
                "recievePushnotification":"تلقي إشعارات الدفع",
                "paymentmethod":"طريقة الدفع او السداد",
-               "addnewcard":"أضف بطاقة جديدة"
+               "addnewcard":"أضف بطاقة جديدة",
+  "yourpaymentisbeingprocessed": "تتم معالجة دفعتك",
+  "paymentverified": "تم التحقق من الدفع",
+  "chooseyourpaymentmethod": "اختر طريقتك في الدفع",
+  "chooseyourvehicle":"اختر سيارتك",
+  "proceedpayment": "المضي قدما في الدفع",
+  "orderplaced": "تم تقديم طلبك بنجاح",
+  "orderplaced2": "شكرا لطلبك. سيكون طلبك جاهزًا خلال الوقت المحدد. تأكد من أنك قدمت التفاصيل الصحيحة لسيارتك",
+  "gotohome": "اذهب إلى الصفحة الرئيسية",
+  "checkout": "الدفع"
 }

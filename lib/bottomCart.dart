@@ -5,7 +5,7 @@ import 'package:anypickdemo/processing.dart';
 import 'package:flutter/material.dart';
 import 'Cart_model.dart';
 import 'Widgets/AppColors.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class QuantityControl extends StatefulWidget {
   final int initialQuantity;
   final Function(int) onChanged;
@@ -48,7 +48,7 @@ class _QuantityControlState extends State<QuantityControl> {
         height: 40,
         width: 100,
         decoration: BoxDecoration(
-          color: AppColors.themeColor2.withOpacity(1),
+          color: AppColors.themeColor.withOpacity(1),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Row(
@@ -61,10 +61,12 @@ class _QuantityControlState extends State<QuantityControl> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
+            SizedBox(width: 0.5),
             Text(
               _quantity.toString(),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
             ),
+            SizedBox(width: 0.5),
             GestureDetector(
               onTap: incrementQuantity,
               child: Text(
@@ -153,7 +155,7 @@ class BottomSheetCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double buttonHeight = screenHeight * 0.08; // Adjust the fraction as needed
+    final double buttonHeight = screenHeight * 0.06; // Adjust the fraction as needed
 
     return SingleChildScrollView(
         child: Column(
@@ -180,7 +182,7 @@ class BottomSheetCart extends StatelessWidget {
                   },
                   style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor2),
+                    backgroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
@@ -190,7 +192,9 @@ class BottomSheetCart extends StatelessWidget {
                       Size(double.infinity, buttonHeight),
                     ),
                   ),
-                  child: const Text('Start CheckOut'),
+                  child: Text(
+                      AppLocalizations.of(context)!.checkout
+                  ),
                 ),
               ),
             ),
@@ -202,7 +206,7 @@ class BottomSheetCart extends StatelessWidget {
   Widget _buildListWithBackground(List<FoodItem> items) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.themeColor2.withOpacity(0.2),
+        color: Colors.white70,
         borderRadius: BorderRadius.circular(20),
       ),
       child: FoodItemList(items: items), // Use the FoodItemList widget here

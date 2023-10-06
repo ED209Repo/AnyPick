@@ -6,6 +6,7 @@ import 'VehicleManagement.dart';
 import 'New_Payment_Page.dart';
 import 'Language_Page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'Widgets/custombackbutton.dart';
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
 
@@ -34,9 +35,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
+        leading: CustomBackButton(
+          onPressed: () => Navigator.of(context).pop(),
         ),
       title:  Text(AppLocalizations.of(context)!.accountsetting),
       centerTitle: true,

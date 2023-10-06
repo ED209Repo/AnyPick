@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'Widgets/AppColors.dart';
+import 'Widgets/custombackbutton.dart';
 
 class LanguagePage extends StatefulWidget {
   @override
@@ -27,7 +28,10 @@ class _LanguagePageState extends State<LanguagePage> {
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBar(
           backgroundColor: AppColors.themeColor,
-          automaticallyImplyLeading: true, // Show the back button
+          automaticallyImplyLeading: false,
+          leading: CustomBackButton(
+            onPressed: () => Navigator.of(context).pop(),
+          ),// Show the back button
           title: Text('Language Page'),
           centerTitle: true,
           actions: [
