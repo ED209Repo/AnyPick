@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -355,7 +354,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
             CoolAlert.show(
               context:context,
              type: CoolAlertType.loading,
-             text: "Product Added",
+             text: AppLocalizations.of(context)!.productadded,
              autoCloseDuration: const Duration(seconds: 2),
              backgroundColor: Color(0xffF5A896),
              animType: CoolAlertAnimType.scale,

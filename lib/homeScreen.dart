@@ -73,7 +73,7 @@ Future<String> _getUsername()async{
                 );
                                }else {
                                  CoolAlert.show(context: context, type: CoolAlertType.loading,
-                              text: "SignUp First To Access Application Features",
+                              text: AppLocalizations.of(context)!.signUpFirstToAccessApplicationFeatures,
                               animType: CoolAlertAnimType.scale,
                               lottieAsset: 'images/warning.json',
                               autoCloseDuration: Duration(seconds: 3)

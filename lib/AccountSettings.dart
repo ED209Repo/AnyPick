@@ -1,10 +1,8 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
-import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:anypickdemo/homeScreen.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Cart_screen.dart';
 import 'ProfileSetting.dart';
 import 'VehicleManagement.dart';
 import 'New_Payment_Page.dart';
@@ -47,9 +45,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+        leading: IconButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const Example()));
+        }, icon: const Icon(Icons.home_filled),),
       title:  Text(AppLocalizations.of(context)!.accountsetting),
       centerTitle: true,
       ),
@@ -170,7 +168,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               onTap: () async {
                 await logout();
                 CoolAlert.show(context: context, type: CoolAlertType.loading,
-                              text: "LoggedOut Successfull",
+                              text: AppLocalizations.of(context)!.loggedOutSuccessfull,
                               autoCloseDuration: const Duration(seconds: 2),
                               lottieAsset: "images/signup.json",
                               animType: CoolAlertAnimType.scale,
@@ -182,8 +180,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                               );
               },
             ),
-            SizedBox(height: 15,),
-            Text("Developed by 🇵🇰 With ❤️ for 🇸🇦", textAlign: TextAlign.center,),
+            const SizedBox(height: 15,),
+            const Text("Version 1.0.1", textAlign: TextAlign.center,),
           ],
         ),
       ),
