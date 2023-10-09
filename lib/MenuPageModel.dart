@@ -53,7 +53,7 @@ class scrollList {
   final List<String> flavors;
   final List<String> AdsOn;
   int price;
-  int count;
+  int quantity;
 
   scrollList({
   required this.title,
@@ -64,7 +64,7 @@ class scrollList {
     required this.options,
     required this.flavors,
     required this.AdsOn,
-  this.count = 0,
+  this.quantity = 0,
 });
 }
 class scrollListModel {

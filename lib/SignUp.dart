@@ -1,6 +1,8 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Widgets/AppColors.dart';
 import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
@@ -14,7 +16,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _controller = TextEditingController(text: "Hello, World!");
+  TextEditingController _usernameController = TextEditingController();
   String _fullname ='';
   String _username ='';
   String _email ='';
@@ -26,6 +28,11 @@ class _SignupPageState extends State<SignupPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void _saveUsername(String username)async{
+    SharedPreferences pref= await SharedPreferences.getInstance();
+    pref.setString('username', username);
   }
 
   @override
@@ -70,12 +77,13 @@ class _SignupPageState extends State<SignupPage> {
                           }
                           return null;
                         },
-                        onSaved: (value) {
-                          _username = value!;
-                        },
+                        // onSaved: (value) {
+                        //   _username = value!;
+                        // },
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
+                        controller: _usernameController,
                         decoration:  InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -95,9 +103,9 @@ class _SignupPageState extends State<SignupPage> {
                           }
                           return null;
                         },
-                        onSaved: (value) {
-                          _fullname = value!;
-                        },
+                        // onSaved: (value) {
+                        //   _fullname = value!;
+                        // },
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
@@ -208,19 +216,18 @@ class _SignupPageState extends State<SignupPage> {
                         height: 40,
                         child: CustomButton(
                           text: AppLocalizations.of(context)!.createanaccount,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                          onPressed: () async {
+                            if  (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-
-                              Fluttertoast.showToast(
-                                msg: 'Signup successful',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.TOP,
-                                backgroundColor: AppColors.themeColor2,
-                                textColor: Colors.white,
-                              );
-
-                              Navigator.push(
+                                CoolAlert.show(context: context, type: CoolAlertType.loading,
+                              text: "SignUp Successfull",
+                              autoCloseDuration: const Duration(seconds: 2),
+                              lottieAsset: "images/signup.json",
+                              animType: CoolAlertAnimType.scale,
+                               );
+                               _saveUsername(_usernameController.text);
+                               await Future.delayed(const Duration(milliseconds: 2000));
+                                 Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => const Example()),
                               );}

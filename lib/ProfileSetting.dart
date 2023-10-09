@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'AccountSettings.dart';
@@ -36,10 +37,9 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
-        ),
+        leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
         title:  Text(AppLocalizations.of(context)!.profilesetting),
         centerTitle: true,
         actions: [

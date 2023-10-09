@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:anypickdemo/Widgets/AppColors.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'ProductPageModel.dart';
 
@@ -100,30 +103,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 top: MediaQuery.of(context).padding.top + 30,
                 left: 25,
                 right: 25,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white, // Use an appropriate color
-                      ),
-                      child: const Icon(Icons.cancel),
-                    ),
-                  ),
-                  // Container(
-                  //   padding: const EdgeInsets.all(8),
-                  //   decoration: const BoxDecoration(
-                  //     shape: BoxShape.circle,
-                  //     color: Colors.white, // Use an appropriate color
-                  //   ),
-                  //   child: const Icon(Icons.favorite_outline),
-                  // ),
-                ],
               ),
             ),
             Container(
@@ -372,7 +351,18 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         width: 100,
         height: 56,
         child: RawMaterialButton(
-          onPressed: () {
+          onPressed: () async{
+            CoolAlert.show(
+              context:context,
+             type: CoolAlertType.loading,
+             text: "Product Added",
+             autoCloseDuration: const Duration(seconds: 2),
+             backgroundColor: Color(0xffF5A896),
+             animType: CoolAlertAnimType.scale,
+             lottieAsset: "images/CartS.json"
+            );
+           await Future.delayed(const Duration(milliseconds: 2000));
+            Navigator.pop(context);
             // Implement your shopping bag logic here
           },
           fillColor: kPrimaryColor, // Use an appropriate color

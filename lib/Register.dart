@@ -104,6 +104,7 @@ class _registerscreenState extends State<registerscreen> {
                 FilteringTextInputFormatter.digitsOnly, // Allow only digits
               ],
               keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.done,
               cursorColor: AppColors.cursorColor,
               onChanged: (value) {
                 print(value);
@@ -236,6 +237,7 @@ class _registerscreenState extends State<registerscreen> {
                         showModalBottomSheet<void>(
                           enableDrag: true,
                           isDismissible: true,
+                          isScrollControlled: true,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(20),

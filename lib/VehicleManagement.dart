@@ -1,4 +1,5 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
+import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
 import 'Add_Vehicle_Page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,10 +22,9 @@ class _VehicleManagementPageState extends State<VehicleManagementPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
-        ),
+        leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
       title:  Text(AppLocalizations.of(context)!.vehiclemanagement),
       centerTitle: true,
       ),

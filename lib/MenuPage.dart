@@ -1,4 +1,6 @@
+import 'package:anypickdemo/APfontsStyle.dart';
 import 'package:anypickdemo/MenuPageModel.dart';
+import 'package:anypickdemo/New_Menu_Page.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'ProductPage.dart';
@@ -6,18 +8,18 @@ import 'ProductPageModel.dart';
 import 'homeScreen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
-
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
 
   @override
   _MenuPageState createState() => _MenuPageState();
 }
+
 class _MenuPageState extends State<MenuPage> {
   int currentPageIndex = 0;
   int likeCount = 0;
   int heartCount = 0;
+
   void incrementLikeCount() {
     setState(() {
       likeCount++;
@@ -34,7 +36,8 @@ class _MenuPageState extends State<MenuPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const Example(), // Replace with your Example widget
+        builder: (context) =>
+            const Example(), // Replace with your Example widget
       ),
     );
   }
@@ -43,6 +46,18 @@ class _MenuPageState extends State<MenuPage> {
   Widget build(BuildContext context) {
     final containerHeight = MediaQuery.of(context).size.height * 0.3;
     final double fontSize = MediaQuery.of(context).size.width < 600 ? 14 : 18;
+    List<String> tabLabels = [
+      "Starter",
+      "Main Course",
+      "Appetizers",
+      "Seafood",
+      "Chicken & Lamb",
+      "Fast Food",
+      "Deserts",
+      "Chinese Food",
+      "Add ons",
+      "Cold Drinks",
+    ];
 
     return Scaffold(
       body: Stack(
@@ -75,7 +90,8 @@ class _MenuPageState extends State<MenuPage> {
                           child: Container(
                             width: 30,
                             height: 30,
-                            color: Colors.grey.withOpacity(0.5), // Semi-transparent overlay
+                            color: Colors.grey.withOpacity(0.5),
+                            // Semi-transparent overlay
                             child: const Icon(
                               Icons.arrow_back_ios_new,
                               color: Colors.white,
@@ -88,11 +104,11 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.fromLTRB(14, 0, 0, 0),
                   child: Text(
                     'MayField Bakery & \nCafe',
-                    style: TextStyle(
+                    style: APfontsStyle.customTextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
@@ -101,11 +117,11 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.fromLTRB(14, 0, 0, 0),
                   child: Text(
                     'Chinese  -   American  -  Desi Food',
-                    style: TextStyle(
+                    style: APfontsStyle.customTextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -150,249 +166,220 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                // SizedBox(
-                //   height: 140,
-                //   child: ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: MenuPageModel.items.length,
-                //     itemBuilder: (BuildContext context, int index) {
-                //       final menuItem = MenuPageModel.items[index];
-                //       return ClipRRect(
-                //         borderRadius: BorderRadius.circular(30),
-                //         child: Container(
-                //           width: 120,
-                //           margin: const EdgeInsets.symmetric(horizontal: 10),
-                //           color: Colors.grey[300],
-                //           child: Column(
-                //             crossAxisAlignment: CrossAxisAlignment.start,
-                //             children: [
-                //               Expanded(
-                //                 child: Image.network(
-                //                   menuItem.imageUrl,
-                //                   fit: BoxFit.cover,
-                //                   width: double.infinity,
-                //                 ),
-                //               ),
-                //               Padding(
-                //                 padding: const EdgeInsets.all(8.0),
-                //                 child: Text(
-                //                   menuItem.title,
-                //                   style: const TextStyle(
-                //                     fontWeight: FontWeight.bold,
-                //                   ),
-                //                 ),
-                //               ),
-                //               Padding(
-                //                 padding: const EdgeInsets.only(
-                //                     left: 8.0, bottom: 8.0),
-                //                 child: Text(
-                //                   menuItem.dishType,
-                //                   style: const TextStyle(
-                //                     color: Colors.grey,
-                //                     fontStyle: FontStyle.italic,
-                //                   ),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //       );
-                //     },
-                //   ),
-                // ),
+            
                 const SizedBox(height: 20),
-                // const SingleChildScrollView(
-                //   scrollDirection: Axis.horizontal,
-                //   child: Row(
-                //     mainAxisSize: MainAxisSize.max,
-                //     children: [
-                //       SizedBox(width: 10),
-                //       Text('Starter',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Main Course',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Appetizers',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Seafood',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Chicken & Lamb',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Fast Food',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Deserts',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Chinese Food',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Add ons',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       Text('Cold Drinks',style: commonTextStyle),
-                //       SizedBox(width: 20),
-                //       // Add more Text widgets as needed
-                //     ],
-                //   ),
-                // ),
+              
                 const SizedBox(width: 20),
                 SingleChildScrollView(
                   child: SizedBox(
-                    width: double.infinity,
-                    height: 420,
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: scrollListModel.items.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final item = scrollListModel.items[index];
-                        return Container(
-                          margin: const EdgeInsets.all(8.0),
-                          padding: const EdgeInsets.all(12.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 120.0,
-                                height: 120.0,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.network(
-                                    item.imageUrl,
-                                    fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 420,
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: scrollListModel.items.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final item = scrollListModel.items[index];
+                          return Container(
+                            margin: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(12.0),
+                            decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                image: AssetImage('images/gradient-3.jpg'),
+                                // Replace with your background image path
+                                fit: BoxFit.cover,
+                              ),
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 120.0,
+                                  height: 120.0,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    child: Image.network(
+                                      item.imageUrl,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(width: 16.0),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                            builder: (context) => DetailPage(
-                                              food2: Food2.generateRecommendFoods2()[0], // Pass the Food object here
+                                const SizedBox(width: 16.0),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => DetailPage(food2: Food2.generateRecommendFoods2()[0]),
                                             ),
-                                          ),
-                                        );
-                                      },
-                                      child: Text(
-                                        item.title,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22.0,
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      ' ${item.description}',
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontStyle: FontStyle.italic,
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          ' SAR ${item.price}',
-                                          style: const TextStyle(
-                                            fontSize: 20,
+                                          );
+                                        },
+                                        child: Text(
+                                          item.title,
+                                          style: APfontsStyle.customTextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.green,
+                                            fontSize: 22.0,
+                                            color: Colors.white,
                                           ),
                                         ),
-                                        const Spacer(),
-                                        IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              item.count++;
-                                            });
-                                          },
-                                          icon: const Icon(
-                                            Icons.add_outlined,
-                                            color: Colors.green,
-                                            size: 32,
-                                          ),
+                                      ),
+                                      Text(
+                                        ' ${item.description}',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: APfontsStyle.customTextStyle(
+                                          
+                                          color: Colors.white60,
                                         ),
-                                        Row(
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Container(
+                                        width: double.maxFinite,
+                                        height: 40,
+                                        child: Stack(
                                           children: [
-                                            Container(
-                                              padding: const EdgeInsets.all(8.0), // Add padding to control the background size
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey.withOpacity(0.5), // Set the desired opacity
-                                                borderRadius: BorderRadius.circular(8.0), // Add border radius if needed
-                                              ),
-                                              child: Text(
-                                                '${item.count}',
-                                                style: const TextStyle(
-                                                  fontSize: 30,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white, // Text color
+                                            Align(
+                                              alignment:
+                                                  const Alignment(-0.5, 0),
+                                              child: Container(
+                                                height: 40,
+                                                width: 120,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      AppColors.QuantityBGColor.withOpacity(0.1),
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    const SizedBox(
+                                                      width: 15,
+                                                    ),
+                                                    Text(
+                                                      ' SAR ${item.price}',
+                                                      style: APfontsStyle.customTextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
-                                            IconButton(
-                                              onPressed: () {
-                                                if (item.count > 0) {
-                                                  setState(() {
-                                                    item.count--;
-                                                  });
-                                                }
-                                              },
-                                              icon: const Icon(
-                                                Icons.remove_outlined,
-                                                color: Colors.red,
-                                                size: 32,
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: Container(
+                                                height: 40,
+                                                width: 90,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  // Use an appropriate color
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        // Handle decrement quantity for this item
+                                                        setState(() {
+                                                          if (item.quantity >
+                                                              0) {
+                                                            item.quantity--;
+                                                          }
+                                                        });
+                                                      },
+                                                      child:  Text(
+                                                        '-',
+                                                        style: APfontsStyle.customTextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      item.quantity.toString(),
+                                                      // Access the quantity property of the item
+                                                      style: APfontsStyle.customTextStyle(
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        // Handle increment quantity for this item
+                                                        setState(() {
+                                                          item.quantity++;
+                                                        });
+                                                      },
+                                                      child:  Text(
+                                                        '+',
+                                                        style: APfontsStyle.customTextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ],
                                         ),
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      )),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: <Widget>[
+                        for (int index = 0; index < tabLabels.length; index++)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                currentPageIndex = index;
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 8, horizontal: 16),
+                              color: currentPageIndex == index
+                                  ? AppColors.SplashColor// You can set the active tab's color here
+                                  : AppColors.themeColor,
+                              // You can set the inactive tab's color here
+                              child: Text(
+                                tabLabels[index],
+                                style: APfontsStyle.customTextStyle(
+                                  color: Colors.white, // Text color
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        );
-                      },
+                      ],
                     ),
                   ),
-                ),
-                 BottomNavigationBar(
-                  currentIndex: currentPageIndex,
-                  onTap: (index) {
-                    setState(() {
-                      currentPageIndex = index;
-                    });
-                  },
-                  items:  <BottomNavigationBarItem>[
-                    BottomNavigationBarItem(
-                      icon: Icon(
-                          Icons.local_pizza_outlined,
-                        size: 30,
-                          color: AppColors.themeColor2,
-                      ),
-                      label: AppLocalizations.of(context)!.pizza,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.fastfood_outlined,
-                      size: 30,
-                      color: AppColors.themeColor2),
-                      label: AppLocalizations.of(context)!.burgers,
-                    ),
-                    BottomNavigationBarItem(
-                      icon: Icon(Icons.food_bank,
-                      size: 30,
-                          color: AppColors.themeColor2
-                      ),
-                      label: AppLocalizations.of(context)!.maincourse,
-
-                    ),
-                  ],
                 ),
               ],
             ),
@@ -402,7 +389,8 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 }
-const commonTextStyle = TextStyle(
+
+ TextStyle commonTextStyle = APfontsStyle.customTextStyle(
   fontSize: 20,
   fontWeight: FontWeight.bold,
   color: Colors.black,

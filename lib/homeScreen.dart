@@ -1,6 +1,7 @@
 import 'package:anypickdemo/AccountSettings.dart';
 import 'package:anypickdemo/bottomCart.dart';
 import 'package:anypickdemo/browseScreen.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,9 +22,9 @@ class Example extends StatefulWidget {
 class _ExamplePageState extends State<Example> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final String profileImageUrl =
-      'images/profile.jpg'; // Replace with your image URL
+      ''; // Replace with your image URL
    String userName = 'Danial'; // Replace with the user's name
-
+  bool isLoggedIn = false ;
   final CardSwiperController controller = CardSwiperController();
   final cards = candidates.map(ExampleCard.new).toList();
 
@@ -33,7 +34,14 @@ class _ExamplePageState extends State<Example> {
     controller.dispose();
     super.dispose();
   }
-
+Future<String> _getUsername()async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String uname = prefs.getString('username') ?? "Guest";
+  if (uname != 'Guest'){
+    isLoggedIn = true ;
+  }
+  return uname;
+}
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +64,27 @@ class _ExamplePageState extends State<Example> {
                                 padding: const EdgeInsets.only(left: 10, top: 10),
                                    child: GestureDetector(
                                       onTap: () {
-                                      Navigator.of(context).push(
+                                        
+                                        if(isLoggedIn) {
+                                         Navigator.of(context).push(
                                       MaterialPageRoute(
                                      builder: (context) => const AccountSettingsPage(),
                   ),
                 );
+                               }else {
+                                 CoolAlert.show(context: context, type: CoolAlertType.loading,
+                              text: "SignUp First To Access Application Features",
+                              animType: CoolAlertAnimType.scale,
+                              lottieAsset: 'images/warning.json',
+                              autoCloseDuration: Duration(seconds: 3)
+                               );
+                               }
               },
                                        child: const CircleAvatar(
+                                        backgroundColor: Colors.white,
                                         radius: 25, // Adjust the radius as needed
-                                       backgroundImage: AssetImage('images/profile.jpg'),
+                                       backgroundImage: AssetImage('images/arabmanprofile2.png'
+                                      ),
               ),
             ),
           ),
@@ -81,14 +101,18 @@ class _ExamplePageState extends State<Example> {
                                               fontSize: 14,
                                             ),
                                              ),
-                                                  Text(
-
-                                                   '$userName',
-                                             style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                ),
-              ),
+                                                  FutureBuilder<String>(
+  future: _getUsername(),
+  builder: (context, snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return CircularProgressIndicator();
+    } else if (snapshot.hasError) {
+      return Text('Error: ${snapshot.error}');
+    } else {
+      return Text('${AppLocalizations.of(context)!.hey} ${snapshot.data}');
+    }
+  },
+),
             ],
           ),
           const Spacer(),

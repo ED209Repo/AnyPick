@@ -12,4 +12,6 @@ mixin AppColors {
   static Color cursorColor = Colors.black;
   static Color SplashColor = const Color(0xff358597);
   static Color whitetext = Colors.white;
+  static Color QuantityBGColor = Color(0xFFF5A896);
+static Color kBackground = Color(0xBAF5F5F5);
 }

@@ -102,7 +102,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(padding: const EdgeInsets.fromLTRB(320,0,0,0),
+          Padding(padding: const EdgeInsets.fromLTRB(320,35,0,0),
               child: Consumer<LanguageChangeController>(builder: (context,provider,child){
                 return PopupMenuButton(
                     icon: const Icon(Icons.language_rounded),

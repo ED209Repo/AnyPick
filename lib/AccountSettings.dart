@@ -1,5 +1,9 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
+import 'package:anypickdemo/Widgets/custombackbutton.dart';
+import 'package:anypickdemo/homeScreen.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Cart_screen.dart';
 import 'ProfileSetting.dart';
 import 'VehicleManagement.dart';
@@ -8,12 +12,15 @@ import 'Language_Page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
+  
 
   @override
   _AccountSettingsPageState createState() => _AccountSettingsPageState();
 }
 
 class _AccountSettingsPageState extends State<AccountSettingsPage> {
+  final TextEditingController phoneController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
   // Initialize selected values for notifications
   bool pushNotifications = false;
   bool smsNotifications = true; // Default to "On"
@@ -29,15 +36,20 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
   // Define custom color F5A896
   final Color customColor = const Color(0xFFF5A896);
 
+  logout() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.remove('phoneNumber');
+     await preferences.remove('username');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
-        ),
+        leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
       title:  Text(AppLocalizations.of(context)!.accountsetting),
       centerTitle: true,
       ),
@@ -145,7 +157,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  LanguagePage(),
+                    builder: (context) =>  LanguageSelectionPage(),
                   ),
                 );
                 // Handle the item tap action here
@@ -155,7 +167,23 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               leading: Icon(Icons.logout, color: customColor), // Use custom color
               title:  Text(AppLocalizations.of(context)!.logout),
               subtitle:  Text(AppLocalizations.of(context)!.signoutyouraccount),
+              onTap: () async {
+                await logout();
+                CoolAlert.show(context: context, type: CoolAlertType.loading,
+                              text: "LoggedOut Successfull",
+                              autoCloseDuration: const Duration(seconds: 2),
+                              lottieAsset: "images/signup.json",
+                              animType: CoolAlertAnimType.scale,
+                               );
+                               await Future.delayed(const Duration(milliseconds: 2000));
+                                 Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Example()),
+                              );
+              },
             ),
+            SizedBox(height: 15,),
+            Text("Developed by 🇵🇰 With ❤️ for 🇸🇦", textAlign: TextAlign.center,),
           ],
         ),
       ),

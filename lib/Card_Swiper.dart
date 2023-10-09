@@ -1,3 +1,4 @@
+import 'package:anypickdemo/APfontsStyle.dart';
 import 'package:flutter/material.dart';
 import 'ProductPage.dart';
 import 'ProductPageModel.dart';
@@ -93,16 +94,16 @@ class _ExampleCardState extends State<ExampleCard> {
                                     },
                                     icon: Icon(
                                       widget.restaurant.likeIcons,
-                                      color: Colors.blue,
+                                      color: Colors.white,
                                       size: 20,
                                     ),
                                   ),
                                   const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.likeCount.toString(),
-                                    style: const TextStyle(
+                                    style: APfontsStyle.customTextStyle(
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   const SizedBox(width: 5),
@@ -114,16 +115,16 @@ class _ExampleCardState extends State<ExampleCard> {
                                     },
                                     icon: Icon(
                                       widget.restaurant.heartIcon,
-                                      color: Colors.red,
+                                      color: Colors.white,
                                       size: 20,
                                     ),
                                   ),
                                   const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.heartCount.toString(),
-                                    style: const TextStyle(
+                                    style: APfontsStyle.customTextStyle(
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ],
@@ -133,7 +134,7 @@ class _ExampleCardState extends State<ExampleCard> {
                             Center(
                               child: Text(
                                 widget.restaurant.name,
-                                style: const TextStyle(
+                                style: APfontsStyle.customTextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 26,
@@ -159,7 +160,7 @@ class _ExampleCardState extends State<ExampleCard> {
                     const SizedBox(width: 5),
                     Text(
                       widget.restaurant.city,
-                      style: TextStyle(
+                      style: APfontsStyle.customTextStyle(
                         color: AppColors.whitetext,
                         fontSize: 20,
                       ),
@@ -173,7 +174,7 @@ class _ExampleCardState extends State<ExampleCard> {
                     const SizedBox(width: 5),
                     Text(
                       widget.restaurant.job,
-                      style: TextStyle(
+                      style: APfontsStyle.customTextStyle(
                         color: AppColors.whitetext,
                         fontSize: 17,
                       ),
@@ -195,7 +196,7 @@ class _ExampleCardState extends State<ExampleCard> {
             width: 500,
             child: Center(
               child: Text(AppLocalizations.of(context)!.firstchoice,
-                style: TextStyle(
+                style: APfontsStyle.customTextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: AppColors.whitetext,
@@ -245,7 +246,7 @@ class _ExampleCardState extends State<ExampleCard> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height * 0.8,
+                                    height: MediaQuery.of(context).size.height * 0.75,
                                     width: double.infinity,
                                     child: FoodDetailPage(food: Food.generateRecommendFoods()[0]),
                                   );
@@ -259,7 +260,7 @@ class _ExampleCardState extends State<ExampleCard> {
                                 children: [
                                   Text(
                                     widget.restaurant.dealNames[index],
-                                    style: const TextStyle(
+                                    style:  APfontsStyle.customTextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
                                     ),

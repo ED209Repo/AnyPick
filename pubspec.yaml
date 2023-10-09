@@ -54,6 +54,7 @@ dependencies:
   flutter_localization:
   dropdown_button2: ^2.3.9
   google_fonts: ^6.1.0
+  cool_alert: ^2.0.1
 
 dev_dependencies:
   flutter_test:
