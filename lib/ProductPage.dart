@@ -93,258 +93,262 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.themeColor, // Use an appropriate color
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 20,
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 30,
-                left: 25,
-                right: 25,
-              ),
-            ),
-            Container(
-              height: 150,
-              child: Stack(
-                children: [
-                  Column(
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 20,
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).padding.top + 30,
+                    left: 25,
+                    right: 25,
+                  ),
+                ),
+                Container(
+                  height: 150,
+                  child: Stack(
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(50),
-                            ),
-                            color: kBackground, // Use an appropriate color
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                      margin: const EdgeInsets.all(15),
-                      width: 150,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.red.withOpacity(0.2),
-                            offset: const Offset(-4, 10),
-                            blurRadius: 10,
-                          ),
-                        ],
-                      ),
-                      child: ClipOval(
-                        child: Image.asset(
-                          widget.food.imgUrl!,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(25),
-              color: kBackground, // Use an appropriate color
-              child: Column(
-                children: [
-                  Text(
-                    widget.food.name!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 22,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Row(
+                      Column(
                         children: [
-                          const Icon(
-                            Icons.access_time_outlined,
-                            color: Colors.blue,
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
                           ),
-                          Text(
-                            widget.food.waitTime!,
-                            style: const TextStyle(fontSize: 16),
-                          ),
-                          const SizedBox(width: 10),
-                          GestureDetector(
-                            //onTap: incrementHeartCount,
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                  size: 30,
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(50),
                                 ),
-                                const SizedBox(width: 4),
-                                Text('$heartCount'),
-                              ],
+                                color: kBackground, // Use an appropriate color
+                              ),
                             ),
                           ),
                         ],
                       ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          margin: const EdgeInsets.all(15),
+                          width: 150,
+                          height: 250,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.red.withOpacity(0.2),
+                                offset: const Offset(-4, 10),
+                                blurRadius: 10,
+                              ),
+                            ],
+                          ),
+                          child: ClipOval(
+                            child: Image.asset(
+                              widget.food.imgUrl!,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: double.maxFinite,
-                    height: 40,
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: const Alignment(-0.5, 0),
-                          child: Container(
-                            height: 40,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                const Text(
-                                  'SR',
-                                  style: TextStyle(
-                                      fontSize: 13, fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  widget.food.price.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            height: 40,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              color: AppColors.themeColor, // Use an appropriate color
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                GestureDetector(
-                                  onTap: decrementQuantity,
-                                  child: const Text(
-                                    '-',
-                                    style: TextStyle(
-                                        fontSize: 20, fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Text(
-                                  quantity.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
-                                GestureDetector(
-                                  onTap: incrementQuantity,
-                                  child: const Text(
-                                    '+',
-                                    style: TextStyle(
-                                        fontSize: 20, fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Row(
+                ),
+                Container(
+                  padding: const EdgeInsets.all(25),
+                  color: kBackground, // Use an appropriate color
+                  child: Column(
                     children: [
                       Text(
-                        'Add-ons',
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    height: 100,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        if (index < widget.food.addons!.length) {
-                          final String addonName = widget.food.addons![index].keys.first;
-                          return GestureDetector(
-                            onTap: () {
-                              if (widget.food.addons != null &&
-                                  index < widget.food.addons!.length) {
-                                _showAddonOptionDialog(context, addonName);
-                              }
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(40),
+                        widget.food.name!,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.access_time_outlined,
+                                color: Colors.blue,
                               ),
-                              child: Column(
-                                children: [
-                                  Image.asset(
-                                    widget.food.addons![index].values.first,
-                                    width: 52,
-                                  ),
-                                  Text(addonName),
-                                ],
+                              Text(
+                                widget.food.waitTime!,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              const SizedBox(width: 10),
+                              GestureDetector(
+                                //onTap: incrementHeartCount,
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.favorite,
+                                      color: Colors.red,
+                                      size: 30,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text('$heartCount'),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        height: 40,
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: const Alignment(-0.5, 0),
+                              child: Container(
+                                height: 40,
+                                width: 120,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    const Text(
+                                      'SR',
+                                      style: TextStyle(
+                                          fontSize: 13, fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      widget.food.price.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 20, fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                      separatorBuilder: (_, index) => const SizedBox(
-                        width: 15,
+                            Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: AppColors.themeColor, // Use an appropriate color
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: decrementQuantity,
+                                      child: const Text(
+                                        '-',
+                                        style: TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      quantity.toString(),
+                                      style: const TextStyle(
+                                          fontSize: 20, fontWeight: FontWeight.bold),
+                                    ),
+                                    GestureDetector(
+                                      onTap: incrementQuantity,
+                                      child: const Text(
+                                        '+',
+                                        style: TextStyle(
+                                            fontSize: 20, fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      itemCount: widget.food.addons != null ? widget.food.addons!.length : 0,
-                    ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Row(
+                        children: [
+                          Text(
+                            'Add-ons',
+                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 100,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            if (index < widget.food.addons!.length) {
+                              final String addonName = widget.food.addons![index].keys.first;
+                              return GestureDetector(
+                                onTap: () {
+                                  if (widget.food.addons != null &&
+                                      index < widget.food.addons!.length) {
+                                    _showAddonOptionDialog(context, addonName);
+                                  }
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(40),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        widget.food.addons![index].values.first,
+                                        width: 52,
+                                      ),
+                                      Text(addonName),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
+                          },
+                          separatorBuilder: (_, index) => const SizedBox(
+                            width: 15,
+                          ),
+                          itemCount: widget.food.addons != null ? widget.food.addons!.length : 0,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 19,
+                      ),
+                      const SizedBox(height: 20),
+                      const SizedBox(height: 10),
+                      // Text(
+                      //   widget.food.about!,
+                      //   style: const TextStyle(fontSize: 16, wordSpacing: 1.2, height: 1.5),
+                      // ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 19,
-                  ),
-                  const SizedBox(height: 20),
-                  const SizedBox(height: 10),
-                  // Text(
-                  //   widget.food.about!,
-                  //   style: const TextStyle(fontSize: 16, wordSpacing: 1.2, height: 1.5),
-                  // ),
-                  const SizedBox(height: 20),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       floatingActionButton: Container(
         width: 100,
