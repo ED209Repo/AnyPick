@@ -1,7 +1,12 @@
+import 'package:anypickdemo/APfontsStyle.dart';
 import 'package:flutter/material.dart';
-import 'New_Menu_Page.dart';
+import 'ProductPage.dart';
+import 'ProductPageModel.dart';
 import 'Widgets/AppColors.dart'; // Make sure this import is correct.
-import 'card_candidate_model.dart'; // Make sure this import is correct.
+import 'card_candidate_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';// Make sure this import is correct.
+import 'Cart_screen.dart';
+
 
 class ExampleCard extends StatefulWidget {
   final ExampleResturantModel restaurant;
@@ -68,7 +73,7 @@ class _ExampleCardState extends State<ExampleCard> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(120, 10, 16, 0),
+                    padding: const EdgeInsets.fromLTRB(130, 10, 30, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -89,16 +94,16 @@ class _ExampleCardState extends State<ExampleCard> {
                                     },
                                     icon: Icon(
                                       widget.restaurant.likeIcons,
-                                      color: Colors.blue,
+                                      color: Colors.white,
                                       size: 20,
                                     ),
                                   ),
                                   const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.likeCount.toString(),
-                                    style: const TextStyle(
+                                    style: APfontsStyle.customTextStyle(
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   const SizedBox(width: 5),
@@ -110,16 +115,16 @@ class _ExampleCardState extends State<ExampleCard> {
                                     },
                                     icon: Icon(
                                       widget.restaurant.heartIcon,
-                                      color: Colors.red,
+                                      color: Colors.white,
                                       size: 20,
                                     ),
                                   ),
                                   const SizedBox(width: 1),
                                   Text(
                                     widget.restaurant.heartCount.toString(),
-                                    style: const TextStyle(
+                                    style: APfontsStyle.customTextStyle(
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ],
@@ -129,7 +134,7 @@ class _ExampleCardState extends State<ExampleCard> {
                             Center(
                               child: Text(
                                 widget.restaurant.name,
-                                style: const TextStyle(
+                                style: APfontsStyle.customTextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 26,
@@ -155,7 +160,7 @@ class _ExampleCardState extends State<ExampleCard> {
                     const SizedBox(width: 5),
                     Text(
                       widget.restaurant.city,
-                      style: TextStyle(
+                      style: APfontsStyle.customTextStyle(
                         color: AppColors.whitetext,
                         fontSize: 20,
                       ),
@@ -169,7 +174,7 @@ class _ExampleCardState extends State<ExampleCard> {
                     const SizedBox(width: 5),
                     Text(
                       widget.restaurant.job,
-                      style: TextStyle(
+                      style: APfontsStyle.customTextStyle(
                         color: AppColors.whitetext,
                         fontSize: 17,
                       ),
@@ -186,15 +191,14 @@ class _ExampleCardState extends State<ExampleCard> {
           child: Container(
             decoration: const BoxDecoration(
               color: Colors.black,
-
             ),
-            height: 35,
+            height: 36,
             width: 500,
             child: Center(
-              child: Text(
-                "First Choice",
-                style: TextStyle(
-                  fontSize: 20,
+              child: Text(AppLocalizations.of(context)!.firstchoice,
+              textAlign: TextAlign.center,
+                style: APfontsStyle.customTextStyle(
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: AppColors.whitetext,
                 ),
@@ -243,9 +247,9 @@ class _ExampleCardState extends State<ExampleCard> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height *0.9,
+                                    height: MediaQuery.of(context).size.height * 0.75,
                                     width: double.infinity,
-                                    child: DetailPage(food: Food.generateRecommendFoods()[0]),
+                                    child: FoodDetailPage(food: Food.generateRecommendFoods()[0]),
                                   );
                                 },
                               );
@@ -257,7 +261,7 @@ class _ExampleCardState extends State<ExampleCard> {
                                 children: [
                                   Text(
                                     widget.restaurant.dealNames[index],
-                                    style: const TextStyle(
+                                    style:  APfontsStyle.customTextStyle(
                                       color: Colors.black,
                                       fontSize: 18,
                                     ),
@@ -267,7 +271,12 @@ class _ExampleCardState extends State<ExampleCard> {
                                       alignment: Alignment.centerRight,
                                       child: IconButton(
                                         onPressed: () {
-                                          // Handle cart icon press here
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => CartScreen(),
+                                            ),
+                                          );
                                         },
                                         icon: Icon(
                                           isSelected

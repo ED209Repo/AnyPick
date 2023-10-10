@@ -1,6 +1,8 @@
+import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:fast_color_picker/fast_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'Widgets/AppColors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AddVehiclePage extends StatefulWidget {
   final Function(Map<String, String> vehicleData) onVehicleAdded;
 
@@ -19,11 +21,10 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
-        ),
-        title: const Text("Add Vehicle"),
+        leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
+        title:  Text(AppLocalizations.of(context)!.addvehicale),
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
@@ -42,7 +43,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                       width: 3,
                     ),
                   ),
-                  labelText: 'Plate Number',
+                  labelText: AppLocalizations.of(context)!.platenumber,
                   labelStyle: TextStyle(
                     color: AppColors.blackColor,
                   ),
@@ -63,7 +64,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                       width: 3,
                     ),
                   ),
-                  labelText: 'Vehicle Name',
+                  labelText: AppLocalizations.of(context)!.vehiclename,
                   labelStyle: TextStyle(
                     color: AppColors.blackColor,
                   ),
@@ -93,10 +94,10 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   final colorName = selectedColor.toString();
                   if (plateNumber.isEmpty || vehicleName.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                       SnackBar(
                         backgroundColor: Colors.red,
-                        content: Text('Please fill in all fields.'),
-                        duration: Duration(seconds: 2),
+                        content: Text(AppLocalizations.of(context)!.pleasefillallfield),
+                        duration: const Duration(seconds: 2),
                       ),
                     );
                   } else {
@@ -114,9 +115,9 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   minimumSize: Size(MediaQuery.of(context).size.width * 0.5, 0),
                 ),
-                child: const Text(
-                  'Add Vehicle',
-                  style: TextStyle(color: Colors.white), // Text color change
+                child:  Text(
+                  AppLocalizations.of(context)!.addvehicale,
+                  style: const TextStyle(color: Colors.white), // Text color change
                 ),
               ),
             ),

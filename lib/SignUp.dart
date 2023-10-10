@@ -1,6 +1,8 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Widgets/AppColors.dart';
 import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
@@ -14,7 +16,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _controller = TextEditingController(text: "Hello, World!");
+  TextEditingController _usernameController = TextEditingController();
   String _fullname ='';
   String _username ='';
   String _email ='';
@@ -28,6 +30,11 @@ class _SignupPageState extends State<SignupPage> {
     super.initState();
   }
 
+  void _saveUsername(String username)async{
+    SharedPreferences pref= await SharedPreferences.getInstance();
+    pref.setString('username', username);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,11 +44,11 @@ class _SignupPageState extends State<SignupPage> {
                 key: _formKey,
                 child: ListView(
                     children: <Widget>[
-                      const Row(
+                       Row(
                         children:<Widget> [
-                          Expanded(child: Text("Create Account",
+                          Expanded(child: Text(AppLocalizations.of(context)!.createanaccount,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style:const  TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 32,
                             ),),),
@@ -58,7 +65,7 @@ class _SignupPageState extends State<SignupPage> {
                               width: 3,
                             ),
                           ),
-                          labelText: 'Phone Number',
+                          labelText: AppLocalizations.of(context)!.phonenumber,
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 16,
@@ -66,16 +73,17 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter a username';
+                            return 'Please enter a phone number';
                           }
                           return null;
                         },
-                        onSaved: (value) {
-                          _username = value!;
-                        },
+                        // onSaved: (value) {
+                        //   _username = value!;
+                        // },
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
+                        controller: _usernameController,
                         decoration:  InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -83,7 +91,7 @@ class _SignupPageState extends State<SignupPage> {
                               width: 3,
                             ),
                           ),
-                          labelText: 'Full Name',
+                          labelText: AppLocalizations.of(context)!.fullname,
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 16,
@@ -91,13 +99,13 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter your full name';
+                            return AppLocalizations.of(context)!.pleaseenteryourfullname;
                           }
                           return null;
                         },
-                        onSaved: (value) {
-                          _fullname = value!;
-                        },
+                        // onSaved: (value) {
+                        //   _fullname = value!;
+                        // },
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
@@ -110,7 +118,7 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                           ),
 
-                          labelText: 'Email Address',
+                          labelText: AppLocalizations.of(context)!.emailaddress,
                           labelStyle: TextStyle(
                             color: AppColors.blackColor,
                             fontSize: 16,
@@ -118,10 +126,10 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter an email address';
+                            return AppLocalizations.of(context)!.pleaseneteryouremail;
                           }
                           if (!value.contains('@')) {
-                            return 'Please enter a valid email';
+                            return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
                           }
                           return null;
                         },
@@ -130,8 +138,8 @@ class _SignupPageState extends State<SignupPage> {
                         },
                       ),
                       const SizedBox(height: 20.0),
-                      const Text("Gender",
-                      style: TextStyle(
+                       Text(AppLocalizations.of(context)!.gender,
+                      style: const TextStyle(
                         fontSize: 17,
                       ),),
                       Row(
@@ -169,8 +177,8 @@ class _SignupPageState extends State<SignupPage> {
 
                       ),
                       const SizedBox(height: 15),
-                      const Text('Date of Birth',
-                      style: TextStyle(
+                       Text(AppLocalizations.of(context)!.dob,
+                      style: const TextStyle(
                         fontSize: 17,
                       ),),
                       const SizedBox(height: 10.0),
@@ -188,7 +196,7 @@ class _SignupPageState extends State<SignupPage> {
                                     foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
                                   ),
                                   child: Text(
-                                    myAge.isEmpty ? 'Choose Date' : '$SelectedDate',
+                                    myAge.isEmpty ? AppLocalizations.of(context)!.choosedate : '$SelectedDate',
                                     style: const TextStyle(
                                       decorationThickness: 2.5,
                                       fontWeight: FontWeight.w600,
@@ -207,20 +215,19 @@ class _SignupPageState extends State<SignupPage> {
                       SizedBox(
                         height: 40,
                         child: CustomButton(
-                          text: "Create Account",
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                          text: AppLocalizations.of(context)!.createanaccount,
+                          onPressed: () async {
+                            if  (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-
-                              Fluttertoast.showToast(
-                                msg: 'Signup successful',
-                                toastLength: Toast.LENGTH_LONG,
-                                gravity: ToastGravity.TOP,
-                                backgroundColor: AppColors.themeColor2,
-                                textColor: Colors.white,
-                              );
-
-                              Navigator.push(
+                                CoolAlert.show(context: context, type: CoolAlertType.loading,
+                              text: AppLocalizations.of(context)!.signUpSuccessfull,
+                              autoCloseDuration: const Duration(seconds: 2),
+                              lottieAsset: "images/signup.json",
+                              animType: CoolAlertAnimType.scale,
+                               );
+                               _saveUsername(_usernameController.text);
+                               await Future.delayed(const Duration(milliseconds: 2000));
+                                 Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => const Example()),
                               );}
@@ -230,11 +237,11 @@ class _SignupPageState extends State<SignupPage> {
                       const SizedBox(height: 30.0),
                       Column(
                         children: [
-                          const Text('By Continuing you agree to',
-                          style: TextStyle(
+                           Text(AppLocalizations.of(context)!.bycontinuingyouagreeto,
+                          style: const TextStyle(
                             fontSize: 17,
                           ),),
-                           Text('AnyPick Terms & Conditions',
+                           Text(AppLocalizations.of(context)!.anypicktermsconditions,
                           style: TextStyle(
                             decoration: TextDecoration.underline,
                             decorationThickness: 3,

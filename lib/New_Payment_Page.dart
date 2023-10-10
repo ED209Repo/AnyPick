@@ -1,7 +1,8 @@
+import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterme_credit_card/flutterme_credit_card.dart';
 import 'Widgets/AppColors.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class PaymentMethodPage extends StatefulWidget {
   final List<Map<String, String>> paymentMethods;
 
@@ -17,8 +18,11 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
         backgroundColor: AppColors.themeColor,
-        title: const Text('Payment Method'),
+        title:  Text(AppLocalizations.of(context)!.paymentmethod),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -49,13 +53,13 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                             ),
                           );
                         },
-                        child: const Row(
+                        child:  Row(
                           children: [
-                            Icon(Icons.add, color: Color(0xFFF5A896)),
-                            SizedBox(width: 8),
+                            const Icon(Icons.add, color: Color(0xFFF5A896)),
+                            const SizedBox(width: 8),
                             Text(
-                              "Add a new card",
-                              style: TextStyle(color: Color(0xFFF5A896)),
+                              AppLocalizations.of(context)!.addnewcard,
+                              style: const TextStyle(color: Color(0xFFF5A896)),
                             ),
                           ],
                         ),
@@ -98,8 +102,11 @@ class _AddCardPageState extends State<AddCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
         backgroundColor: AppColors.themeColor,
-        title: const Text('Add Your Card'),
+        title:  Text(AppLocalizations.of(context)!.addyourcard),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -114,8 +121,8 @@ class _AddCardPageState extends State<AddCardPage> {
                     controller: holderController,
                     cursorColor: AppColors.themeColor, // Set color here
                     decoration: InputDecoration(
-                      labelText: "Card Holder",
-                      hintText: "Your Name",
+                      labelText: AppLocalizations.of(context)!.cardholder,
+                      hintText: AppLocalizations.of(context)!.yourname,
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: AppColors.themeColor,
@@ -132,7 +139,7 @@ class _AddCardPageState extends State<AddCardPage> {
                     controller: cardNumberController,
                     cursorColor: AppColors.themeColor, // Set color here
                     decoration: InputDecoration(
-                      labelText: "Card Number",
+                      labelText: AppLocalizations.of(context)!.cardnumber,
                       hintText: "0000 0000 0000 0000",
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -219,8 +226,8 @@ class _AddCardPageState extends State<AddCardPage> {
                   Navigator.pop(context);
                   } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                  content: Text('Please fill in all fields.'),
+                   SnackBar(
+                  content: Text(AppLocalizations.of(context)!.pleasefillallfield),
                   duration: Duration(seconds: 2),
                   ),
                   );
@@ -231,8 +238,8 @@ class _AddCardPageState extends State<AddCardPage> {
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   minimumSize: Size(MediaQuery.of(context).size.width * 0.5, 0),
                 ),
-                child: const Text(
-                  'Add Card',
+                child:  Text(
+                  AppLocalizations.of(context)!.addCard,
                 ),
               ),
             ),

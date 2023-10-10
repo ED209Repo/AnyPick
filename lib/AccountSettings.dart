@@ -1,17 +1,24 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
+import 'package:anypickdemo/homeScreen.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'ProfileSetting.dart';
 import 'VehicleManagement.dart';
 import 'New_Payment_Page.dart';
 import 'Language_Page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
+  
 
   @override
   _AccountSettingsPageState createState() => _AccountSettingsPageState();
 }
 
 class _AccountSettingsPageState extends State<AccountSettingsPage> {
+  final TextEditingController phoneController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
   // Initialize selected values for notifications
   bool pushNotifications = false;
   bool smsNotifications = true; // Default to "On"
@@ -27,16 +34,21 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
   // Define custom color F5A896
   final Color customColor = const Color(0xFFF5A896);
 
+  logout() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.remove('phoneNumber');
+     await preferences.remove('username');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new,color: AppColors.whitetext),
-        ),
-      title: const Text("Account Settings"),
+        leading: IconButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const Example()));
+        }, icon: const Icon(Icons.home_filled),),
+      title:  Text(AppLocalizations.of(context)!.accountsetting),
       centerTitle: true,
       ),
       body: SafeArea(
@@ -45,9 +57,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           children: <Widget>[
             const SizedBox(height: 10),
             buildListItemWithForwardButton(
-              'Personal Info',
+              AppLocalizations.of(context)!.personalinfo,
               Icons.person,
-              'Change your account information',
+              AppLocalizations.of(context)!.changeyouraccountinfo,
                   () {
                 // Navigate to the ProfileSettingsPage when the item is tapped
                 Navigator.push(
@@ -59,9 +71,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
             ),
             buildListItemWithForwardButton(
-              'Payment Methods',
+              AppLocalizations.of(context)!.paymentmethods,
               Icons.payment,
-              'Manage your payment methods',
+              AppLocalizations.of(context)!.manageyourmethod,
                   () {
                 Navigator.push(
                   context,
@@ -72,17 +84,17 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
             ),
             buildListItemWithForwardButton(
-              'Locations',
+              AppLocalizations.of(context)!.location,
               Icons.location_on,
-              'Manage your saved locations',
+              AppLocalizations.of(context)!.manageyoursavelocation,
                   () {
                 // Handle the item tap action here
               },
             ),
             buildListItemWithForwardButton(
-              'Vehicle Management',
+              AppLocalizations.of(context)!.vehiclemanagement,
               Icons.directions_car,
-              'Manage your vehicles',
+              AppLocalizations.of(context)!.manageyourvehicle,
                   () {
                 Navigator.push(
                   context,
@@ -94,56 +106,56 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
             ),
              buildListItemWithForwardButton(
-              'Order History',
+               AppLocalizations.of(context)!.orderhistory,
               Icons.history,
-              'View Your Order History and Details ',
+               AppLocalizations.of(context)!.viewyourorderhistory,
                   () {
                 // Handle the item tap action here
               },
             ),
-            const ListTile(
-              title: Text('Notifications'),
+             ListTile(
+              title: Text(AppLocalizations.of(context)!.notifications),
             ),
             // Notifications with Toggle Buttons (On/Off)
             buildNotificationTile(
-              'Push Notifications',
+              AppLocalizations.of(context)!.pushNotification,
               pushNotifications,
                   (bool value) {
                 setState(() {
                   pushNotifications = value;
                 });
               },
-              'Receive push notifications',
+              AppLocalizations.of(context)!.recievePushnotification,
             ),
-            const ListTile(
-              title: Text('More'),
+             ListTile(
+              title: Text(AppLocalizations.of(context)!.more),
             ),
             // Add forward buttons to other items
             buildListItemWithForwardButton(
-              'Rate Us',
+              AppLocalizations.of(context)!.rateus,
               Icons.star,
-              'Rate our app',
+              AppLocalizations.of(context)!.rateourapp,
                   () {
                 // Handle the item tap action here
               },
             ),
             buildListItemWithForwardButton(
-              'FAQ',
+              AppLocalizations.of(context)!.faq,
               Icons.help,
-              'Frequently asked questions',
+              AppLocalizations.of(context)!.frequentlyaskedquestions,
                   () {
                 // Handle the item tap action here
               },
             ),
             buildListItemWithForwardButton(
-              'Language', // New "Language" option
+              AppLocalizations.of(context)!.language, // New "Language" option
               Icons.language, // Use the language icon
-              'Change app language', // Description
+              AppLocalizations.of(context)!.changeapplanguage, // Description
                   () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>  LanguagePage(),
+                    builder: (context) =>  LanguageSelectionPage(),
                   ),
                 );
                 // Handle the item tap action here
@@ -151,9 +163,62 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
             ),
             ListTile(
               leading: Icon(Icons.logout, color: customColor), // Use custom color
-              title: const Text('Logout'),
-              subtitle: const Text('Sign out of your account'),
+              title:  Text(AppLocalizations.of(context)!.logout),
+              subtitle:  Text(AppLocalizations.of(context)!.signoutyouraccount),
+              onTap: () async {
+  showDialog(context: context,
+      builder: (BuildContext context){
+    return AlertDialog(
+      backgroundColor: AppColors.themeColor,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      title: const Text('Logout',
+      style: TextStyle(
+        color: Colors.white
+      ),),
+      content: const Text('Are you sure,want to log out?',
+      style: TextStyle(
+          color: Colors.white
+      ),),
+      actions: [
+        TextButton(
+          child: const Text('Cancel',
+          style: TextStyle(
+              color: Colors.grey,
+          ),),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          child: const Text('Logout',
+          style: TextStyle(
+              color: Colors.red
+          ),),
+          onPressed: () async {// Close the dialog
+            await logout();
+            CoolAlert.show(context: context, type: CoolAlertType.loading,
+              text: AppLocalizations.of(context)!.loggedOutSuccessfull,
+              autoCloseDuration: const Duration(milliseconds: 2000),
+              lottieAsset: "images/signup.json",
+              animType: CoolAlertAnimType.scale,
+            );
+            await Future.delayed(const Duration(milliseconds: 2000));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Example()),
+            );
+          },
+        ),
+      ],
+    );
+      });
+
+},
             ),
+            const SizedBox(height: 15,),
+            const Text("Version 1.1.1", textAlign: TextAlign.center,),
           ],
         ),
       ),

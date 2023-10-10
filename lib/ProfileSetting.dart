@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'AccountSettings.dart';
 import 'Widgets/AppColors.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ProfileSettingsPage extends StatefulWidget {
   const ProfileSettingsPage({Key? key}) : super(key: key);
 
@@ -12,12 +14,14 @@ class ProfileSettingsPage extends StatefulWidget {
 }
 
 class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
+  TextEditingController _usernameController = TextEditingController();
   String _fullname = '';
   String _email = '';
-  ImageProvider<Object> currentProfilePhoto = const AssetImage('images/profile_photo.JPG');
+  ImageProvider<Object> currentProfilePhoto = const AssetImage("images/arabmanprofile2.png",);
   String? imagePath; // Store the path to the selected image
   File? pickedImage; // Store the picked image as a File
   String? selectedDateText; // Store the selected date text
+  bool isLoggedIn = false ;
 
   Future<void> changeProfilePhoto() async {
     final picker = ImagePicker();
@@ -31,20 +35,35 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
     }
   }
 
+  Future<String> _getUsername()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String uname = prefs.getString('username') ?? "Guest";
+    if (uname != 'Guest'){
+      isLoggedIn = true ;
+    }
+    return uname;
+  }
+
+  void _saveUsername(String username)async{
+    SharedPreferences pref= await SharedPreferences.getInstance();
+    pref.setString('username', username);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
-        ),
-        title: const Text("Profile Settings"),
+        leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
+        title:  Text(AppLocalizations.of(context)!.profilesetting),
         centerTitle: true,
         actions: [
           TextButton(
-            onPressed: () {
+            onPressed: () async {
+              _saveUsername(_usernameController.text);
+              await Future.delayed(const Duration(milliseconds: 2000));
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const AccountSettingsPage()),
@@ -57,7 +76,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               )
 
             ),
-            child: const Text("Save"),
+            child:  Text(AppLocalizations.of(context)!.save),
           ),
         ],
       ),
@@ -67,14 +86,14 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
           const SizedBox(height: 10),
           Container(
             height: MediaQuery.of(context).size.height * 0.2,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.white, Colors.white],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                stops: [0.5, 0.9],
-              ),
-            ),
+            // decoration: const BoxDecoration(
+            //   gradient: LinearGradient(
+            //     colors: [Colors.white, Colors.white],
+            //     begin: Alignment.centerLeft,
+            //     end: Alignment.centerRight,
+            //     stops: [0.5, 0.9],
+            //   ),
+            // ),
             child: Stack(
               children: [
                 Center(
@@ -87,7 +106,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                       minRadius: 40.0,
                       // Use a conditional statement to check if a new image is available
                       // If so, use FileImage for the new image; otherwise, use currentProfilePhoto
-                      backgroundImage: pickedImage != null
+                      backgroundImage:   pickedImage != null
                           ? FileImage(pickedImage!)
                           : currentProfilePhoto,
                     ),
@@ -111,15 +130,24 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
           ),
 
           // Change your profile photo description
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              '@alirana50',
-              style: TextStyle(
-                fontSize: 25.0,
-                color: Colors.black,
-              ),
-              textAlign: TextAlign.center,
+           Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: FutureBuilder<String>(
+              future: _getUsername(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  return Text('${snapshot.data}',
+                  style: const TextStyle(
+                    fontSize: 25.0,
+                    color: Colors.black,
+                  ),
+                    textAlign: TextAlign.center,);
+                }
+              },
             ),
           ),
 
@@ -130,6 +158,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: TextFormField(
+              controller: _usernameController,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
@@ -137,20 +166,20 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     width: 3,
                   ),
                 ),
-                labelText: 'Full Name',
+                labelText: AppLocalizations.of(context)!.fullname,
                 labelStyle: TextStyle(
                   color: AppColors.blackColor,
                 ),
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your full name';
+                  return AppLocalizations.of(context)!.pleaseenteryourfullname;
                 }
                 return null;
               },
-              onSaved: (value) {
-                _fullname = value!;
-              },
+              // onSaved: (value) {
+              //   _fullname = value!;
+              // },
             ),
           ),
 
@@ -166,17 +195,17 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                     width: 3,
                   ),
                 ),
-                labelText: 'Email Address',
+                labelText: AppLocalizations.of(context)!.emailaddress,
                 labelStyle: TextStyle(
                   color: AppColors.blackColor,
                 ),
               ),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter an email address';
+                  return AppLocalizations.of(context)!.pleaseneteryouremail;
                 }
                 if (!value.contains('@')) {
-                  return 'Please enter a valid email';
+                  return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
                 }
                 return null;
               },
@@ -203,7 +232,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               child: Container(
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  selectedDateText ?? 'Date of Birth',
+                  selectedDateText ?? AppLocalizations.of(context)!.dob,
                   style: const TextStyle(
                     decorationThickness: 2.5,
                     fontWeight: FontWeight.w600,

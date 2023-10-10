@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Food {
+class Food2 {
   String? imgUrl;
   String? desc;
   String? name;
@@ -12,7 +12,7 @@ class Food {
   String? about;
   bool highLight;
 
-  Food({
+  Food2({
     this.imgUrl,
     this.desc,
     this.name,
@@ -25,9 +25,9 @@ class Food {
     this.highLight = false,
   });
 
-  static List<Food> generateRecommendFoods() {
+  static List<Food2> generateRecommendFoods2() {
     return [
-      Food(
+      Food2(
         imgUrl: 'images/hardess.jpg',
         desc: 'Most Popular',
         name: 'Beef Burger',
@@ -50,9 +50,9 @@ class Food {
 }
 
 class FoodImg extends StatelessWidget {
-  final Food? food;
+  final Food2? food2;
 
-  FoodImg({this.food});
+  FoodImg({this.food2});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class FoodImg extends StatelessWidget {
               ),
               child: ClipOval(
                 child: Image.asset(
-                  food!.imgUrl!,
+                  food2!.imgUrl!,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -110,52 +110,52 @@ class FoodImg extends StatelessWidget {
 }
 
 class FoodDetail extends StatelessWidget {
-  final Food? food;
+  final Food2? food2;
 
-  FoodDetail({this.food});
+  FoodDetail({this.food2});
 
   Future<void> _showAddonOptionDialog(BuildContext context, String addonName) async {
     final List<String> options = ['Option 1', 'Option 2', 'Option 3'];
     String? selectedOption;
 
     await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-    return StatefulBuilder(
-    builder: (context, setState) {
-    return AlertDialog(
-    title: Text('Select $addonName '),
-    content: Column(
-    mainAxisSize: MainAxisSize.min,
-    children: options.map((option) {
-    return ListTile(
-    title: Text(option),
-    leading: Radio<String>(
-    value: option,
-    groupValue: selectedOption,
-    onChanged: (value) {
-    setState(() {
-    selectedOption = value;
-    });
-    },
-    ),
-    );
-    }).toList(),
-    ),
-    actions: <Widget>[
-    TextButton(
-    onPressed: () {
-    // Perform actions with the selected option here
-    print('Selected $addonName Option: $selectedOption');
-    Navigator.of(context).pop(); // Close dialog after saving
-    },
-    child: Text('Save'),
-    ),
-    ],
-    );
-    },
-    );
-    },
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              title: Text('Select $addonName '),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: options.map((option) {
+                  return ListTile(
+                    title: Text(option),
+                    leading: Radio<String>(
+                      value: option,
+                      groupValue: selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedOption = value;
+                        });
+                      },
+                    ),
+                  );
+                }).toList(),
+              ),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    // Perform actions with the selected option here
+                    print('Selected $addonName Option: $selectedOption');
+                    Navigator.of(context).pop(); // Close dialog after saving
+                  },
+                  child: Text('Save'),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 
@@ -167,7 +167,7 @@ class FoodDetail extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            food!.name!,
+            food2!.name!,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 22,
@@ -182,19 +182,19 @@ class FoodDetail extends StatelessWidget {
               _buildIconText(
                 Icons.access_time_outlined,
                 Colors.blue,
-                food!.waitTIme!,
+                food2!.waitTIme!,
               ),
               _buildIconText(
                 Icons.star_outlined,
                 Colors.amber,
-                food!.score!.toString(),
+                food2!.score!.toString(),
               ),
             ],
           ),
           const SizedBox(
             height: 39,
           ),
-          FoodQuantity(food: food),
+          FoodQuantity(food2: food2),
           SizedBox(
             height: 39,
           ),
@@ -212,11 +212,11 @@ class FoodDetail extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                if (index < food!.Addons!.length) {
-                  final String addonName = food!.Addons![index].keys.first;
+                if (index < food2!.Addons!.length) {
+                  final String addonName = food2!.Addons![index].keys.first;
                   return GestureDetector(
                     onTap: () {
-                      if (food!.Addons != null && index < food!.Addons!.length) {
+                      if (food2!.Addons != null && index < food2!.Addons!.length) {
                         _showAddonOptionDialog(context, addonName);
                       }
                     },
@@ -229,7 +229,7 @@ class FoodDetail extends StatelessWidget {
                       child: Column(
                         children: [
                           Image.asset(
-                            food!.Addons![index].values.first,
+                            food2!.Addons![index].values.first,
                             width: 52,
                           ),
                           Text(addonName),
@@ -244,7 +244,7 @@ class FoodDetail extends StatelessWidget {
               separatorBuilder: (_, index) => SizedBox(
                 width: 15,
               ),
-              itemCount: food!.Addons != null ? food!.Addons!.length : 0,
+              itemCount: food2!.Addons != null ? food2!.Addons!.length : 0,
             ),
           ),
           const SizedBox(
@@ -261,7 +261,7 @@ class FoodDetail extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            food!.about!,
+            food2!.about!,
             style: const TextStyle(fontSize: 16, wordSpacing: 1.2, height: 1.5),
           ),
           const SizedBox(height: 20),
@@ -287,9 +287,9 @@ class FoodDetail extends StatelessWidget {
 }
 
 class FoodQuantity extends StatefulWidget {
-  final Food? food;
+  final Food2? food2;
 
-  const FoodQuantity({Key? key, this.food}) : super(key: key);
+  const FoodQuantity({Key? key, this.food2}) : super(key: key);
 
   @override
   _FoodQuantityState createState() => _FoodQuantityState();
@@ -337,7 +337,7 @@ class _FoodQuantityState extends State<FoodQuantity> {
                   style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  widget.food!.price.toString(),
+                  widget.food2!.price.toString(),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -385,11 +385,11 @@ class _FoodQuantityState extends State<FoodQuantity> {
 }
 
 class DetailPage extends StatelessWidget {
-  final Food food;
+  final Food2 food2;
 
   const DetailPage({
     Key? key,
-    required this.food,
+    required this.food2,
   }) : super(key: key);
 
   @override
@@ -405,10 +405,10 @@ class DetailPage extends StatelessWidget {
               leftCallback: () => Navigator.pop(context),
             ),
             FoodImg(
-              food: food,
+              food2: food2,
             ),
             FoodDetail(
-              food: food,
+              food2: food2,
             ),
           ],
         ),
@@ -438,7 +438,7 @@ class DetailPage extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: Text(
-                  food!.quantity!.toString(),
+                  food2!.quantity!.toString(),
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,

@@ -1,10 +1,13 @@
 import 'package:anypickdemo/Widgets/AppColors.dart';
+import 'package:anypickdemo/controller/language_change_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
+import 'package:provider/provider.dart';
 import 'Register.dart';
 import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+enum Language{ English,Arabic}
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({Key? key}) : super(key: key);
 
@@ -18,103 +21,110 @@ class _OnboardscreenState extends State<OnboardScreen> {
     Container(
       width: double.infinity,
       color: AppColors.whitetext,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Image.asset(
-              'images/mainlogo.png',
-              height: 150,
-              width: 150,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Image.asset(
-              'images/onboarding1.png',
-              height: 250,
-              width: 250,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 90),
-            child: Text(
-              "Find your desired food around you",
-              style: TextStyle(
-                color: AppColors.greyText,
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
+      child: Padding(
+        padding: const EdgeInsets.only(top:80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Image.asset(
+                'images/mainlogo.png',
+                height: 150,
+                width: 150,
               ),
             ),
-          ),
-        ],
-      ),
-    ),
-    Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: AppColors.themeColor2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5,),
-            child: Image.asset(
-              'images/whiteicon.png',
-              height: 150,
-              width: 150,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 5),
-            child: Image.asset(
-              'images/onboarding2.png',
-              height: 250,
-              width: 250,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 90),
-            child: Text(
-              "Pickup your food on the go",
-              style: TextStyle(
-                color: AppColors.whitetext,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Image.asset(
+                'images/onboarding1.png',
+                height: 250,
+                width: 250,
               ),
             ),
-          ),
-        ],
-      ),
-    ),
-    Padding(
-      padding: EdgeInsets.fromLTRB(0, 40, 20, 0),
-      child: Container(
-        alignment: Alignment.topRight,
-        child: DropdownButton<String>(
-          dropdownColor: AppColors.themeColor,
-         icon: const Icon(
-           Icons.language_rounded,
-         ),
-          items: <String>['English', 'العربية'].map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          onChanged: (_) {},
+            Padding(
+              padding: const EdgeInsets.only(bottom: 90),
+              child: Text(
+                "Find your desired food around you",
+                style: TextStyle(
+                  color: AppColors.greyText,
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     ),
     Container(
       width: double.infinity,
+      color: AppColors.themeColor2,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 80),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5,),
+              child: Image.asset(
+                'images/whiteicon.png',
+                height: 150,
+                width: 150,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Image.asset(
+                'images/onboarding2.png',
+                height: 250,
+                width: 250,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 90),
+              child: Text(
+                "Pickup your food on the go",
+                style: TextStyle(
+                  color: AppColors.whitetext,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+    Container(
       color: AppColors.whitetext,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Padding(padding: const EdgeInsets.fromLTRB(320,25,0,0),
+              child: Consumer<LanguageChangeController>(builder: (context,provider,child){
+                return PopupMenuButton(
+                    icon: const Icon(Icons.language_rounded),
+                    onSelected: (Language item){
+                      if(Language.English.name==item.name){
+                        provider.changeLanguage(const Locale('en'));
+                      } else{
+                        provider.changeLanguage(const Locale('ar'));
+                      }
+                    },
+                    itemBuilder: (BuildContext context)=> <PopupMenuEntry<Language>>[
+                      const PopupMenuItem(
+                          value: Language.English,
+                          child: Text("Enlgish")),
+                      const PopupMenuItem(
+                          value: Language.Arabic,
+                          child: Text("العربية")),
+                    ]
+                );
+              })),
           Padding(
-            padding: const EdgeInsets.only(bottom: 60),
+            padding: const EdgeInsets.only(bottom: 60,top: 30),
             child: Image.asset(
               "images/mainlogo.png",
               height: 150,
@@ -141,6 +151,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
               ),
             ),
           ),
+
         ],
       ),
     ),
@@ -168,11 +179,11 @@ class _OnboardscreenState extends State<OnboardScreen> {
                 left: 30,
                 right: 30,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     (currentPage == 2 )
-                        ? CustomButton(text: 'Continue',
+                        ? CustomButton(text: AppLocalizations.of(context)!.continuetext,
                       onPressed: () => HomeMethod(context),) :
                     Column(
                       children: <Widget>[

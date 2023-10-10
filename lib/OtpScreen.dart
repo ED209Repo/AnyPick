@@ -1,9 +1,9 @@
+import 'package:anypickdemo/SignUp.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-import 'SignUp.dart';
 import 'Widgets/AppColors.dart';
-import 'Widgets/CustomButton.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class otpscreen extends StatefulWidget {
   final String verificationId;
   const otpscreen({Key? key, required this.verificationId}) : super(key: key);
@@ -32,16 +32,16 @@ class _otpscreenState extends State<otpscreen> {
                     ),
                   ],
                 ),
-                const Text(
-                  "Verification Code",
-                  style: TextStyle(
+                 Text(
+                  AppLocalizations.of(context)!.verificationcode,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22,
                   ),
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  "Enter the OTP  sent to your phone number",
+                  AppLocalizations.of(context)!.entertheotpsenttoyourphonenumber,
                   style: TextStyle(
                     fontWeight: FontWeight.normal,
                     color: AppColors.blackColor,
@@ -54,6 +54,9 @@ class _otpscreenState extends State<otpscreen> {
                   controller: otpController,
                   length: 6,
                   showCursor: true,
+                  autofocus: true,
+
+                  textInputAction: TextInputAction.done,
                   defaultPinTheme: PinTheme(
                     width: 60,
                     height: 60,
@@ -68,19 +71,33 @@ class _otpscreenState extends State<otpscreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  onCompleted: (pin) async {
+                    if (pin.length == 6){
+                      CoolAlert.show(context: context, type: CoolAlertType.loading,
+                        text: AppLocalizations.of(context)!.otpverified,
+                        autoCloseDuration: const Duration(seconds: 2),
+                        lottieAsset: "images/verified.json",
+                        animType: CoolAlertAnimType.scale,
+                      );
+                      await Future.delayed(const Duration(milliseconds: 2000));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const SignupPage()),
+                      );}
+                  },
                 ),
                 const SizedBox(height: 20.0),
-                SizedBox(
-                  width: double.infinity,
-                  height: 50,
-                  child: CustomButton(
-                      text: "Verify",
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (
-                            context) => const SignupPage()));
-                      }
-                  ),
-                )
+                // SizedBox(
+                //   width: double.infinity,
+                //   height: 50,
+                //   child: CustomButton(
+                //       text: AppLocalizations.of(context)!.verify,
+                //       onPressed: ()  {
+                //         Navigator.push(context, MaterialPageRoute(builder: (
+                //             context) => const SignupPage()));
+                //       }
+                //   ),
+                // )
               ],
             ),
           );

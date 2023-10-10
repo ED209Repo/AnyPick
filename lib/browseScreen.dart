@@ -1,7 +1,9 @@
+import 'package:anypickdemo/APfontsStyle.dart';
 import 'package:anypickdemo/MenuPage.dart';
+import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'BrowseScreenModel.dart';
 import 'Widgets/AppColors.dart';
 
@@ -41,7 +43,7 @@ Widget categoriesContainer({required String image, required String name}) {
         ),
       ),
       Text(name,
-        style: const TextStyle(
+        style: APfontsStyle.customTextStyle(
           fontSize: 17,
           fontWeight: FontWeight.bold,
         ),),
@@ -72,22 +74,46 @@ class _TryScreenState extends State<TryScreen> {
     return  Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(65),
           child: AppBar(
-            backgroundColor: AppColors.themeColor2,
-            leading: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
-              child: GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
-                child: Icon(Icons.arrow_back_ios_new, color: AppColors.whitetext),
-              ),
-            ),
+            toolbarHeight: 60.0,
+            backgroundColor: AppColors.themeColor,
+            leading: CustomBackButton(
+  onPressed: () => Navigator.of(context).pop(),
+),
+          
             title: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text('Browse',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: AppColors.whitetext,
-                fontSize: 20,
-              ),),
+              padding: const EdgeInsets.only(top: 5),
+                child: Container(
+                  height: 50,
+                  width: 300,
+                  child: TextField(
+                    textAlign: TextAlign.start,
+                    controller: _searchController,
+                    onChanged: (query) {
+                      _performSearch(query);
+                    },
+                    decoration: InputDecoration(
+                      label: const Text("search foods"),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.blackColor,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.themeColor2,
+                          width: 3,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
             ),
             centerTitle: true,
           )),
@@ -97,36 +123,6 @@ class _TryScreenState extends State<TryScreen> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                const SizedBox(height: 12),
-                TextField(
-                  controller: _searchController,
-                  onChanged: (query) {
-                    _performSearch(query);
-                  },
-                  decoration: InputDecoration(
-                    hintText: "Search Food",
-                    hintStyle: const TextStyle(
-                      color: Colors.black,
-                    ),
-                    prefixIcon: Icon(Icons.search, color: AppColors.themeColor2),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.blackColor,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.themeColor2,
-                        width: 3,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 12),
                 Container(
                   height: 120.0,
@@ -197,6 +193,10 @@ class _TryScreenState extends State<TryScreen> {
                               margin: const EdgeInsets.all(8.0),
                               padding: const EdgeInsets.all(12.0),
                               decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                  image: AssetImage('images/gradient-3.jpg'), // Replace with your background image path
+                                  fit: BoxFit.cover,
+                                ),
                                 border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
@@ -220,7 +220,6 @@ class _TryScreenState extends State<TryScreen> {
                                         children: [
                                           GestureDetector(
                                             onTap: (){
-
                                               Navigator.push(
                                                 context, 
                                               MaterialPageRoute(
@@ -229,9 +228,10 @@ class _TryScreenState extends State<TryScreen> {
                                             },
                                             child: Text(
                                               browseItem.title,
-                                              style: const TextStyle(
+                                              style: APfontsStyle.customTextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 22.0,
+                                                color: Colors.white
                                               ),
                                             ),
                                           ),
@@ -240,27 +240,30 @@ class _TryScreenState extends State<TryScreen> {
                                             '${browseItem.Description}',
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              fontStyle: FontStyle.italic,
-                                              color: Colors.grey,
+                                            style: APfontsStyle.customTextStyle(
+                                              color: Colors.white,
                                             ),
                                           ),
                                           const SizedBox(height: 17),
-                                          Wrap(
-                                            children:[
-                                              const Icon(Icons.timer_outlined,
-                                                  color: Colors.grey,
-                                                  size: 15),
-                                              Text(
-                                                ' ${browseItem.time}',
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontStyle: FontStyle.italic,
-                                                  color: Colors.grey,
+                                          Container(
+                                            alignment: Alignment.bottomRight,
+                                            child: Wrap(
+                                              children:[
+                                                const Icon(Icons.delivery_dining,
+                                                    color: Colors.white,
+                                                    size: 20,
                                                 ),
-                                              ),
-                                            ],
+                                                Text(
+                                                  ' ${browseItem.time}',
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style:  APfontsStyle.customTextStyle(
+                                                    
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       )),

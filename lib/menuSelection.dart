@@ -2,7 +2,7 @@ import 'package:anypickdemo/MenuPage.dart';
 import 'package:anypickdemo/MenuPageModel.dart';
 import 'package:anypickdemo/Widgets/CustomButton2.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class menuSelection extends StatefulWidget {
   final String title;
@@ -121,8 +121,8 @@ class _menuSelectionState extends State<menuSelection> {
                 ),
                 const SizedBox(height: 15), // Spacer
                 // Choice of Top Cookie
-                const Text(
-                  'Choice of Top Cookie',
+                 Text(
+                  AppLocalizations.of(context)!.choiceoftopcookie,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -181,14 +181,14 @@ class _menuSelectionState extends State<menuSelection> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
                     ),
-                    child: const Text("Show Top Cookies"),
+                    child:  Text(AppLocalizations.of(context)!.showtopcookies),
                   ),
                 ),
                 const SizedBox(height: 12), // Spacer
                 // Choice of flavor
-                const Text(
-                  'Choice of Flavor',
-                  style: TextStyle(
+                 Text(
+                  AppLocalizations.of(context)!.choiceofflavour,
+                  style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -251,8 +251,8 @@ class _menuSelectionState extends State<menuSelection> {
                 ),
                 const SizedBox(height: 10), // Spacer
                 // Choice of Ads On
-                const Text(
-                  'Choice of Ads On',
+                 Text(
+                  AppLocalizations.of(context)!.choiceofadon,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -311,12 +311,12 @@ class _menuSelectionState extends State<menuSelection> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey,
                     ),
-                    child: const Text("Select Ads On"),
+                    child:  Text(AppLocalizations.of(context)!.selectadons),
                   ),
                 ),
                 const SizedBox(height: 40),
                 CustomButton2
-                  (text: "ADD TO ORDER",
+                  (text: AppLocalizations.of(context)!.addtoorder,
                     onPressed: ()
                     {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> const MenuPage()));
