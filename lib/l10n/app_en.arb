@@ -82,7 +82,12 @@
 "orderplaced2": "Thank you for your order. Your order will be ready within the given time. Make sure you have given the right details of your car",
 "gotohome": "Go to homepage",
 "checkout": "Checkout",
-"hey":"Hey"
+"hey":"Hey",
+"loggedOutSuccessfull":"Log out successfull",
+"signUpSuccessfull":"Signup successfull",
+"signUpFirstToAccessApplicationFeatures":"Signup first to access application features",
+"productadded":"product added",
+"otpverified":"Otp verified"
 
 
   }

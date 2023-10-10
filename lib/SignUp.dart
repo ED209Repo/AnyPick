@@ -220,7 +220,7 @@ class _SignupPageState extends State<SignupPage> {
                             if  (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
                                 CoolAlert.show(context: context, type: CoolAlertType.loading,
-                              text: "SignUp Successfull",
+                              text: AppLocalizations.of(context)!.signUpSuccessfull,
                               autoCloseDuration: const Duration(seconds: 2),
                               lottieAsset: "images/signup.json",
                               animType: CoolAlertAnimType.scale,

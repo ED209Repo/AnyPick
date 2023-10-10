@@ -74,40 +74,29 @@ class _TryScreenState extends State<TryScreen> {
     return  Scaffold(
       appBar: PreferredSize(preferredSize: Size.fromHeight(65),
           child: AppBar(
+            toolbarHeight: 60.0,
             backgroundColor: AppColors.themeColor,
             leading: CustomBackButton(
   onPressed: () => Navigator.of(context).pop(),
 ),
           
             title: Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(AppLocalizations.of(context)!.browse,
-              style: APfontsStyle.customTextStyle(
-                fontWeight: FontWeight.bold,
-                color: AppColors.whitetext,
-                fontSize: 20,
-              ),),
-            ),
-            centerTitle: true,
-          )),
-      body: SingleChildScrollView(
-        child: Stack(
-          children:[Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                const SizedBox(height: 12),
-                TextField(
+              padding: const EdgeInsets.only(top: 12),
+              child: SizedBox(
+                height: 45,
+                width: 300,
+                child: TextField(
                   controller: _searchController,
                   onChanged: (query) {
                     _performSearch(query);
                   },
                   decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.searchfood,
+                    hintText: AppLocalizations.of(context)!.searchfood ,
+                    alignLabelWithHint: true,
                     hintStyle: APfontsStyle.customTextStyle(
-                      color: Colors.black,
+                      color: Colors.grey,
                     ),
-                    prefixIcon: Icon(Icons.search, color: AppColors.themeColor2),
+                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
@@ -126,6 +115,16 @@ class _TryScreenState extends State<TryScreen> {
                     ),
                   ),
                 ),
+              ),
+            ),
+            centerTitle: true,
+          )),
+      body: SingleChildScrollView(
+        child: Stack(
+          children:[Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
                 const SizedBox(height: 12),
                 Container(
                   height: 120.0,

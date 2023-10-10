@@ -82,5 +82,10 @@
 "orderplaced2": "شكرا لطلبك. سيكون طلبك جاهزًا خلال الوقت المحدد. تأكد من أنك قدمت التفاصيل الصحيحة لسيارتك",
 "gotohome": "اذهب إلى الصفحة الرئيسية",
 "checkout": "الدفع",
-"hey":"يا"
+"hey":"يا",
+"loggedOutSuccessfull":"تسجيل الخروج بنجاح",
+"signUpSuccessfull":"الاشتراك بنجاح",
+"signUpFirstToAccessApplicationFeatures":"قم بالتسجيل أولاً للوصول إلى ميزات التطبيق",
+"productadded":"تمت إضافة المنتج",
+"otpverified":"تم التحقق من OTP"
 }
