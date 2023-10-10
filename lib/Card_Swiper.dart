@@ -192,12 +192,13 @@ class _ExampleCardState extends State<ExampleCard> {
             decoration: const BoxDecoration(
               color: Colors.black,
             ),
-            height: 35,
+            height: 36,
             width: 500,
             child: Center(
               child: Text(AppLocalizations.of(context)!.firstchoice,
+              textAlign: TextAlign.center,
                 style: APfontsStyle.customTextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: AppColors.whitetext,
                 ),

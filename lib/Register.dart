@@ -48,12 +48,7 @@ class _registerscreenState extends State<registerscreen> {
     );
     final double screenHeight = MediaQuery.of(context).size.height;
     final double buttonHeight = screenHeight * 0.08;
-    return Container(
-       child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
-        },
-        child: Padding(
+    return  Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
             key: _formKey,
@@ -104,7 +99,9 @@ class _registerscreenState extends State<registerscreen> {
                 ),
                 const SizedBox(height: 15),
                 TextFormField(
+                  autofocus: true,
                   inputFormatters: [
+                    
                     LengthLimitingTextInputFormatter(9), // Set the max length to 10
                     FilteringTextInputFormatter.digitsOnly, // Allow only digits
                   ],
@@ -211,6 +208,12 @@ class _registerscreenState extends State<registerscreen> {
                     )
                         : null,
                   ),
+                  onTapOutside: (event) {
+                    if (phoneController.text.length == 9){
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      behavior: HitTestBehavior.opaque;
+                    }
+                  },
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
@@ -289,8 +292,6 @@ class _registerscreenState extends State<registerscreen> {
               ],
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }

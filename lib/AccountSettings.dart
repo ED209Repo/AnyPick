@@ -166,22 +166,59 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               title:  Text(AppLocalizations.of(context)!.logout),
               subtitle:  Text(AppLocalizations.of(context)!.signoutyouraccount),
               onTap: () async {
-                await logout();
-                CoolAlert.show(context: context, type: CoolAlertType.loading,
-                              text: AppLocalizations.of(context)!.loggedOutSuccessfull,
-                              autoCloseDuration: const Duration(seconds: 2),
-                              lottieAsset: "images/signup.json",
-                              animType: CoolAlertAnimType.scale,
-                               );
-                               await Future.delayed(const Duration(milliseconds: 2000));
-                                 Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const Example()),
-                              );
-              },
+  showDialog(context: context,
+      builder: (BuildContext context){
+    return AlertDialog(
+      backgroundColor: AppColors.themeColor,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      title: const Text('Logout',
+      style: TextStyle(
+        color: Colors.white
+      ),),
+      content: const Text('Are you sure,want to log out?',
+      style: TextStyle(
+          color: Colors.white
+      ),),
+      actions: [
+        TextButton(
+          child: const Text('Cancel',
+          style: TextStyle(
+              color: Colors.grey,
+          ),),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        TextButton(
+          child: const Text('Logout',
+          style: TextStyle(
+              color: Colors.red
+          ),),
+          onPressed: () async {// Close the dialog
+            await logout();
+            CoolAlert.show(context: context, type: CoolAlertType.loading,
+              text: AppLocalizations.of(context)!.loggedOutSuccessfull,
+              autoCloseDuration: const Duration(milliseconds: 2000),
+              lottieAsset: "images/signup.json",
+              animType: CoolAlertAnimType.scale,
+            );
+            await Future.delayed(const Duration(milliseconds: 2000));
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Example()),
+            );
+          },
+        ),
+      ],
+    );
+      });
+
+},
             ),
             const SizedBox(height: 15,),
-            const Text("Version 1.0.1", textAlign: TextAlign.center,),
+            const Text("Version 1.1.1", textAlign: TextAlign.center,),
           ],
         ),
       ),

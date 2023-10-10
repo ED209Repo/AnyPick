@@ -81,41 +81,39 @@ class _TryScreenState extends State<TryScreen> {
 ),
           
             title: Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: SizedBox(
-                height: 45,
-                width: 300,
-                child: TextField(
-                  controller: _searchController,
-                  onChanged: (query) {
-                    _performSearch(query);
-                  },
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.searchfood ,
-                    alignLabelWithHint: true,
-                    hintStyle: APfontsStyle.customTextStyle(
-                      color: Colors.grey,
-                    ),
-                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.blackColor,
-                        width: 1,
+              padding: const EdgeInsets.only(top: 5),
+                child: Container(
+                  height: 50,
+                  width: 300,
+                  child: TextField(
+                    textAlign: TextAlign.start,
+                    controller: _searchController,
+                    onChanged: (query) {
+                      _performSearch(query);
+                    },
+                    decoration: InputDecoration(
+                      label: const Text("search foods"),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.blackColor,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.themeColor2,
-                        width: 3,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: AppColors.themeColor2,
+                          width: 3,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
-              ),
             ),
             centerTitle: true,
           )),
