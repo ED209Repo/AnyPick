@@ -1,7 +1,7 @@
 {
   "findYourDesiredFoodAroundYou" :"ابحث عن الطعام المطلوب من حولك",
-  "goodmorning":"صباح الخير",
-  "goodevening":"مساء الخير",
+  "goodmorning":"صباح الخير,",
+  "goodevening":"مساء الخير,",
   "pickupyourfoodonthego":"التقط طعامك أثناء التنقل",
   "weareexcited,let'sgetstarted!":"نحن متحمسون، دعونا نبدأ!",
    "cart":"عربة التسوق",
@@ -87,5 +87,8 @@
 "signUpSuccessfull":"الاشتراك بنجاح",
 "signUpFirstToAccessApplicationFeatures":"قم بالتسجيل أولاً للوصول إلى ميزات التطبيق",
 "productadded":"تمت إضافة المنتج",
-"otpverified":"تم التحقق من OTP"
+"otpverified":"تم التحقق من OTP",
+"logout":"تسجيل خروج",
+"areyousurewanttologout":"هل أنت متأكد، هل تريد تسجيل الخروج؟",
+"cancel":"يلغي"
 }

@@ -247,7 +247,7 @@ class _ExampleCardState extends State<ExampleCard> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return Container(
-                                    height: MediaQuery.of(context).size.height * 0.75,
+                                    height: MediaQuery.of(context).size.height * 0.9,
                                     width: double.infinity,
                                     child: FoodDetailPage(food: Food.generateRecommendFoods()[0]),
                                   );

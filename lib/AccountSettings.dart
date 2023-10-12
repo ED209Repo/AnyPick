@@ -10,8 +10,6 @@ import 'Language_Page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
-  
-
   @override
   _AccountSettingsPageState createState() => _AccountSettingsPageState();
 }
@@ -173,18 +171,18 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
-      title: const Text('Logout',
-      style: TextStyle(
+      title:  Text(AppLocalizations.of(context)!.logout,
+      style: const TextStyle(
         color: Colors.white
       ),),
-      content: const Text('Are you sure,want to log out?',
-      style: TextStyle(
+      content:  Text(AppLocalizations.of(context)!.areyousurewanttologout,
+      style: const TextStyle(
           color: Colors.white
       ),),
       actions: [
         TextButton(
-          child: const Text('Cancel',
-          style: TextStyle(
+          child:  Text(AppLocalizations.of(context)!.cancel,
+          style: const TextStyle(
               color: Colors.grey,
           ),),
           onPressed: () {
@@ -192,8 +190,8 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           },
         ),
         TextButton(
-          child: const Text('Logout',
-          style: TextStyle(
+          child:  Text(AppLocalizations.of(context)!.logout,
+          style: const TextStyle(
               color: Colors.red
           ),),
           onPressed: () async {// Close the dialog

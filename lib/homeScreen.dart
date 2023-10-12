@@ -1,7 +1,6 @@
 import 'package:anypickdemo/AccountSettings.dart';
 import 'package:anypickdemo/bottomCart.dart';
 import 'package:anypickdemo/browseScreen.dart';
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,6 +26,7 @@ class _ExamplePageState extends State<Example> {
   bool isLoggedIn = false ;
   final CardSwiperController controller = CardSwiperController();
   final cards = candidates.map(ExampleCard.new).toList();
+
 
 
   @override
@@ -72,12 +72,22 @@ Future<String> _getUsername()async{
                   ),
                 );
                                }else {
-                                 CoolAlert.show(context: context, type: CoolAlertType.loading,
-                              text: AppLocalizations.of(context)!.signUpFirstToAccessApplicationFeatures,
-                              animType: CoolAlertAnimType.scale,
-                              lottieAsset: 'images/warning.json',
-                              autoCloseDuration: Duration(seconds: 3)
-                               );
+                                          showModalBottomSheet<dynamic>(
+                                            backgroundColor: Colors.white,
+                                            isScrollControlled: true,
+                                            shape: const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                    topRight: Radius.circular(20),
+                                                    topLeft: Radius.circular(20))),
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return Container(
+                                                height: MediaQuery.of(context).size.height * 0.7,
+                                                width: double.infinity,
+                                                child: const registerscreen(),
+                                              );
+                                            },
+                                          );
                                }
               },
                                        child: const CircleAvatar(
@@ -109,7 +119,7 @@ Future<String> _getUsername()async{
     } else if (snapshot.hasError) {
       return Text('Error: ${snapshot.error}');
     } else {
-      return Text('${AppLocalizations.of(context)!.hey} ${snapshot.data}');
+      return Text('${snapshot.data}');
     }
   },
 ),

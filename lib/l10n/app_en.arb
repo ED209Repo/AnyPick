@@ -1,7 +1,7 @@
 {
   "findYourDesiredFoodAroundYou": "Find your desired food around you",
-  "goodmorning":"Good Morning",
-  "goodevening":"Good Evening",
+  "goodmorning":"Good Morning,",
+  "goodevening":"Good Evening,",
   "pickupyourfoodonthego":"Pickup your food on the go",
   "weareexcitedletsgetstarted":"We are excited, let's get started!",
   "cart":"Cart",
@@ -87,7 +87,8 @@
 "signUpSuccessfull":"Signup successfull",
 "signUpFirstToAccessApplicationFeatures":"Signup first to access application features",
 "productadded":"product added",
-"otpverified":"Otp verified"
-
-
+"otpverified":"Otp verified",
+"logout":"Logout",
+"areyousurewanttologout":"Are you sure,want to log out?",
+"cancel":"Cancel"
   }
