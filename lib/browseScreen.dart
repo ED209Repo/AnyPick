@@ -92,7 +92,7 @@ class _TryScreenState extends State<TryScreen> {
                       _performSearch(query);
                     },
                     decoration: InputDecoration(
-                      label: const Text("search foods"),
+                      label:  Text(AppLocalizations.of(context)!.searchfood),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       prefixIcon: const Icon(Icons.search, color: Colors.grey),
                       filled: true,

@@ -128,7 +128,7 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty) {
                             return AppLocalizations.of(context)!.pleaseneteryouremail;
                           }
-                          if (!value.contains('@')) {
+                          if (!value.contains('@') && !value.contains('.com'))  {
                             return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
                           }
                           return null;

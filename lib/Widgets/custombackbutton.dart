@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomBackButton extends StatelessWidget {
   final VoidCallback? onPressed;
 
-  CustomBackButton({required this.onPressed});
+  const CustomBackButton({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

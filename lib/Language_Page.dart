@@ -66,7 +66,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
               ),
             ),
             ListTile(
-              title: const Text('Arabic'),
+              title: const Text('العربية'),
               leading: Radio<Locale>(
                 fillColor: MaterialStateColor.resolveWith((states) => AppColors.themeColor),
                 hoverColor: MaterialStateColor.resolveWith((states) => AppColors.blackColor),
