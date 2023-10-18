@@ -231,16 +231,6 @@ class _registerscreenState extends State<registerscreen> {
 
                             // Save the phone number locally
                             await savePhoneNumberLocally(phoneController.text);
-
-                            // Show a toast message
-                            Fluttertoast.showToast(
-                              msg: 'Code Sent Successfully',
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.TOP,
-                              backgroundColor: AppColors.SplashColor,
-                              textColor: AppColors.blackColor,
-                            );
-
                             // Proceed to the next screen or show a modal bottom sheet
                             showModalBottomSheet<void>(
                               enableDrag: true,

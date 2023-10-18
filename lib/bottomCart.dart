@@ -119,7 +119,7 @@ class _FoodItemListState extends State<FoodItemList> {
                   fit: BoxFit.cover,
                 ),
               ),
-              title: Text('${item.title} x${quantity + 0}'),
+              title: Text('${item.title}'),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
