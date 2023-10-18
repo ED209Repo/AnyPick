@@ -45,7 +45,7 @@ Widget categoriesContainer({required String image, required String name}) {
       Text(name,
         style: APfontsStyle.customTextStyle(
           fontSize: 17,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.normal,
         ),),
     ],
   );
@@ -92,7 +92,7 @@ class _TryScreenState extends State<TryScreen> {
                       _performSearch(query);
                     },
                     decoration: InputDecoration(
-                      label: const Text("search foods"),
+                      label:  Text(AppLocalizations.of(context)!.searchfood),
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       prefixIcon: const Icon(Icons.search, color: Colors.grey),
                       filled: true,
@@ -249,7 +249,7 @@ class _TryScreenState extends State<TryScreen> {
                                             alignment: Alignment.bottomRight,
                                             child: Wrap(
                                               children:[
-                                                const Icon(Icons.delivery_dining,
+                                                const Icon(Icons.directions_car,
                                                     color: Colors.white,
                                                     size: 20,
                                                 ),

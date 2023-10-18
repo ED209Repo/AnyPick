@@ -59,7 +59,7 @@ class _registerscreenState extends State<registerscreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 150.0),
+                      padding: const EdgeInsets.only(right: 0.0),
                       child: SizedBox(
                           height: 80,
                           width: 80,
@@ -70,8 +70,8 @@ class _registerscreenState extends State<registerscreen> {
                     Spacer(),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 65,
-                        bottom: 50,
+                        left: 0,
+                        bottom: 45,
                       ),
                       child: GestureDetector(
                         onTap: () => Navigator.of(context).pop(),
@@ -84,7 +84,7 @@ class _registerscreenState extends State<registerscreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 60.0),
+                      padding: const EdgeInsets.only(right: 0.0),
                       child: Text(
                         AppLocalizations.of(context)!.enteryourphonenumber,
                         style: TextStyle(
@@ -231,16 +231,6 @@ class _registerscreenState extends State<registerscreen> {
 
                             // Save the phone number locally
                             await savePhoneNumberLocally(phoneController.text);
-
-                            // Show a toast message
-                            Fluttertoast.showToast(
-                              msg: 'Code Sent Successfully',
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.TOP,
-                              backgroundColor: AppColors.SplashColor,
-                              textColor: AppColors.blackColor,
-                            );
-
                             // Proceed to the next screen or show a modal bottom sheet
                             showModalBottomSheet<void>(
                               enableDrag: true,

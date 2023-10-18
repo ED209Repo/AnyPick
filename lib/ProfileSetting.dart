@@ -15,6 +15,7 @@ class ProfileSettingsPage extends StatefulWidget {
 
 class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
   TextEditingController _usernameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   String _fullname = '';
   String _email = '';
   ImageProvider<Object> currentProfilePhoto = const AssetImage("images/arabmanprofile2.png",);
@@ -55,25 +56,30 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
         leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title:  Text(AppLocalizations.of(context)!.profilesetting),
         centerTitle: true,
         actions: [
           TextButton(
             onPressed: () async {
-              _saveUsername(_usernameController.text);
-              await Future.delayed(const Duration(milliseconds: 2000));
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AccountSettingsPage()),
-              );
+              if  (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                _saveUsername(_usernameController.text);
+                await Future.delayed(const Duration(milliseconds: 2000));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AccountSettingsPage()),
+                );
+              }
             },
+
             style: TextButton.styleFrom(
-              primary: AppColors.whitetext,
-              textStyle: const TextStyle(
-                fontSize: 20,
-              )
+                primary: AppColors.whitetext,
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                )
 
             ),
             child:  Text(AppLocalizations.of(context)!.save),
@@ -81,169 +87,158 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
         ],
       ),
 
-      body: ListView(
-        children: <Widget>[
-          const SizedBox(height: 10),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.2,
-            // decoration: const BoxDecoration(
-            //   gradient: LinearGradient(
-            //     colors: [Colors.white, Colors.white],
-            //     begin: Alignment.centerLeft,
-            //     end: Alignment.centerRight,
-            //     stops: [0.5, 0.9],
-            //   ),
-            // ),
-            child: Stack(
-              children: [
-                Center(
-                  child: GestureDetector(
-                    onTap: () async {
-                      await changeProfilePhoto();
-                    },
-                    child: CircleAvatar(
-                      backgroundColor: Colors.grey,
-                      minRadius: 40.0,
-                      // Use a conditional statement to check if a new image is available
-                      // If so, use FileImage for the new image; otherwise, use currentProfilePhoto
-                      backgroundImage:   pickedImage != null
-                          ? FileImage(pickedImage!)
-                          : currentProfilePhoto,
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(
+            children: <Widget>[
+              const SizedBox(height: 10),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Stack(
+                  children: [
+                    Center(
+                      child: GestureDetector(
+                        onTap: () async {
+                          await changeProfilePhoto();
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          minRadius: 40.0,
+                          // Use a conditional statement to check if a new image is available
+                          // If so, use FileImage for the new image; otherwise, use currentProfilePhoto
+                          child: Image(image: pickedImage != null
+                              ? FileImage(pickedImage!)
+                              : currentProfilePhoto,
+                            fit: BoxFit.cover,),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: IconButton(
+                        icon: const Icon(
+                          Icons.camera_alt,
+                          color: Colors.white,
+                          size: 35.0,
+                        ),
+                        onPressed: () async {
+                          await changeProfilePhoto();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // Change your profile photo description
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: FutureBuilder<String>(
+                  future: _getUsername(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      return Text('${snapshot.data}',
+                        style: const TextStyle(
+                          fontSize: 25.0,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,);
+                    }
+                  },
+                ),
+              ),
+
+              // SizedBox for spacing
+              const SizedBox(height: 30),
+
+              // Full Name text field
+              TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.themeColor,
+                      width: 3,
+                    ),
+                  ),
+                  labelText: AppLocalizations.of(context)!.fullname,
+                  labelStyle: TextStyle(
+                    color: AppColors.blackColor,
+                  ),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return AppLocalizations.of(context)!.pleaseenteryourfullname;
+                  }
+                  return null;
+                },
+                // onSaved: (value) {
+                //   _fullname = value!;
+                // },
+              ),
+              // Email text field
+              const SizedBox(height: 10),
+              TextFormField(
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.themeColor,
+                      width: 3,
+                    ),
+                  ),
+                  labelText: AppLocalizations.of(context)!.emailaddress,
+                  labelStyle: TextStyle(
+                    color: AppColors.blackColor,
+                  ),
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return AppLocalizations.of(context)!.pleaseneteryouremail;
+                  }
+                  if (!value.contains('@') || !value.contains('.com')) {
+                    return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
+                  }
+                  return null;
+                },
+                // onSaved: (value) {
+                //   _email = value!;
+                // },
+              ),
+              const SizedBox(height: 30),
+              TextButton(
+                onPressed: () async {
+                  final selectedDate = await pickDob();
+                  if (selectedDate != null) {
+                    setState(() {
+                      selectedDateText = 'Date of Birth: $selectedDate';
+                    });
+                  }
+                },
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
+                ),
+                child: Container(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    selectedDateText ?? AppLocalizations.of(context)!.dob,
+                    style: const TextStyle(
+                      decorationThickness: 2.5,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 16,
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.camera_alt,
-                      color: Colors.white,
-                      size: 35.0,
-                    ),
-                    onPressed: () async {
-                      await changeProfilePhoto();
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Change your profile photo description
-           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: FutureBuilder<String>(
-              future: _getUsername(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  return Text('${snapshot.data}',
-                  style: const TextStyle(
-                    fontSize: 25.0,
-                    color: Colors.black,
-                  ),
-                    textAlign: TextAlign.center,);
-                }
-              },
-            ),
-          ),
-
-          // SizedBox for spacing
-          const SizedBox(height: 50),
-
-          // Full Name text field
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextFormField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColors.themeColor,
-                    width: 3,
-                  ),
-                ),
-                labelText: AppLocalizations.of(context)!.fullname,
-                labelStyle: TextStyle(
-                  color: AppColors.blackColor,
-                ),
               ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return AppLocalizations.of(context)!.pleaseenteryourfullname;
-                }
-                return null;
-              },
-              // onSaved: (value) {
-              //   _fullname = value!;
-              // },
-            ),
+            ],
           ),
-
-          // Email text field
-          const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: AppColors.themeColor,
-                    width: 3,
-                  ),
-                ),
-                labelText: AppLocalizations.of(context)!.emailaddress,
-                labelStyle: TextStyle(
-                  color: AppColors.blackColor,
-                ),
-              ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return AppLocalizations.of(context)!.pleaseneteryouremail;
-                }
-                if (!value.contains('@')) {
-                  return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
-                }
-                return null;
-              },
-              onSaved: (value) {
-                _email = value!;
-              },
-            ),
-          ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextButton(
-              onPressed: () async {
-                final selectedDate = await pickDob();
-                if (selectedDate != null) {
-                  setState(() {
-                    selectedDateText = 'Date of Birth: $selectedDate';
-                  });
-                }
-              },
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
-              ),
-              child: Container(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  selectedDateText ?? AppLocalizations.of(context)!.dob,
-                  style: const TextStyle(
-                    decorationThickness: 2.5,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
