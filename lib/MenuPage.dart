@@ -63,7 +63,7 @@ class _MenuPageState extends State<MenuPage> {
           leading: CustomBackButton(
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title:  Text("Restaurant",
+          title:  Text("Menu",
             style: APfontsStyle.customTextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

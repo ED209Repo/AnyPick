@@ -56,8 +56,8 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
         leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title:  Text(AppLocalizations.of(context)!.profilesetting),
         centerTitle: true,
         actions: [
@@ -76,10 +76,10 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
             },
 
             style: TextButton.styleFrom(
-              primary: AppColors.whitetext,
-              textStyle: const TextStyle(
-                fontSize: 20,
-              )
+                primary: AppColors.whitetext,
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                )
 
             ),
             child:  Text(AppLocalizations.of(context)!.save),
@@ -108,9 +108,10 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                           minRadius: 40.0,
                           // Use a conditional statement to check if a new image is available
                           // If so, use FileImage for the new image; otherwise, use currentProfilePhoto
-                          backgroundImage:   pickedImage != null
+                          child: Image(image: pickedImage != null
                               ? FileImage(pickedImage!)
                               : currentProfilePhoto,
+                            fit: BoxFit.cover,),
                         ),
                       ),
                     ),
@@ -132,7 +133,7 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               ),
 
               // Change your profile photo description
-               Padding(
+              Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: FutureBuilder<String>(
                   future: _getUsername(),
@@ -143,10 +144,10 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                       return Text('Error: ${snapshot.error}');
                     } else {
                       return Text('${snapshot.data}',
-                      style: const TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black,
-                      ),
+                        style: const TextStyle(
+                          fontSize: 25.0,
+                          color: Colors.black,
+                        ),
                         textAlign: TextAlign.center,);
                     }
                   },
@@ -157,45 +158,45 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
               const SizedBox(height: 30),
 
               // Full Name text field
-               TextFormField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.themeColor,
-                        width: 3,
-                      ),
-                    ),
-                    labelText: AppLocalizations.of(context)!.fullname,
-                    labelStyle: TextStyle(
-                      color: AppColors.blackColor,
+              TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.themeColor,
+                      width: 3,
                     ),
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return AppLocalizations.of(context)!.pleaseenteryourfullname;
-                    }
-                    return null;
-                  },
-                  // onSaved: (value) {
-                  //   _fullname = value!;
-                  // },
+                  labelText: AppLocalizations.of(context)!.fullname,
+                  labelStyle: TextStyle(
+                    color: AppColors.blackColor,
+                  ),
                 ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return AppLocalizations.of(context)!.pleaseenteryourfullname;
+                  }
+                  return null;
+                },
+                // onSaved: (value) {
+                //   _fullname = value!;
+                // },
+              ),
               // Email text field
               const SizedBox(height: 10),
               TextFormField(
-                  decoration: InputDecoration(
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: AppColors.themeColor,
-                        width: 3,
-                      ),
-                    ),
-                    labelText: AppLocalizations.of(context)!.emailaddress,
-                    labelStyle: TextStyle(
-                      color: AppColors.blackColor,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: AppColors.themeColor,
+                      width: 3,
                     ),
                   ),
+                  labelText: AppLocalizations.of(context)!.emailaddress,
+                  labelStyle: TextStyle(
+                    color: AppColors.blackColor,
+                  ),
+                ),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return AppLocalizations.of(context)!.pleaseneteryouremail;
@@ -205,36 +206,36 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                   }
                   return null;
                 },
-                  // onSaved: (value) {
-                  //   _email = value!;
-                  // },
-                ),
+                // onSaved: (value) {
+                //   _email = value!;
+                // },
+              ),
               const SizedBox(height: 30),
-               TextButton(
-                  onPressed: () async {
-                    final selectedDate = await pickDob();
-                    if (selectedDate != null) {
-                      setState(() {
-                        selectedDateText = 'Date of Birth: $selectedDate';
-                      });
-                    }
-                  },
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
-                  ),
-                  child: Container(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      selectedDateText ?? AppLocalizations.of(context)!.dob,
-                      style: const TextStyle(
-                        decorationThickness: 2.5,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
-                        fontSize: 16,
-                      ),
+              TextButton(
+                onPressed: () async {
+                  final selectedDate = await pickDob();
+                  if (selectedDate != null) {
+                    setState(() {
+                      selectedDateText = 'Date of Birth: $selectedDate';
+                    });
+                  }
+                },
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all<Color>(AppColors.themeColor),
+                ),
+                child: Container(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    selectedDateText ?? AppLocalizations.of(context)!.dob,
+                    style: const TextStyle(
+                      decorationThickness: 2.5,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                      fontSize: 16,
                     ),
                   ),
                 ),
+              ),
             ],
           ),
         ),
