@@ -82,7 +82,7 @@ class _MenuPageState extends State<MenuPage> {
                 currentPageIndex = index;
               });
             },
-            indicatorColor: Colors.white,
+            indicatorColor: AppColors.themeColor,
           ),
         ),
         body: NestedScrollView(
@@ -91,7 +91,7 @@ class _MenuPageState extends State<MenuPage> {
               SliverToBoxAdapter(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.themeColor,
+                    color: AppColors.whitetext,
                     borderRadius: const BorderRadius.only(
                       bottomRight: Radius.circular(10.0), // Adjust the radius as needed
                       bottomLeft: Radius.circular(10.0), // Adjust the radius as needed
@@ -124,7 +124,7 @@ class _MenuPageState extends State<MenuPage> {
                                   Text(
                                     'MayField Bakery & Cafe',
                                     style: APfontsStyle.customTextStyle(
-                                      color: Colors.white,
+                                      color: Colors.grey[600] ?? Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25,
                                     ),
@@ -134,7 +134,7 @@ class _MenuPageState extends State<MenuPage> {
                                   Text(
                                     'Chinese - American - Desi Food',
                                     style: APfontsStyle.customTextStyle(
-                                      color: Colors.white,
+                                      color: Colors.grey,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -154,9 +154,9 @@ class _MenuPageState extends State<MenuPage> {
                               onTap: incrementLikeCount,
                               child: Row(
                                 children: [
-                                  const Icon(
+                                   Icon(
                                     Icons.thumb_up,
-                                    color: Colors.white,
+                                    color: Colors.grey[600],
                                     size: 30,
                                   ),
                                   const SizedBox(width: 4),
@@ -169,9 +169,9 @@ class _MenuPageState extends State<MenuPage> {
                               onTap: incrementHeartCount,
                               child: Row(
                                 children: [
-                                  const Icon(
+                                   Icon(
                                     Icons.favorite,
-                                    color: Colors.white,
+                                    color: Colors.grey[600],
                                     size: 30,
                                   ),
                                   const SizedBox(width: 4),
