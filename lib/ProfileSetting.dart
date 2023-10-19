@@ -108,10 +108,12 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
                           minRadius: 40.0,
                           // Use a conditional statement to check if a new image is available
                           // If so, use FileImage for the new image; otherwise, use currentProfilePhoto
-                          child: Image(image: pickedImage != null
+                          child: ClipOval(
+                           child: Image(image: pickedImage != null
                               ? FileImage(pickedImage!)
                               : currentProfilePhoto,
-                            fit: BoxFit.cover,),
+                            fit: BoxFit.cover),
+                          ),
                         ),
                       ),
                     ),

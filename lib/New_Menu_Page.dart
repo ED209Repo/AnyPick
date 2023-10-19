@@ -1,4 +1,6 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Food2 {
   String? imgUrl;
@@ -417,7 +419,20 @@ class DetailPage extends StatelessWidget {
         width: 100,
         height: 56,
         child: RawMaterialButton(
-          onPressed: () {},
+          onPressed: () async{
+            CoolAlert.show(
+                context:context,
+                type: CoolAlertType.loading,
+                text: AppLocalizations.of(context)!.productadded,
+                autoCloseDuration: const Duration(seconds: 2),
+                backgroundColor: const Color(0xffF5A896),
+                animType: CoolAlertAnimType.scale,
+                lottieAsset: "images/CartS.json"
+            );
+            await Future.delayed(const Duration(milliseconds: 2000));
+            Navigator.pop(context);
+            // Implement your shopping bag logic here
+          },
           fillColor: kPrimaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
