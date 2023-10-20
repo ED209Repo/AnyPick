@@ -4,6 +4,8 @@ import 'package:anypickdemo/Widgets/CustomButton2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'menuSelectionModel.dart';
+
 class menuSelection extends StatefulWidget {
   final String title;
   final String description;
@@ -11,7 +13,7 @@ class menuSelection extends StatefulWidget {
   final List<String> flavors;
   final List<String> AdsOn;
 
-  const menuSelection({Key? key, 
+  const menuSelection({Key? key,
     required this.title,
     required this.description,
     required this.options,
