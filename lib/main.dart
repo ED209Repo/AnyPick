@@ -1,3 +1,4 @@
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:anypickdemo/SplashScreen.dart';
 import 'package:anypickdemo/controller/language_change_controller.dart';
 import 'package:flutter/material.dart';
