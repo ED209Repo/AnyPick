@@ -23,23 +23,31 @@ class _SlidingSegmentedControlDemoState
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: ButtonsTabBar(
-                      backgroundColor: AppColors.themeColor,
-                      unselectedBackgroundColor: Colors.grey[300],
-                      unselectedLabelStyle: const TextStyle(color: Colors.black),
-                      labelStyle:
-                      const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                      labelSpacing: 10,
-                      tabs: const [
-                        Tab(
-                          text: "Explore",
-                        ),
-                        Tab(
-                          text: "Nearby",
-                        ),
-                      ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: ButtonsTabBar(
+                        unselectedBorderColor: Color(0xffd8deda),
+                        borderColor: AppColors.themeColor,
+                        borderWidth: 2,
+                        buttonMargin: EdgeInsets.all(5),
+                        backgroundColor: Colors.white,
+                        unselectedBackgroundColor: Colors.white,
+                        unselectedLabelStyle:  TextStyle(color: Colors.grey[400]),
+                        labelStyle:
+                        const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                        labelSpacing: 10,
+                        tabs: const [
+                          Tab(
+                            text: "Explore",
+                          ),
+                          Tab(
+                            text: "Nearby",
+                          ),
+
+                        ],
+                      ),
                     ),
                   ),
                 ],

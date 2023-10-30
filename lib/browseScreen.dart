@@ -138,56 +138,56 @@ class _TryScreenState extends State<TryScreen> {
                   child: Column(
                     children: [
                       ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: filteredItems.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final browseItem = filteredItems[index];
-                            return Container(
-                              margin: const EdgeInsets.all(8.0),
-                              padding: const EdgeInsets.all(12.0),
-                              decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  image: AssetImage('images/gradient-3.jpg'), // Replace with your background image path
-                                  fit: BoxFit.cover,
-                                ),
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 90.0,
-                                    height: 90.0,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      child: Image.asset(
-                                        browseItem.imageUrl,
-                                        fit: BoxFit.cover,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: filteredItems.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final browseItem = filteredItems[index];
+                          return Column(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.all(12.0),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: 90.0,
+                                      height: 90.0,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                        child: Image.asset(
+                                          browseItem.imageUrl,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 16.0),
-                                  Expanded(
+                                    const SizedBox(width: 16.0),
+                                    Expanded(
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           GestureDetector(
-                                            onTap: (){
+                                            onTap: () {
                                               Navigator.push(
-                                                context, 
-                                              MaterialPageRoute(
-                                                builder: ((context) => MenuPage()),
-                                                ));
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: ((context) => MenuPage()),
+                                                ),
+                                              );
                                             },
-                                            child: Text(
-                                              browseItem.title,
-                                              style: APfontsStyle.customTextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 22.0,
-                                                color: Colors.white
-                                              ),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '${browseItem.title}  ${browseItem.titleArabic}',
+                                                  style: APfontsStyle.customTextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize:15,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                                Icon(Icons.verified,color: Colors.red,size: 15,)
+                                              ],
                                             ),
                                           ),
                                           const SizedBox(height: 5),
@@ -196,36 +196,42 @@ class _TryScreenState extends State<TryScreen> {
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             style: APfontsStyle.customTextStyle(
-                                              color: Colors.white,
+                                              color: Colors.grey,
                                             ),
                                           ),
                                           const SizedBox(height: 17),
                                           Container(
                                             alignment: Alignment.bottomRight,
                                             child: Wrap(
-                                              children:[
-                                                const Icon(Icons.directions_car,
-                                                    color: Colors.white,
-                                                    size: 20,
+                                              children: [
+                                                const Icon(
+                                                  Icons.directions_car,
+                                                  color: Colors.grey,
+                                                  size: 20,
                                                 ),
                                                 Text(
                                                   ' ${browseItem.time}',
                                                   maxLines: 2,
                                                   overflow: TextOverflow.ellipsis,
-                                                  style:  APfontsStyle.customTextStyle(
-                                                    
-                                                    color: Colors.white,
+                                                  style: APfontsStyle.customTextStyle(
+                                                    color: Colors.grey,
                                                   ),
                                                 ),
                                               ],
                                             ),
                                           ),
                                         ],
-                                      )),
-                                ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            );
-                          })
+                              if (index < filteredItems.length - 1) Divider(), // Add a divider if not the last item
+                            ],
+                          );
+                        },
+                      )
+
                     ],
                   ),
                 )

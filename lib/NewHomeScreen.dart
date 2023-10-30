@@ -14,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  bool _showMoreContent = false;
 
   // Define your content screens here.
   final List<Widget> _screens = [
@@ -33,19 +32,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 37),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 60,
-                          width: 60,
-                          child: Image.asset("images/whiteicon2.png"),
-                        )
+                        Text("AnyPick",style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),),
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -107,19 +107,15 @@ class _HomeScreenState extends State<HomeScreen> {
         body: OrderScreenTabbar(),
       )
     ),
+    Container(
+      child: const Scaffold(
+        body: AccountSettingsPage(),
+      ),
+    )
   ];
 
   @override
   Widget build(BuildContext context) {
-    if (_showMoreContent) {
-      // Display the "More" content as a simple page.
-      return Scaffold(
-        body: Container(
-          child: const AccountSettingsPage(),
-        )
-      );
-    } else {
-      // Display the FlashyTabBar.
       return Scaffold(
         body: _screens[_selectedIndex],
         bottomNavigationBar: FlashyTabBar(
@@ -129,38 +125,31 @@ class _HomeScreenState extends State<HomeScreen> {
           showElevation: true,
           onItemSelected: (index) => setState(() {
             _selectedIndex = index;
-            if (index == 2) {
-              // If "More" tab is selected, show the "More" content as a simple page.
-              _showMoreContent = true;
-            } else {
-              _showMoreContent = false;
-            }
           }),
           items: [
             FlashyTabBarItem(
               icon: Icon(
                 Icons.home,
-                color: _selectedIndex == 0 ? AppColors.themeColor : AppColors.themeColor2,
+                color: _selectedIndex == 0 ? AppColors.themeColor : Colors.grey[400],
               ),
-              title: Text('Home', style: TextStyle(color: _selectedIndex == 0 ? AppColors.themeColor : AppColors.themeColor2)),
+              title: Text('Home', style: TextStyle(color: _selectedIndex == 0 ? AppColors.themeColor : Colors.grey[400])),
             ),
             FlashyTabBarItem(
               icon: Icon(
                 Icons.access_time,
-                color: _selectedIndex == 1 ? AppColors.themeColor : AppColors.themeColor2,
+                color: _selectedIndex == 1 ? AppColors.themeColor : Colors.grey[400],
               ),
-              title: Text('Order', style: TextStyle(color: _selectedIndex == 1 ? AppColors.themeColor : AppColors.themeColor2)),
+              title: Text('Order', style: TextStyle(color: _selectedIndex == 1 ? AppColors.themeColor :Colors.grey[400])),
             ),
             FlashyTabBarItem(
               icon: Icon(
                 Icons.more_horiz,
-                color: _selectedIndex == 2 ? AppColors.themeColor : AppColors.themeColor2,
+                color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400],
               ),
-              title: Text('More', style: TextStyle(color: _selectedIndex == 2 ? AppColors.themeColor : AppColors.themeColor2)),
+              title: Text('More', style: TextStyle(color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400])),
             ),
           ],
         ),
       );
-    }
   }
 }

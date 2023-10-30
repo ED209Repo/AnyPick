@@ -27,11 +27,11 @@ class _OrderScreenTabbar
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20),
+          padding: const EdgeInsets.only(left:12,right: 12),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: const Color(0xff00A4B4), // Change to your desired color
+              color: AppColors.themeColor, // Change to your desired color
             ),
             width: double.infinity,
             child: Row(
@@ -49,7 +49,7 @@ class _OrderScreenTabbar
                   child: Container(
                     decoration: BoxDecoration(
                       color: _currentIndex == entry.key
-                          ? AppColors.themeColor2
+                          ?  AppColors.themeColor
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -91,9 +91,9 @@ class _OrderScreenTabbar
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: ExpansionTileCard(
-                      expandedColor: AppColors.themeColor2,
+                      expandedColor: AppColors.themeColor,
                       expandedTextColor: Colors.white,
-                      baseColor: AppColors.themeColor2,
+                      baseColor:  AppColors.themeColor,
                       key: cardA,
                       leading:  CircleAvatar(child:  ClipRRect(
                         borderRadius: BorderRadius.circular(12.0),
@@ -112,7 +112,7 @@ class _OrderScreenTabbar
                         Column(
                           children: <Widget>[
                             ListTile(
-                              tileColor: AppColors.themeColor2,
+                              tileColor: AppColors.themeColor,
                               title:  Text('${orders[currentOrderIndex].description}',style: const TextStyle(
                                 color: Colors.white,
                               ),),
