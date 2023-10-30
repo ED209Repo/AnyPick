@@ -1,5 +1,5 @@
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
-import 'package:anypickdemo/homeScreen.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,7 +44,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
         leading: IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>const Example()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
         }, icon: const Icon(Icons.home_filled),),
       title:  Text(AppLocalizations.of(context)!.accountsetting),
       centerTitle: true,
@@ -205,7 +205,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
             await Future.delayed(const Duration(milliseconds: 2000));
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const Example()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
         ),

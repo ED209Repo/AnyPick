@@ -1,5 +1,6 @@
 import 'package:anypickdemo/APfontsStyle.dart';
 import 'package:anypickdemo/MenuPageModel.dart';
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:anypickdemo/New_Menu_Page.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class _MenuPageState extends State<MenuPage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const Example(), // Replace with your Example widget
+        builder: (context) => const HomeScreen(), // Replace with your Example widget
       ),
     );
   }

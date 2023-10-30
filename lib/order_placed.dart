@@ -1,4 +1,4 @@
-import 'package:anypickdemo/homeScreen.dart';
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'Widgets/AppColors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -24,7 +24,7 @@ class OrderPlacedScreen extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 30), // Adjust the top spacing as needed
+                      const SizedBox(height: 30), // Adjust the top spacing as needed
                       Text(
                         AppLocalizations.of(context)!.orderplaced,
                         style: TextStyle(
@@ -33,12 +33,12 @@ class OrderPlacedScreen extends StatelessWidget {
                           color: AppColors.themeColor, // Use your preferred color
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16), // Add horizontal padding
                         child: Text(
                           AppLocalizations.of(context)!.orderplaced2,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black, // Use your preferred color
                           ),
@@ -48,15 +48,15 @@ class OrderPlacedScreen extends StatelessWidget {
                     ],
                   ),
                   Transform.translate(
-                    offset: Offset(0, -40), // Adjust the vertical offset as needed
+                    offset: const Offset(0, -40), // Adjust the vertical offset as needed
                     child: Container(
                       width: 80,
                       height: 80,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         color: Colors.green, // Use your preferred color
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.check,
                         color: Colors.white,
                         size: 40,
@@ -67,7 +67,7 @@ class OrderPlacedScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 35),
+          const SizedBox(height: 35),
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16), // Adjust the horizontal padding as needed
@@ -78,7 +78,7 @@ class OrderPlacedScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Example(),
+                        builder: (context) => HomeScreen(),
                       ),
                     );
                   },
@@ -88,7 +88,7 @@ class OrderPlacedScreen extends StatelessWidget {
                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                     ),
                     minimumSize: MaterialStateProperty.all<Size>(
-                      Size(double.infinity, 5), // Use double.infinity for full width
+                      const Size(double.infinity, 5), // Use double.infinity for full width
                     ),
                   ),
                   child: Row(
@@ -96,14 +96,14 @@ class OrderPlacedScreen extends StatelessWidget {
                     children: [
                       Text(
                        AppLocalizations.of(context)!.gotohome,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Icon(
+                      const SizedBox(width: 10),
+                      const Icon(
                         Icons.home,
                         color: Colors.white,
                       ),

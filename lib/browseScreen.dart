@@ -72,51 +72,6 @@ class _TryScreenState extends State<TryScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: PreferredSize(preferredSize: Size.fromHeight(65),
-          child: AppBar(
-            toolbarHeight: 60.0,
-            backgroundColor: AppColors.themeColor,
-            leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
-          
-            title: Padding(
-              padding: const EdgeInsets.only(top: 5),
-                child: Container(
-                  height: 50,
-                  width: 300,
-                  child: TextField(
-                    textAlign: TextAlign.start,
-                    controller: _searchController,
-                    onChanged: (query) {
-                      _performSearch(query);
-                    },
-                    decoration: InputDecoration(
-                      label:  Text(AppLocalizations.of(context)!.searchfood),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.blackColor,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.themeColor2,
-                          width: 3,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-            ),
-            centerTitle: true,
-          )),
       body: SingleChildScrollView(
         child: Stack(
           children:[Padding(

@@ -1,3 +1,4 @@
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:anypickdemo/homeScreen.dart';
 import 'package:anypickdemo/onBoardingScreen.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _SplashscreenState extends State<Splashscreen>
       if (phoneNumber != null && phoneNumber.isNotEmpty) {
         // User's phone number exists in stored data, navigate to the home screen
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => Example()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       } else {
         // User's phone number doesn't exist in stored data, navigate to onboarding
@@ -73,7 +74,7 @@ class _SplashscreenState extends State<Splashscreen>
                       if (phoneNumber != null && phoneNumber.isNotEmpty) {
                         // User's phone number exists in stored data, navigate to the home screen
                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => Example()),
+                          MaterialPageRoute(builder: (context) => const HomeScreen()),
                         );
                       } else {
                         // User's phone number doesn't exist in stored data, navigate to onboarding
