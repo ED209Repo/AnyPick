@@ -165,11 +165,10 @@ class _OnboardscreenState extends State<OnboardScreen> {
     return Scaffold(
         body: Stack(
             children: [
-              LiquidSwipe(
-                pages: pages,
-                enableLoop: false,
-                waveType: WaveType.liquidReveal,
-                onPageChangeCallback: (page) {
+              PageView(
+                children: pages,
+                controller: _pageController,
+                onPageChanged: (page) {
                   setState(() {
                     currentPage = page;
                   });
@@ -228,4 +227,5 @@ class _OnboardscreenState extends State<OnboardScreen> {
             (Route<dynamic> route) => false,
         );
     }
+    PageController _pageController = PageController(initialPage: 0);
 }

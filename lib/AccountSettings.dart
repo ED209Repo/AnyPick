@@ -8,6 +8,7 @@ import 'VehicleManagement.dart';
 import 'New_Payment_Page.dart';
 import 'Language_Page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/cupertino.dart';
 class AccountSettingsPage extends StatefulWidget {
   const AccountSettingsPage({Key? key}) : super(key: key);
   @override
@@ -16,7 +17,7 @@ class AccountSettingsPage extends StatefulWidget {
 
 class _AccountSettingsPageState extends State<AccountSettingsPage> {
   final TextEditingController phoneController = TextEditingController();
-  TextEditingController _usernameController = TextEditingController();
+  // TextEditingController _usernameController = TextEditingController();
   // Initialize selected values for notifications
   bool pushNotifications = false;
   bool smsNotifications = true; // Default to "On"
@@ -40,20 +41,23 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.themeColor,
-        leading: IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>const HomeScreen()));
-        }, icon: const Icon(Icons.home_filled),),
-      title:  Text(AppLocalizations.of(context)!.accountsetting),
-      centerTitle: true,
-      ),
+    return CupertinoPageScaffold(
+      child: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
+          return <Widget>[
+            const CupertinoSliverNavigationBar(
+              backgroundColor: Color(0xFFF5A896),
+              largeTitle: Text('Profile', style: TextStyle(
+                color: Colors.white,
+              ),),
+            )
+          ];
+        },
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            const SizedBox(height: 10),
+            const SizedBox(height:0.1),
             buildListItemWithForwardButton(
               AppLocalizations.of(context)!.personalinfo,
               Icons.person,
@@ -219,6 +223,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
             const Text("Version 1.1.1", textAlign: TextAlign.center,),
           ],
         ),
+      ),
       ),
     );
   }
