@@ -136,14 +136,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             FlashyTabBarItem(
               icon: Icon(
-                Icons.access_time,
+                Icons.shopping_cart_outlined,
                 color: _selectedIndex == 1 ? AppColors.themeColor : Colors.grey[400],
               ),
               title: Text('Order', style: TextStyle(color: _selectedIndex == 1 ? AppColors.themeColor :Colors.grey[400])),
             ),
             FlashyTabBarItem(
               icon: Icon(
-                Icons.more_horiz,
+                Icons.settings,
                 color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400],
               ),
               title: Text('More', style: TextStyle(color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400])),

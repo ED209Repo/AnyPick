@@ -36,14 +36,14 @@ class _SlidingSegmentedControlDemoState
                         unselectedBackgroundColor: Colors.white,
                         unselectedLabelStyle:  TextStyle(color: Colors.grey[400]),
                         labelStyle:
-                        const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
+                         TextStyle(color: AppColors.themeColor, fontWeight: FontWeight.bold),
                         labelSpacing: 10,
                         tabs: const [
                           Tab(
                             text: "Explore",
                           ),
                           Tab(
-                            text: "Nearby",
+                            text: "Top Picks",
                           ),
 
                         ],
