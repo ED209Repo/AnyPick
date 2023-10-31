@@ -32,6 +32,7 @@ class _SlidingSegmentedControlDemoState
                         borderColor: AppColors.themeColor,
                         borderWidth: 2,
                         buttonMargin: EdgeInsets.all(5),
+                        contentPadding: EdgeInsets.all(10),
                         backgroundColor: Colors.white,
                         unselectedBackgroundColor: Colors.white,
                         unselectedLabelStyle:  TextStyle(color: Colors.grey[400]),
@@ -40,10 +41,10 @@ class _SlidingSegmentedControlDemoState
                         labelSpacing: 10,
                         tabs: const [
                           Tab(
-                            text: "Explore",
+                            text: " Explore ",
                           ),
                           Tab(
-                            text: "Top Picks",
+                            text: " Top Picks ",
                           ),
 
                         ],
