@@ -1,11 +1,8 @@
 import 'package:anypickdemo/APfontsStyle.dart';
 import 'package:anypickdemo/MenuPage.dart';
-import 'package:anypickdemo/Widgets/custombackbutton.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'BrowseScreenModel.dart';
-import 'Widgets/AppColors.dart';
 
 class TryScreen extends StatefulWidget {
   const TryScreen({Key? key});
@@ -226,7 +223,7 @@ class _TryScreenState extends State<TryScreen> {
                                   ],
                                 ),
                               ),
-                              if (index < filteredItems.length - 1) Divider(), // Add a divider if not the last item
+                              if (index < filteredItems.length - 1) Divider(thickness: 1.5), // Add a divider if not the last item
                             ],
                           );
                         },

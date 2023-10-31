@@ -41,18 +41,15 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled){
-          return <Widget>[
-            const CupertinoSliverNavigationBar(
-              backgroundColor: Color(0xFFF5A896),
-              largeTitle: Text('Profile', style: TextStyle(
-                color: Colors.white,
-              ),),
-            )
-          ];
-        },
+   return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.themeColor,
+        // leading: IconButton(onPressed: (){
+        //   Navigator.push(context, MaterialPageRoute(builder: (context)=>const Example()));
+        // }, icon: const Icon(Icons.home_filled),),
+      title:  Text(AppLocalizations.of(context)!.setting),
+      centerTitle: true,
+      ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
@@ -224,8 +221,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
           ],
         ),
       ),
-      ),
-    );
+      );
   }
 
   Widget buildNotificationTile(
