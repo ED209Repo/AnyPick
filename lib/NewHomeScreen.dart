@@ -1,4 +1,5 @@
 import 'package:anypickdemo/AccountSettings.dart';
+import 'package:anypickdemo/Cart_screen.dart';
 import 'package:anypickdemo/OrderScreenTabBar.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
       color: AppColors.themeColor,
       alignment: Alignment.center,
       child: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 130,
+            toolbarHeight: 100,
             backgroundColor: AppColors.themeColor,
             elevation: 0,
             flexibleSpace: Column(
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(left: 37),
+                    padding: EdgeInsets.only(left: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -42,48 +43,57 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 20,
                           color: Colors.white,
                         ),),
+                        Spacer(),
+                        Spacer(),
+                        Expanded(child: Icon(Icons.location_on,size: 30,color: Colors.white,))
                       ],
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 45,
-                        width: 320,
-                        child: TextField(
-                          textAlign: TextAlign.start,
-                          decoration: InputDecoration(
-                            label: const Text("Search Food"),
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                            prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                            filled: true,
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColors.blackColor,
-                                width: 1,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 45,
+                          width: 325,
+                          child: TextField(
+                            textAlign: TextAlign.start,
+                            decoration: InputDecoration(
+                              label: const Text("Search Food"),
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: AppColors.whitetext,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: AppColors.themeColor2,
-                                width: 3,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  color: Colors.red,
+                                  width: 3,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   )
                 ],
               ),
           ),
-          body: Container(
-            child: SlidingSegmentedControlDemo(),
+          body: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Container(
+              child: SlidingSegmentedControlDemo(),
+            ),
           ),
         ),
       ),
@@ -94,11 +104,11 @@ class _HomeScreenState extends State<HomeScreen> {
       alignment: Alignment.center,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.themeColor,
           elevation: 0,
-          title: const Text("Order",
+          title: const Text("Orders",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 25,
             fontWeight: FontWeight.bold
           ),),
@@ -106,6 +116,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: OrderScreenTabbar(),
       )
+    ),
+    Container(
+      child: const Scaffold(
+        body: CartScreen(),
+      ),
     ),
     Container(
       child: const Scaffold(
@@ -130,23 +145,34 @@ class _HomeScreenState extends State<HomeScreen> {
             FlashyTabBarItem(
               icon: Icon(
                 Icons.home,
+                size: 28,
                 color: _selectedIndex == 0 ? AppColors.themeColor : Colors.grey[400],
               ),
-              title: Text('Home', style: TextStyle(color: _selectedIndex == 0 ? AppColors.themeColor : Colors.grey[400])),
+              title: Text('Home', style: TextStyle(color: _selectedIndex == 0 ? AppColors.themeColor : Colors.grey[400],fontSize: 18)),
+            ),
+            FlashyTabBarItem(
+              icon: Icon(
+                Icons.access_time_outlined,
+                size: 28,
+                color: _selectedIndex == 1 ? AppColors.themeColor : Colors.grey[400],
+              ),
+              title: Text('Order', style: TextStyle(color: _selectedIndex == 1 ? AppColors.themeColor :Colors.grey[400],fontSize: 18)),
             ),
             FlashyTabBarItem(
               icon: Icon(
                 Icons.shopping_cart_outlined,
-                color: _selectedIndex == 1 ? AppColors.themeColor : Colors.grey[400],
+                size: 28,
+                color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400],
               ),
-              title: Text('Order', style: TextStyle(color: _selectedIndex == 1 ? AppColors.themeColor :Colors.grey[400])),
+              title: Text('Cart', style: TextStyle(color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400],fontSize: 18)),
             ),
             FlashyTabBarItem(
               icon: Icon(
                 Icons.settings,
-                color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400],
+                size: 28,
+                color: _selectedIndex == 3 ? AppColors.themeColor : Colors.grey[400],
               ),
-              title: Text('More', style: TextStyle(color: _selectedIndex == 2 ? AppColors.themeColor : Colors.grey[400])),
+              title: Text('Setting', style: TextStyle(color: _selectedIndex == 3 ? AppColors.themeColor : Colors.grey[400],fontSize: 18)),
             ),
           ],
         ),

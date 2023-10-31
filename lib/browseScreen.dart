@@ -148,7 +148,7 @@ class _TryScreenState extends State<TryScreen> {
                             children: [
                               Container(
                                 margin: const EdgeInsets.all(8.0),
-                                padding: const EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.only(top: 10.0,bottom: 10.0),
                                 child: Row(
                                   children: [
                                     SizedBox(
