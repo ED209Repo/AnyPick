@@ -61,9 +61,9 @@ class _MenuPageState extends State<MenuPage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.themeColor,
-          leading: CustomBackButton(
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+          // leading: CustomBackButton(
+          //   onPressed: () => Navigator.of(context).pop(),
+          // ),
           title:  Text("Menu",
             style: APfontsStyle.customTextStyle(
               color: Colors.white,
