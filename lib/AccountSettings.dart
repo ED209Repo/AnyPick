@@ -41,14 +41,11 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        // leading: IconButton(onPressed: (){
-        //   Navigator.push(context, MaterialPageRoute(builder: (context)=>const Example()));
-        // }, icon: const Icon(Icons.home_filled),),
-      title:  Text(AppLocalizations.of(context)!.setting),
-      centerTitle: true,
+        title: Text("Profile",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 20),),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: ListView(

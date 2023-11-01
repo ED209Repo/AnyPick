@@ -22,9 +22,9 @@ class _VehicleManagementPageState extends State<VehicleManagementPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+//         leading: CustomBackButton(
+//   onPressed: () => Navigator.of(context).pop(),
+// ),
       title:  Text(AppLocalizations.of(context)!.vehiclemanagement),
       centerTitle: true,
       ),

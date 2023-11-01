@@ -21,9 +21,9 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+//         leading: CustomBackButton(
+//   onPressed: () => Navigator.of(context).pop(),
+// ),
         title:  Text(AppLocalizations.of(context)!.addvehicale),
         centerTitle: true,
       ),

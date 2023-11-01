@@ -55,9 +55,9 @@ class _ProfileSettingsPageState extends State<ProfileSettingsPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.themeColor,
-        leading: CustomBackButton(
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        // leading: CustomBackButton(
+        //   onPressed: () => Navigator.of(context).pop(),
+        // ),
         title:  Text(AppLocalizations.of(context)!.profilesetting),
         centerTitle: true,
         actions: [
