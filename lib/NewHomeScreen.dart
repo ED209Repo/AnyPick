@@ -25,70 +25,77 @@ class _HomeScreenState extends State<HomeScreen> {
       child: DefaultTabController(
         length: 4,
         child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 100,
-            backgroundColor: AppColors.themeColor,
-            elevation: 0,
-            flexibleSpace: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("AnyPick",style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
-                        ),),
-                        Spacer(),
-                        Spacer(),
-                        Expanded(child: Icon(Icons.location_on,size: 30,color: Colors.white,))
-                      ],
+          appBar: PreferredSize(
+  preferredSize: Size.fromHeight(110.0),
+  child: AppBar(
+    backgroundColor: AppColors.themeColor,
+    elevation: 0,
+    flexibleSpace: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "AnyPick",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              ),
+              Spacer(),
+              Spacer(),
+              Expanded(
+                child: Icon(Icons.location_on, size: 30, color: Colors.white),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 45,
+                width: 375,
+                child: TextField(
+                  textAlign: TextAlign.start,
+                  decoration: InputDecoration(
+                    labelText: "Search Food",
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                    prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: AppColors.whitetext,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.red,
+                        width: 3,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 45,
-                          width: 325,
-                          child: TextField(
-                            textAlign: TextAlign.start,
-                            decoration: InputDecoration(
-                              label: const Text("Search Food"),
-                              floatingLabelBehavior: FloatingLabelBehavior.never,
-                              prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: AppColors.whitetext,
-                                  width: 1,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.red,
-                                  width: 3,
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                ),
               ),
+            ],
           ),
+        )
+      ],
+    ),
+  ),
+),
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Container(

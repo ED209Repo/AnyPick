@@ -26,8 +26,6 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
   // Map notification types to their respective icons
   final Map<String, IconData> notificationIcons = {
     'Push Notifications': Icons.notifications,
-    'SMS Notifications': Icons.message,
-    'Promotional Notifications': Icons.local_offer,
   };
 
   // Define custom color F5A896
