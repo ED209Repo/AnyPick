@@ -34,9 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
               IconButton(onPressed: (){}, icon: Icon(Icons.location_on,color: Colors.white,),),
             ],
             flexibleSpace: Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0,bottom: 8.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: kToolbarHeight),
@@ -113,47 +113,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: FlashyTabBar(
-        height: 55,
-        animationDuration: const Duration(milliseconds: 500),
-        selectedIndex: _selectedIndex,
-        showElevation: true,
-        onItemSelected: (index) => setState(() async { if (index == 3) { // If "Settings" tab is selected
-    final preferences = await SharedPreferences.getInstance();
-    final String? phoneNumber = preferences.getString('phoneNumber');
-
-    if (phoneNumber != null) {
-    // Navigate to the "Account Settings" screen
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AccountSettingsPage()));
-    } else {
-      // Open a bottom sheet to prompt the user to register
-      showModalBottomSheet<dynamic>(
-        backgroundColor: Colors.white,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-          ),
-        ),
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            width: double.infinity,
-            child: registerscreen(), // Assuming 'registerscreen' is a valid widget
-          );
-        },
-      );
-    }
-    } else {
-    // For other tabs, simply set the selected index
-    setState(() {
-    _selectedIndex = index;
-    });
-    }
-    },),
+        body: _screens[_selectedIndex],
+        bottomNavigationBar: FlashyTabBar(
+          height: 55,
+          animationDuration: const Duration(milliseconds: 500),
+          selectedIndex: _selectedIndex,
+          showElevation: true,
+          onItemSelected: (index) => setState(() {
+            _selectedIndex = index;
+          }),
         items: [
           FlashyTabBarItem(
             icon: Icon(

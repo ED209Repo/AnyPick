@@ -95,7 +95,7 @@ class _MenuPageState extends State<MenuPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MenuPage(),
+                          builder: (context) => const HomeScreen(),
                         ),
                       );
                   
