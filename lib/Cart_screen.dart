@@ -159,6 +159,12 @@ class CartScreen extends StatelessWidget {
     final double buttonHeight = screenHeight * 0.06; // Adjust the fraction as needed
 
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(AppLocalizations.of(context)!.cart),
+        automaticallyImplyLeading: false,
+        backgroundColor: AppColors.themeColor,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

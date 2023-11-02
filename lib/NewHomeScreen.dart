@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 100,
             backgroundColor: AppColors.themeColor,
             elevation: 0,
@@ -104,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
       alignment: Alignment.center,
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: AppColors.themeColor,
           elevation: 0,
           title: const Text("Orders",
