@@ -1,3 +1,4 @@
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:anypickdemo/controller/language_change_controller.dart';
 import 'package:flutter/material.dart';
@@ -164,11 +165,10 @@ class _OnboardscreenState extends State<OnboardScreen> {
     return Scaffold(
         body: Stack(
             children: [
-              LiquidSwipe(
-                pages: pages,
-                enableLoop: false,
-                waveType: WaveType.liquidReveal,
-                onPageChangeCallback: (page) {
+              PageView(
+                children: pages,
+                controller: _pageController,
+                onPageChanged: (page) {
                   setState(() {
                     currentPage = page;
                   });
@@ -223,8 +223,9 @@ class _OnboardscreenState extends State<OnboardScreen> {
   }
   void HomeMethod(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const Example()),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
             (Route<dynamic> route) => false,
         );
     }
+    PageController _pageController = PageController(initialPage: 0);
 }

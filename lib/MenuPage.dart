@@ -1,10 +1,9 @@
-import 'package:anypickdemo/APfontsStyle.dart';
-import 'package:anypickdemo/MenuPageModel.dart';
-import 'package:anypickdemo/New_Menu_Page.dart';
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
-import 'Widgets/custombackbutton.dart';
-import 'homeScreen.dart';
+import 'APfontsStyle.dart';
+import 'New_Menu_Page.dart';
+import 'MenuPageModel.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -14,9 +13,20 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  int currentPageIndex = 0;
+
+  int selectedIndex = 0;
   int likeCount = 0;
   int heartCount = 0;
+  double itemHeight = 200.0;
+  ScrollController scrollController = ScrollController();
+  ScrollController innerListController = ScrollController();
+  final menuItems = [
+    'Summer Box',
+    'Speciality Coffee',
+    'Cold Beverages',
+    'Desserts',
+    'Summer Box',
+  ];
 
   void incrementLikeCount() {
     setState(() {
@@ -29,331 +39,414 @@ class _MenuPageState extends State<MenuPage> {
       heartCount++;
     });
   }
-
   void navigateToExamplePage() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const Example(), // Replace with your Example widget
+        builder: (context) =>
+        const HomeScreen(), // Replace with your Example widget
       ),
     );
   }
 
+  void scrollToItem(int index) {
+    double position = 0;
+    for (int i = 0; i < index; i++) {
+      position += scrollListModel.items[i].items.length * itemHeight-50;
+    }
+
+    scrollController.animateTo(
+      position,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    List<String> tabLabels = [
-      "All Items",
-      "Deals",
-      "Top Picks",
-      "Seafood",
-      "Chicken & Lamb",
-      "Fast Food",
-      "Deserts",
-      "Chinese Food",
-      "Add ons",
-      "Cold Drinks",
-    ];
-
-    return DefaultTabController(
-      length: tabLabels.length,
-      initialIndex: 0,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.themeColor,
-          leading: CustomBackButton(
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title:  Text("Restaurant",
-            style: APfontsStyle.customTextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-
-          ),
-          centerTitle: true,
-          bottom: TabBar(
-            isScrollable: true,
-            tabs: tabLabels.map((label) {
-              return Tab(text: label);
-            }).toList(),
-            onTap: (index) {
-              setState(() {
-                currentPageIndex = index;
-              });
-            },
-            indicatorColor: Colors.white,
-          ),
-        ),
-        body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverToBoxAdapter(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppColors.themeColor,
-                    borderRadius: const BorderRadius.only(
-                      bottomRight: Radius.circular(10.0), // Adjust the radius as needed
-                      bottomLeft: Radius.circular(10.0), // Adjust the radius as needed
+    final containerHeight = MediaQuery.of(context).size.height * 0.3;
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: containerHeight,
+            child: Stack(
+              children: [
+                PageView.builder(
+                  //itemCount: ImageList.images.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white, // Replace with your desired background color
+                      ),
+                      child: const SizedBox(
+                        width: double.infinity,
+                        // Your content goes here, like Image.network or other widgets
+                      ),
+                    );
+                  },
+                ),
+                Positioned(
+                  top: 60,
+                  left: 20,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomeScreen(),
+                        ),
+                      );
+                  
+                    },
+                    child: ClipOval(
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        color: Colors.white,
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                      ),
                     ),
                   ),
-                  child: Stack(
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 115,
-                              height: 115,
-                              child: const ClipOval(
-                                child: Image(
-                                  image: AssetImage('images/mcdd.jpg'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(14),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const SizedBox(height: 40), // Add some space above the text
-                                  Text(
-                                    'MayField Bakery & Cafe',
-                                    style: APfontsStyle.customTextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                    ),
-                                    textAlign: TextAlign.left,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Chinese - American - Desi Food',
-                                    style: APfontsStyle.customTextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Positioned(
-                        top: 20,
-                        right: 10,
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: incrementLikeCount,
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.thumb_up,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text('$likeCount'),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(width: 16),
-                            GestureDetector(
-                              onTap: incrementHeartCount,
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.favorite,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Text('$heartCount'),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
-
-
-              ),
-            ];
-          },
-          body: CustomScrollView(
-            slivers: <Widget>[
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    final item = scrollListModel.items[index];
-                    return Container(
-                      margin: const EdgeInsets.all(8.0),
-                      padding: const EdgeInsets.all(12.0),
+                Positioned(
+                  bottom: 0,
+                  left: 10,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0), // Add border radius for rounded corners
+                    ),
+                    padding: const EdgeInsets.all(10),
+                    child: Container(
                       decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage('images/gradient-3.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8.0),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10.0), // Add border radius for the inner container
                       ),
                       child: Row(
                         children: [
-                          SizedBox(
-                            width: 120.0,
-                            height: 120.0,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12.0),
-                              child: Image.network(
-                                item.imageUrl,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 16.0),
-                          Expanded(
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => DetailPage(
-                                          food2: Food2.generateRecommendFoods2()[0],
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    item.title,
-                                    style: APfontsStyle.customTextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22.0,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                const Icon(
+                                  Icons.location_on,
+                                  color: Colors.black,
+                                  size: 24,
                                 ),
                                 Text(
-                                  ' ${item.description}',
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
+                                  "1.4 Km",
                                   style: APfontsStyle.customTextStyle(
-                                    color: Colors.white60,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Container(
-                                  width: double.maxFinite,
-                                  height: 40,
-                                  child: Stack(
-                                    children: [
-                                      Align(
-                                        alignment: const Alignment(-0.5, 0),
-                                        child: Container(
-                                          height: 40,
-                                          width: 120,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.QuantityBGColor.withOpacity(0.1),
-                                            borderRadius: BorderRadius.circular(30),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              const SizedBox(width: 15),
-                                              Text(
-                                                ' SAR ${item.price}',
-                                                style: APfontsStyle.customTextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment: Alignment.bottomRight,
-                                        child: Container(
-                                          height: 40,
-                                          width: 90,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(30),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (item.quantity > 0) {
-                                                      item.quantity--;
-                                                    }
-                                                  });
-                                                },
-                                                child: Text(
-                                                  '-',
-                                                  style: APfontsStyle.customTextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                item.quantity.toString(),
-                                                style: APfontsStyle.customTextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  setState(() {
-                                                    item.quantity++;
-                                                  });
-                                                },
-                                                child: Text(
-                                                  '+',
-                                                  style: APfontsStyle.customTextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    color: Colors.black,
+                                    fontSize: 17,
                                   ),
                                 ),
                               ],
                             ),
                           ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const VerticalDivider(
+                                color: Colors.black, // Set the color of the vertical divider
+                                width: 100,
+                                thickness: 3,// Set the width of the vertical divider
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                child: Column(
+                                  children: [
+                                    const Icon(
+                                      Icons.access_time_filled_sharp,
+                                      color: Colors.black,
+                                      size: 24,
+                                    ),
+                                    Text(
+                                      "Closes at 12:45 AM",
+                                      style: APfontsStyle.customTextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
-                      ),
-                    );
-                  },
-                  childCount: scrollListModel.items.length,
+                      )
+
+
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Positioned(
+                  left: 20,
+                  bottom: 70,
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0), // Adjust the radius as needed
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          child: Image.network(
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRldj56-OSaTw-EYr1aJBAkKXeF2s_XXbVbUA&usqp=CAU',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(width: 10), // Add spacing between the image and text
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Section B | القسم ب",
+                                style: APfontsStyle.customTextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              const Icon(
+                                Icons.verified,
+                                color: Colors.red,
+                                size: 24,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "American",
+                            style: APfontsStyle.customTextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.delivery_dining_rounded,
+                                color: Colors.black,
+                                size: 24,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(
+                                "1 Riyal",
+                                style: APfontsStyle.customTextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+
+                    ],
+                  ),
+
+                ),
+
+
+
+              ],
+            ),
           ),
-        ),
+
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(menuItems.length, (index) {
+                  final isSelected = index == selectedIndex;
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                        scrollToItem(index);
+                      });
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 9),
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        // decoration: BoxDecoration(
+                        //   color: isSelected ? AppColors.themeColor : Colors.white,
+                        //   borderRadius: BorderRadius.circular(20),
+                        // ),
+                        child: Container(
+                          decoration: isSelected
+                              ? const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Color(0xffF5A896),
+                                width: 1.5, // Adjust the underline thickness as needed
+                              ),
+                            ),
+                          )
+                              : null,
+                          child: Text(
+                            menuItems[index],
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: isSelected ? AppColors.themeColor : Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView.builder(
+              controller: scrollController,
+              shrinkWrap: true,
+              primary: false,
+              itemCount: scrollListModel.items.length,
+              itemBuilder: (context, index) {
+                final category = scrollListModel.items[index];
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          category.title,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    ListView.builder(
+                      controller: innerListController,
+                      shrinkWrap: true,
+                      primary: false,
+                      itemCount: category.items.length,
+                      itemBuilder: (context, itemIndex) {
+                        final item = category.items[itemIndex];
+                        return Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(12.0),
+                              child: Stack(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) => DetailPage(
+                                                      food2: Food2.generateRecommendFoods2()[0],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                item.title,
+                                                style: APfontsStyle.customTextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 22.0,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              ' ${item.description}',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: APfontsStyle.customTextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 10),
+                                            Text(
+                                              ' ${item.price} SR',
+                                              style: APfontsStyle.customTextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 120.0,
+                                        height: 120.0,
+                                        child: ClipRRect(
+                                          borderRadius: BorderRadius.circular(12.0),
+                                          child: Image.network(
+                                            item.imageUrl,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: Container(
+                                      width: 30,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.themeColor,
+                                      ),
+                                      child: const Icon(
+                                        Icons.add,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Divider(
+                              thickness: 1.5, // Adjust the thickness of the divider as needed
+                              color: Colors.grey, // Adjust the color of the divider
+                              indent: 16, // Decrease the space on the left side of the divider
+                              endIndent: 16, // Decrease the space on the right side of the divider
+                              height: 0, // You can set this to create spacing between items and the divider
+                            ),
+                          ],
+                        );
+
+                      },
+                    )
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 }
+
+
 

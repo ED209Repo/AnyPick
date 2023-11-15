@@ -1,3 +1,4 @@
+import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -128,7 +129,7 @@ class _SignupPageState extends State<SignupPage> {
                           if (value!.isEmpty) {
                             return AppLocalizations.of(context)!.pleaseneteryouremail;
                           }
-                          if (!value.contains('@')) {
+                          if (!value.contains('@') && !value.contains('.com'))  {
                             return AppLocalizations.of(context)!.pleaseenteryourvaildemail;
                           }
                           return null;
@@ -229,7 +230,7 @@ class _SignupPageState extends State<SignupPage> {
                                await Future.delayed(const Duration(milliseconds: 2000));
                                  Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const Example()),
+                                MaterialPageRoute(builder: (context) => const HomeScreen()),
                               );}
                           },
                         ),

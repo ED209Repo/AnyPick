@@ -24,9 +24,9 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+//         leading: CustomBackButton(
+//   onPressed: () => Navigator.of(context).pop(),
+// ),
         backgroundColor: AppColors.themeColor,
         title: const Text('Language'),
         actions: [
@@ -66,7 +66,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
               ),
             ),
             ListTile(
-              title: const Text('Arabic'),
+              title: const Text('العربية'),
               leading: Radio<Locale>(
                 fillColor: MaterialStateColor.resolveWith((states) => AppColors.themeColor),
                 hoverColor: MaterialStateColor.resolveWith((states) => AppColors.blackColor),
