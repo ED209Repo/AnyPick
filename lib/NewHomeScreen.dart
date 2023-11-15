@@ -27,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(110.0),
           child: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: AppColors.themeColor,
             elevation: 0,
             title: Text("AnyPick",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),) ,
@@ -34,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
               IconButton(onPressed: (){}, icon: Icon(Icons.location_on,color: Colors.white,),),
             ],
             flexibleSpace: Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0, bottom: 8),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: kToolbarHeight),
@@ -199,12 +200,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           FlashyTabBarItem(
             icon: Icon(
-              Icons.settings,
+              Icons.more_horiz_outlined,
               size: 28,
               color: _selectedIndex == 3 ? AppColors.themeColor : Colors.grey[400],
             ),
             title: Text(
-              'Setting',
+              'More',
               style: TextStyle(
                 color: _selectedIndex == 3 ? AppColors.themeColor : Colors.grey[400],
                 fontSize: 18,

@@ -16,6 +16,7 @@ class AccountSettingsPage extends StatefulWidget {
 }
 
 class _AccountSettingsPageState extends State<AccountSettingsPage> {
+  bool isLoggedIn = false ;
   final TextEditingController phoneController = TextEditingController();
   // TextEditingController _usernameController = TextEditingController();
   // Initialize selected values for notifications
@@ -33,39 +34,116 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
   // Define custom color F5A896
   final Color customColor = const Color(0xFFF5A896);
 
+  Future<String> _getUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String uname = prefs.getString('username') ?? "Guest";
+    if (uname != 'Guest'){
+      isLoggedIn = true;
+    }
+    return uname;
+  }
+
+
   logout() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.remove('phoneNumber');
-     await preferences.remove('username');
+    await preferences.remove('username');
   }
 
   @override
   Widget build(BuildContext context) {
+    final currentTime = DateTime.now();
+    final currentHour = currentTime.hour;
+    String message = "";
+    if (currentHour >= 0 && currentHour < 12) {
+      message = AppLocalizations.of(context)!.goodmorning;
+    } else {
+      message = AppLocalizations.of(context)!.goodevening;
+    }
+
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 70,
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.themeColor,
-        title: Text("Profile",style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white,fontSize: 20),),
-        centerTitle: true,
+        // title: Text("Profile", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20)),
+        flexibleSpace: GestureDetector(
+        onTap: () {
+      Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileSettingsPage(),
+                ),
+              );
+      },
+       child: Row(
+          children: [
+       Padding(
+       padding: const EdgeInsets.only(left: 20.0, right: 4.0, top: 50),
+            child: CircleAvatar(
+              backgroundColor: Colors.white,
+              radius: 25,
+              backgroundImage: AssetImage('images/arabmanprofile2.png'),
+            ),
+       ),
+            SizedBox(width: 10),
+            Padding(
+              padding: const EdgeInsets.only(top:50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    message,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                  FutureBuilder<String>(
+                    future: _getUsername(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}', style: TextStyle(color: Colors.white));
+                      } else {
+                        return Text('${snapshot.data}', style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold));
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
+      actions: [
+        IconButton(onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+        }, icon: Icon(Icons.home))
+      ],
+      ),
+
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16.0),
           children: <Widget>[
-            const SizedBox(height:0.1),
-            buildListItemWithForwardButton(
-              AppLocalizations.of(context)!.personalinfo,
-              Icons.person,
-              AppLocalizations.of(context)!.changeyouraccountinfo,
-                  () {
-                // Navigate to the ProfileSettingsPage when the item is tapped
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileSettingsPage(),
-                  ),
-                );
-              },
-            ),
+            // const SizedBox(height:0.1),
+            // buildListItemWithForwardButton(
+            //   AppLocalizations.of(context)!.personalinfo,
+            //   Icons.person,
+            //   AppLocalizations.of(context)!.changeyouraccountinfo,
+            //       () {
+            //     // Navigate to the ProfileSettingsPage when the item is tapped
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const ProfileSettingsPage(),
+            //       ),
+            //     );
+            //   },
+            // ),
             buildListItemWithForwardButton(
               AppLocalizations.of(context)!.paymentmethods,
               Icons.payment,
@@ -101,15 +179,15 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                 // Handle the item tap action here
               },
             ),
-             buildListItemWithForwardButton(
-               AppLocalizations.of(context)!.orderhistory,
+            buildListItemWithForwardButton(
+              AppLocalizations.of(context)!.orderhistory,
               Icons.history,
-               AppLocalizations.of(context)!.viewyourorderhistory,
+              AppLocalizations.of(context)!.viewyourorderhistory,
                   () {
                 // Handle the item tap action here
               },
             ),
-             ListTile(
+            ListTile(
               title: Text(AppLocalizations.of(context)!.notifications),
             ),
             // Notifications with Toggle Buttons (On/Off)
@@ -123,7 +201,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               },
               AppLocalizations.of(context)!.recievePushnotification,
             ),
-             ListTile(
+            ListTile(
               title: Text(AppLocalizations.of(context)!.more),
             ),
             // Add forward buttons to other items
@@ -162,56 +240,56 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
               title:  Text(AppLocalizations.of(context)!.logout),
               subtitle:  Text(AppLocalizations.of(context)!.signoutyouraccount),
               onTap: () async {
-  showDialog(context: context,
-      builder: (BuildContext context){
-    return AlertDialog(
-      backgroundColor: AppColors.themeColor,
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(15.0)),
-      ),
-      title:  Text(AppLocalizations.of(context)!.logout,
-      style: const TextStyle(
-        color: Colors.white
-      ),),
-      content:  Text(AppLocalizations.of(context)!.areyousurewanttologout,
-      style: const TextStyle(
-          color: Colors.white
-      ),),
-      actions: [
-        TextButton(
-          child:  Text(AppLocalizations.of(context)!.cancel,
-          style: const TextStyle(
-              color: Colors.grey,
-          ),),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child:  Text(AppLocalizations.of(context)!.logout,
-          style: const TextStyle(
-              color: Colors.red
-          ),),
-          onPressed: () async {// Close the dialog
-            await logout();
-            CoolAlert.show(context: context, type: CoolAlertType.loading,
-              text: AppLocalizations.of(context)!.loggedOutSuccessfull,
-              autoCloseDuration: const Duration(milliseconds: 2000),
-              lottieAsset: "images/signup.json",
-              animType: CoolAlertAnimType.scale,
-            );
-            await Future.delayed(const Duration(milliseconds: 2000));
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-        ),
-      ],
-    );
-      });
+                showDialog(context: context,
+                    builder: (BuildContext context){
+                      return AlertDialog(
+                        backgroundColor: AppColors.themeColor,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        ),
+                        title:  Text(AppLocalizations.of(context)!.logout,
+                          style: const TextStyle(
+                              color: Colors.white
+                          ),),
+                        content:  Text(AppLocalizations.of(context)!.areyousurewanttologout,
+                          style: const TextStyle(
+                              color: Colors.white
+                          ),),
+                        actions: [
+                          TextButton(
+                            child:  Text(AppLocalizations.of(context)!.cancel,
+                              style: const TextStyle(
+                                color: Colors.grey,
+                              ),),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          TextButton(
+                            child:  Text(AppLocalizations.of(context)!.logout,
+                              style: const TextStyle(
+                                  color: Colors.red
+                              ),),
+                            onPressed: () async {// Close the dialog
+                              await logout();
+                              CoolAlert.show(context: context, type: CoolAlertType.loading,
+                                text: AppLocalizations.of(context)!.loggedOutSuccessfull,
+                                autoCloseDuration: const Duration(milliseconds: 2000),
+                                lottieAsset: "images/signup.json",
+                                animType: CoolAlertAnimType.scale,
+                              );
+                              await Future.delayed(const Duration(milliseconds: 2000));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                              );
+                            },
+                          ),
+                        ],
+                      );
+                    });
 
-},
+              },
             ),
             const SizedBox(height: 15,),
             const Text("Version 1.1.1", textAlign: TextAlign.center,),

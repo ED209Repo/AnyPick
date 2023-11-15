@@ -1,6 +1,8 @@
+import 'package:anypickdemo/Register.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Food2 {
   String? imgUrl;
@@ -420,7 +422,12 @@ class DetailPage extends StatelessWidget {
         height: 56,
         child: RawMaterialButton(
           onPressed: () async{
-            CoolAlert.show(
+            final preferences = await SharedPreferences.getInstance();
+    final String? phoneNumber = preferences.getString('phoneNumber');
+
+    if (phoneNumber != null) {
+    // Navigate to the "Account Settings" screen
+    CoolAlert.show(
                 context:context,
                 type: CoolAlertType.loading,
                 text: AppLocalizations.of(context)!.productadded,
@@ -431,6 +438,28 @@ class DetailPage extends StatelessWidget {
             );
             await Future.delayed(const Duration(milliseconds: 2000));
             Navigator.pop(context);
+    } else {
+      // Open a bottom sheet to prompt the user to register
+      showModalBottomSheet<dynamic>(
+        backgroundColor: Colors.white,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: double.infinity,
+            child: registerscreen(), // Assuming 'registerscreen' is a valid widget
+          );
+        },
+      );
+    }
+            
             // Implement your shopping bag logic here
           },
           fillColor: kPrimaryColor,
