@@ -18,9 +18,9 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+//         leading: CustomBackButton(
+//   onPressed: () => Navigator.of(context).pop(),
+// ),
         backgroundColor: AppColors.themeColor,
         title:  Text(AppLocalizations.of(context)!.paymentmethod),
         centerTitle: true,
@@ -102,9 +102,9 @@ class _AddCardPageState extends State<AddCardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: CustomBackButton(
-  onPressed: () => Navigator.of(context).pop(),
-),
+//         leading: CustomBackButton(
+//   onPressed: () => Navigator.of(context).pop(),
+// ),
         backgroundColor: AppColors.themeColor,
         title:  Text(AppLocalizations.of(context)!.addyourcard),
         centerTitle: true,
