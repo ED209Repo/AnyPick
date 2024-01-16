@@ -1,13 +1,17 @@
 import 'package:anypickdemo/NewHomeScreen.dart';
+import 'package:anypickdemo/Request_Model.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:anypickdemo/controller/language_change_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 import 'Register.dart';
 import 'Widgets/CustomButton.dart';
-import 'homeScreen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'http_request.dart';
+
 enum Language{ English,Arabic}
 class OnboardScreen extends StatefulWidget {
   const OnboardScreen({Key? key}) : super(key: key);
@@ -159,7 +163,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
   ];
 
   int currentPage = 0;
-
+  var cdi = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,7 +188,14 @@ class _OnboardscreenState extends State<OnboardScreen> {
                   children: [
                     (currentPage == 2 )
                         ? CustomButton(text: AppLocalizations.of(context)!.continuetext,
-                      onPressed: () => HomeMethod(context),) :
+                      onPressed: () async {
+                        http.Response? response = (await  getPosts()) as http.Response?;
+                     //   print(responseData);
+                        //  print(responseData['StatusCode']);
+           
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+
+                      },) :
                     Column(
                       children: <Widget>[
                         Row(
@@ -221,7 +232,8 @@ class _OnboardscreenState extends State<OnboardScreen> {
           (Route<dynamic> route) => false,
     );
   }
-  void HomeMethod(BuildContext context) {
+  Future<void> HomeMethod(BuildContext context) async {
+ 
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => const HomeScreen()),
             (Route<dynamic> route) => false,
@@ -229,3 +241,36 @@ class _OnboardscreenState extends State<OnboardScreen> {
     }
     PageController _pageController = PageController(initialPage: 0);
 }
+
+ 
+    Future<http.Response?> getPosts() async {
+       String uuid =  Uuid().v4();
+       print(uuid);
+        var client = http.Client();
+        var uri = Uri.parse('https://c5a5-206-84-148-41.ngrok-free.app/api/user/login?Devicid=$uuid&Roleid=1&Verified=false');
+        var response = await client.post(uri);
+        if (response.statusCode == 200){
+            print(response.body);
+            ResponseModel parseJson(jsonString){
+              try {
+                final Map<String, dynamic>data = jsonDecode(jsonString);
+                return ResponseModel.fromJson(data);
+              
+              }
+              catch (e){
+                print("Error: $e");
+                return ResponseModel();
+              }
+            }
+            ResponseModel responseModel=parseJson(response.body);
+            print(responseModel.statusCode);
+            print(responseModel.data);
+            print('hello');
+      
+           return response;
+
+
+        }
+
+
+    }

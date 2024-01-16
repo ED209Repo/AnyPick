@@ -1,3 +1,6 @@
+import 'package:anypickdemo/NewHomeScreen.dart';
+import 'package:anypickdemo/SignUp.dart';
+import 'package:anypickdemo/http_request.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -228,30 +231,40 @@ class _registerscreenState extends State<registerscreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
+                            bool isUserRegistered = await UserLogin(phoneController.text, context);
 
                             // Save the phone number locally
-                            await savePhoneNumberLocally(phoneController.text);
-                            // Proceed to the next screen or show a modal bottom sheet
-                            showModalBottomSheet<void>(
-                              enableDrag: true,
-                              isDismissible: true,
-                              isScrollControlled: true,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                    topLeft: Radius.circular(20)),
-                              ),
-                              context: context,
-                              builder: (BuildContext context) {
-                                return Container(
-                                  height: MediaQuery.of(context).size.height * 0.8,
-                                  width: double.infinity,
-                                  child: otpscreen(
-                                    verificationId: '',
-                                  ),
-                                );
-                              },
-                            );
+                            if (isUserRegistered) {
+  // User is registered, proceed with your logic
+  await savePhoneNumberLocally(phoneController.text);
+  // Proceed to the next screen or show a modal bottom sheet
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => HomeScreen()),
+  );
+
+} else {
+  // User is not registered, direct to signup page
+    showModalBottomSheet<dynamic>(
+        backgroundColor: Colors.white,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
+          ),
+        ),
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            width: double.infinity,
+            child: otpscreen(verificationId:'',), // Assuming 'registerscreen' is a valid widget
+          );
+        },
+      );
+}
                           }
                         },
                         child: Text(AppLocalizations.of(context)!.signup),
