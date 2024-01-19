@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (BuildContext context) {
           return Container(
-            height: MediaQuery.of(context).size.height * 0.7,
+            height: MediaQuery.of(context).size.height * 0.9,
             width: double.infinity,
             child: registerscreen(), // Assuming 'registerscreen' is a valid widget
           );

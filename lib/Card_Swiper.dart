@@ -224,86 +224,97 @@ class _ExampleCardState extends State<ExampleCard> {
                 ),
               ],
             ),
-            child: LayoutBuilder(
-              builder: (BuildContext context, BoxConstraints constraints) {
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(22, 22, 22, 10),
-                  child: ListView.builder(
-                    // physics: const NeverScrollableScrollPhysics(),
-                    itemCount: widget.restaurant.dealNames.length,
-                    itemBuilder: (context, index) {
-                      var dealName = widget.restaurant.dealNames[index];
-                      var dealImage = widget.restaurant.dealImage[index];
-                      var isSelected = selectedDeals.contains(CartItem(dealName, dealImage));
-                      return Column(
-                        children: [
-                          InkWell(
-                            onTap:(){
-                              showModalBottomSheet<dynamic>(
-                                backgroundColor: Colors.white,
-                                isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20))),
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return Container(
-                                    height: MediaQuery.of(context).size.height * 0.7,
-                                    width: double.infinity,
-                                    child: FoodDetailPage(food: Food.generateRecommendFoods()[0]),
-                                  );
-                                },
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0), // Adjust the padding as needed
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align title and cart icon
-                                children: [
-                                  Text(
-                                    widget.restaurant.dealNames[index],
-                                    style:  APfontsStyle.customTextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => CartScreen(),
-                                            ),
-                                          );
-                                        },
-                                        icon: Icon(
-                                          isSelected
-                                              ? Icons.shopping_cart
-                                              : Icons.shopping_cart,
-                                          color: Colors.black,
-                                          size: 28.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const Divider(
-                            thickness: 0.5, // Adjust the thickness of the separator line as needed
-                            color: Colors.grey, // Adjust the color of the separator line as needed
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-
-                );
-              },
+            child:LayoutBuilder(
+  builder: (BuildContext context, BoxConstraints constraints) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(22, 22, 22, 10),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 1.5,
+          crossAxisCount: 2, // Number of columns in the grid
+          crossAxisSpacing: 5.0, // Spacing between columns
+          mainAxisSpacing: 5.0, // Spacing between rows
+        ),
+        itemCount: widget.restaurant.dealNames.length,
+        itemBuilder: (context, index) {
+          var dealName = widget.restaurant.dealNames[index];
+          var dealImage = widget.restaurant.dealImage[index];
+          var isSelected =
+              selectedDeals.contains(CartItem(dealName, dealImage));
+          return  Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey, width: 1.0),
+              borderRadius: BorderRadius.circular(8.0),
             ),
+            child:
+          InkWell(
+            onTap: () {
+              showModalBottomSheet<dynamic>(
+                backgroundColor: Colors.white,
+                isScrollControlled: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(20),
+                  ),
+                ),
+                context: context,
+                builder: (BuildContext context) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    width: double.infinity,
+                    child: FoodDetailPage(
+                      food: Food.generateRecommendFoods()[0],
+                    ),
+                  );
+                },
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.restaurant.dealNames[index],
+                    style: APfontsStyle.customTextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CartScreen(),
+                            ),
+                          );
+                        },
+                        icon: Icon(
+                          isSelected
+                              ? Icons.shopping_cart
+                              : Icons.shopping_cart,
+                          color: Colors.black,
+                          size: 28.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ));
+        },
+      ),
+    );
+  },
+),
+
           ),
         ),
       ],
