@@ -1,18 +1,41 @@
 import 'package:anypickdemo/NewHomeScreen.dart';
+import 'package:anypickdemo/Request_Model.dart';
 import 'package:anypickdemo/Widgets/AppColors.dart';
 import 'package:flutter/material.dart';
 import 'APfontsStyle.dart';
 import 'New_Menu_Page.dart';
 import 'MenuPageModel.dart';
+import 'package:flutter/material.dart';
 
 class MenuPage extends StatefulWidget {
-  const MenuPage({Key? key}) : super(key: key);
+  final RestaurantModel restaurant;
+
+   MenuPage({Key? key, required this.restaurant}) : super(key: key);
 
   @override
   _MenuPageState createState() => _MenuPageState();
 }
 
 class _MenuPageState extends State<MenuPage> {
+   Future<List<RestaurantCategoryModel>> _fetchCategories() async {
+    // Replace this with your actual API call or data fetching logic
+    // For example, you can use http package for making HTTP requests.
+    // Make sure to handle errors and loading states accordingly.
+    // For simplicity, I'm returning a hardcoded list of categories here.
+    return Future.delayed(Duration(seconds: 1), () {
+      return widget.restaurant.rest_Cat ?? []; // Assuming rest_Cat is a List<RestaurantCategoryModel>
+    });
+  }
+
+     Future<List<FoodItemModel>> _fetchfooditems() async {
+    // Replace this with your actual API call or data fetching logic
+    // For example, you can use http package for making HTTP requests.
+    // Make sure to handle errors and loading states accordingly.
+    // For simplicity, I'm returning a hardcoded list of categories here.
+    return Future.delayed(Duration(seconds: 1), () {
+      return widget.restaurant.food_Items?? []; // Assuming rest_Cat is a List<RestaurantCategoryModel>
+    });
+  }
 
   int selectedIndex = 0;
   int likeCount = 0;
@@ -265,16 +288,28 @@ class _MenuPageState extends State<MenuPage> {
           const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-            child: SingleChildScrollView(
+            child: FutureBuilder<List<RestaurantCategoryModel>>(
+        future: _fetchCategories(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Loading state
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            // Error state
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            // Data loaded successfully
+            List<RestaurantCategoryModel> categories = snapshot.data ?? [];
+            return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: List.generate(menuItems.length, (index) {
+                children: List.generate(categories.length, (index) {
                   final isSelected = index == selectedIndex;
                   return GestureDetector(
                     onTap: () {
                       setState(() {
                         selectedIndex = index;
-                        scrollToItem(index);
+                        categories[index];
                       });
                     },
                     child: Padding(
@@ -297,7 +332,7 @@ class _MenuPageState extends State<MenuPage> {
                           )
                               : null,
                           child: Text(
-                            menuItems[index],
+                            categories[index]?.name ?? 'no name',
                             style: TextStyle(
                               fontSize: 20,
                               color: isSelected ? AppColors.themeColor : Colors.grey,
@@ -309,17 +344,29 @@ class _MenuPageState extends State<MenuPage> {
                   );
                 }),
               ),
-            ),
-          ),
+            );}
+          })),
           const SizedBox(height: 10),
           Expanded(
-            child: ListView.builder(
+            child: FutureBuilder<List<FoodItemModel>>(
+        future: _fetchfooditems(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // Loading state
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            // Error state
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            // Data loaded successfully
+            List<FoodItemModel> foodItems = snapshot.data ?? [];
+            return ListView.builder(
               controller: scrollController,
               shrinkWrap: true,
               primary: false,
-              itemCount: scrollListModel.items.length,
+              itemCount: foodItems.length,
               itemBuilder: (context, index) {
-                final category = scrollListModel.items[index];
+                final MenuItem = foodItems[index];
                 return Column(
                   children: [
                     Padding(
@@ -327,7 +374,7 @@ class _MenuPageState extends State<MenuPage> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          category.title,
+                          foodItems[index]?.name ?? 'no name',
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -339,9 +386,9 @@ class _MenuPageState extends State<MenuPage> {
                       controller: innerListController,
                       shrinkWrap: true,
                       primary: false,
-                      itemCount: category.items.length,
+                      itemCount: foodItems.length,
                       itemBuilder: (context, itemIndex) {
-                        final item = category.items[itemIndex];
+                        final item = foodItems[index];
                         return Column(
                           children: [
                             Container(
@@ -367,7 +414,7 @@ class _MenuPageState extends State<MenuPage> {
                                                 );
                                               },
                                               child: Text(
-                                                item.title,
+                                                item?.name ?? 'no name',
                                                 style: APfontsStyle.customTextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 22.0,
@@ -385,7 +432,7 @@ class _MenuPageState extends State<MenuPage> {
                                             ),
                                             const SizedBox(height: 10),
                                             Text(
-                                              ' ${item.price} SR',
+                                              ' ${item.unit_PerPrice} SR',
                                               style: APfontsStyle.customTextStyle(
                                                 color: Colors.black,
                                               ),
@@ -393,17 +440,17 @@ class _MenuPageState extends State<MenuPage> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 120.0,
-                                        height: 120.0,
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(12.0),
-                                          child: Image.network(
-                                            item.imageUrl,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
+                                      // SizedBox(
+                                      //   width: 120.0,
+                                      //   height: 120.0,
+                                      //   child: ClipRRect(
+                                      //     borderRadius: BorderRadius.circular(12.0),
+                                      //     child: Image.network(
+                                      //       item.prepare_Time,
+                                      //       fit: BoxFit.cover,
+                                      //     ),
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                                   Positioned(
@@ -440,9 +487,9 @@ class _MenuPageState extends State<MenuPage> {
                   ],
                 );
               },
-            ),
-          ),
-        ],
+            );
+  }})
+      )],
       ),
     );
   }

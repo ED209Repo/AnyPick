@@ -247,7 +247,7 @@ class _OnboardscreenState extends State<OnboardScreen> {
        String uuid =  Uuid().v4();
        print(uuid);
         var client = http.Client();
-        var uri = Uri.parse('https://c5a5-206-84-148-41.ngrok-free.app/api/user/login?Devicid=$uuid&Roleid=1&Verified=false');
+        var uri = Uri.parse('https://1c1d-2407-d000-a-34c9-4d24-935b-1a6a-d4d8.ngrok-free.app/api/user/login?Devicid=$uuid&Roleid=1&Verified=false');
         var response = await client.post(uri);
         if (response.statusCode == 200){
             print(response.body);

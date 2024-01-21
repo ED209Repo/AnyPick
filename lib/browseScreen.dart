@@ -169,7 +169,7 @@ class _TryScreenState extends State<TryScreen> {
                                                       Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                          builder: ((context) => const MenuPage()),
+                                                          builder: ((context) =>  MenuPage(restaurant: restaurant,)),
                                                         ),
                                                       );
                                                     },
@@ -253,7 +253,7 @@ class NearByRestaurantsController {
    Future<List<RestaurantModel>> fetchNearbyRestaurants() async {
   try {
     var client = http.Client();
-    var uri = Uri.parse('https://c5a5-206-84-148-41.ngrok-free.app/api/user/allnearby_Resturants');
+    var uri = Uri.parse('https://my-json-server.typicode.com/ED209Repo/demoAPI/NearR');
     var response = await client.get(uri);
     
     if (response != null && response.statusCode == 200) {

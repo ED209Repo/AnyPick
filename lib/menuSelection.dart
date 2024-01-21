@@ -1,5 +1,6 @@
 import 'package:anypickdemo/MenuPage.dart';
 import 'package:anypickdemo/MenuPageModel.dart';
+import 'package:anypickdemo/Request_Model.dart';
 import 'package:anypickdemo/Widgets/CustomButton2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -60,11 +61,15 @@ class _menuSelectionState extends State<menuSelection> {
                   left: 10,
                   child: GestureDetector(
                     onTap: () {
+                      RestaurantModel restaurant = RestaurantModel(
+                        rest_Cat: null
+  // initialize the properties with the required values
+);
                       // Navigate back to the MenuPage when the close button is pressed
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MenuPage(),
+                          builder: (context) =>  MenuPage(restaurant: restaurant ,),
                         ),
                       );
                     },
@@ -318,8 +323,13 @@ class _menuSelectionState extends State<menuSelection> {
                 CustomButton2
                   (text: AppLocalizations.of(context)!.addtoorder,
                     onPressed: ()
+                    
                     {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const MenuPage()));
+                      RestaurantModel restaurant = RestaurantModel(
+                        rest_Cat: null
+  // initialize the properties with the required values
+);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>  MenuPage(restaurant: restaurant,)));
                     })
               ],
             ),

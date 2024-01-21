@@ -51,11 +51,11 @@ class RestaurantModel {
     }
 
     List<FoodItemModel>? foodItems; // Add this
-    if (json['food_Items'] != null) {
-      foodItems = List<FoodItemModel>.from(json['food_Items'].map(
-        (foodItemJson) => FoodItemModel.fromJson(foodItemJson),
-      ));
-    }
+  if (json['food_Items'] != null) {
+    foodItems = List<FoodItemModel>.from(json['food_Items'].map(
+      (foodItemJson) => FoodItemModel.fromJson(foodItemJson),
+    ));
+  }
 
     return RestaurantModel(
       rest_Id: json['rest_Id'],
