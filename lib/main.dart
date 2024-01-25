@@ -1,3 +1,4 @@
+import 'package:anypickdemo/Nearby.dart';
 import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:anypickdemo/SplashScreen.dart';
 import 'package:anypickdemo/controller/language_change_controller.dart';
@@ -6,6 +7,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'MenuPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +37,7 @@ void main() async {
               Locale('ar'),
             ],
             debugShowCheckedModeBanner: false,
-            home: const Splashscreen(),
+            home: const MenuPage(),
           );
         },
       ),

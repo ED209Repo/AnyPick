@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SizedBox(height: kToolbarHeight),
+                  // SizedBox(height: kToolbarHeight),
                   TextField(
                     textAlign: TextAlign.start,
                     decoration: InputDecoration(

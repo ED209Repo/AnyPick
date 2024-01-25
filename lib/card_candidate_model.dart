@@ -45,7 +45,7 @@ final List<ExampleResturantModel> candidates = [
     likeCount: 0,
     heartCount: 0,
     color: const [Color(0xFFFF3868), Color(0xFFFFB49A)],
-    imageUrl: 'images/mcdd.jpg',
+    imageUrl: 'images/mcdd.png',
     dealNames: [
       'Big Mac Combo Deal',
       'Chicken Sandwich ',

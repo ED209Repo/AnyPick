@@ -35,7 +35,7 @@ class _ExampleCardState extends State<ExampleCard> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          height: 200,
+          height: 150,
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
@@ -60,31 +60,95 @@ class _ExampleCardState extends State<ExampleCard> {
                 alignment: Alignment.topLeft,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.fromLTRB(10, 35, 10, 0),
                     child: Container(
-                      width: 115,
-                      height: 115,
-                      child: const ClipOval(
-                        child: Image(
-                          image: AssetImage('images/mcdd.jpg'),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          const BoxShadow(
+                            color: Colors.black45,
+                            blurRadius: 2,
+                            spreadRadius: 3,
+                            offset: Offset(0,6),
+                          ),
+                        ]
+                      ),
+                      width: 100,
+                      height: 100,
+                      child:  ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: const Image(
+                          image: AssetImage('images/newlogo.png'),
                           fit: BoxFit.cover,
                         ),
                       ),
                     ),
                   ),
+                  const SizedBox(width: 5),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(130, 10, 30, 0),
+                    padding: const EdgeInsets.fromLTRB(120, 35, 0, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const SizedBox(height: 5),
                             Container(
-                              alignment: Alignment.topRight,
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    widget.restaurant.name,
+                                    style: APfontsStyle.customTextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 26,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.centerLeft,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    color: AppColors.whitetext,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    widget.restaurant.city,
+                                    style: APfontsStyle.customTextStyle(
+                                      color: AppColors.whitetext,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10), // Add spacing between job and city
+                                  Icon(
+                                    Icons.access_time_filled_rounded,
+                                    color: AppColors.whitetext,
+                                    size: 20,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  Text(
+                                    widget.restaurant.job,
+                                    style: APfontsStyle.customTextStyle(
+                                      color: AppColors.whitetext,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              child: Row(
                                 children: [
                                   IconButton(
                                     onPressed: () {
@@ -130,57 +194,12 @@ class _ExampleCardState extends State<ExampleCard> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 10),
-                            Center(
-                              child: Text(
-                                widget.restaurant.name,
-                                style: APfontsStyle.customTextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 26,
-                                ),
-                              ),
-                            ),
                           ],
                         ),
                       ],
                     ),
                   ),
                 ],
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-                child: Row( // Wrap job and city in a Row
-                  children: [
-                    Icon(
-                      Icons.location_on,
-                      color: AppColors.whitetext,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      widget.restaurant.city,
-                      style: APfontsStyle.customTextStyle(
-                        color: AppColors.whitetext,
-                        fontSize: 20,
-                      ),
-                    ),
-                    const SizedBox(width: 10), // Add spacing between job and city
-                    Icon(
-                      Icons.access_time_filled_rounded,
-                      color: AppColors.whitetext,
-                      size: 20,
-                    ),
-                    const SizedBox(width: 5),
-                    Text(
-                      widget.restaurant.job,
-                      style: APfontsStyle.customTextStyle(
-                        color: AppColors.whitetext,
-                        fontSize: 17,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ),
@@ -190,7 +209,7 @@ class _ExampleCardState extends State<ExampleCard> {
           widthFactor: 1,
           child: Container(
             decoration: const BoxDecoration(
-              color: Colors.black,
+              color: Colors.white,
             ),
             height: 36,
             width: 500,
@@ -200,7 +219,7 @@ class _ExampleCardState extends State<ExampleCard> {
                 style: APfontsStyle.customTextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.whitetext,
+                  color: AppColors.blackColor,
                 ),
               ),
             ),
@@ -211,7 +230,7 @@ class _ExampleCardState extends State<ExampleCard> {
             height: containerHeight,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(30),
+                bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(30),
               ),
               color: Colors.white,
@@ -225,32 +244,33 @@ class _ExampleCardState extends State<ExampleCard> {
               ],
             ),
             child:LayoutBuilder(
-  builder: (BuildContext context, BoxConstraints constraints) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(22, 22, 22, 10),
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1.5,
-          crossAxisCount: 2, // Number of columns in the grid
-          crossAxisSpacing: 5.0, // Spacing between columns
-          mainAxisSpacing: 5.0, // Spacing between rows
-        ),
-        itemCount: widget.restaurant.dealNames.length,
-        itemBuilder: (context, index) {
-          var dealName = widget.restaurant.dealNames[index];
-          var dealImage = widget.restaurant.dealImage[index];
-          var isSelected =
-              selectedDeals.contains(CartItem(dealName, dealImage));
-          return  Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: 1.0),
-              borderRadius: BorderRadius.circular(8.0),
+              builder: (BuildContext context, BoxConstraints constraints) {
+              return Padding(
+              padding: const EdgeInsets.fromLTRB(22, 22, 22, 10),
+                 child: GridView.builder(
+                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                     childAspectRatio: 1,
+                   crossAxisCount: 2, // Number of columns in the grid
+                  crossAxisSpacing: 15.0, // Spacing between columns
+                  mainAxisSpacing: 15.0, // Spacing between rows
+                  ),
+                  itemCount: widget.restaurant.dealNames.length,
+                  itemBuilder: (context, index) {
+                  var dealName = widget.restaurant.dealNames[index];
+                     var dealImage = widget.restaurant.dealImage[index];
+                  var isSelected =
+                   selectedDeals.contains(CartItem(dealName, dealImage));
+                  return  Container(
+                   decoration: BoxDecoration(
+                   border: Border.all(color: Colors.grey, width: 1.0),
+                     borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15),
+                         topLeft: Radius.circular(15), topRight: Radius.circular(15)),
             ),
-            child:
-          InkWell(
-            onTap: () {
-              showModalBottomSheet<dynamic>(
-                backgroundColor: Colors.white,
+                   child:
+                    InkWell(
+                     onTap: () {
+                        showModalBottomSheet<dynamic>(
+                          backgroundColor: Colors.white,
                 isScrollControlled: true,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
@@ -271,38 +291,46 @@ class _ExampleCardState extends State<ExampleCard> {
               );
             },
             child: Container(
-              padding: const EdgeInsets.all(8.0), // Adjust padding as needed
+              padding: const EdgeInsets.all(4), // Adjust padding as needed
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Stack(
+                    children:<Widget> [
+                      Container(
+                        width: 150,
+                        height: 60,
+                          child: const Image(
+                            image: AssetImage('images/mcdd.png'),
+                            fit: BoxFit.cover,
+                          ),
+                      ),
+                      Container(
+                        alignment: Alignment.topRight,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CartScreen(),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            isSelected
+                                ? Icons.shopping_cart
+                                : Icons.shopping_cart,
+                            color: Colors.black,
+                            size: 28.0,
+                          ),
+                        ),
+                    ),]
+                  ),
                   Text(
                     widget.restaurant.dealNames[index],
                     style: APfontsStyle.customTextStyle(
                       color: Colors.black,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CartScreen(),
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          isSelected
-                              ? Icons.shopping_cart
-                              : Icons.shopping_cart,
-                          color: Colors.black,
-                          size: 28.0,
-                        ),
-                      ),
+                      fontSize: 15,
                     ),
                   ),
                 ],

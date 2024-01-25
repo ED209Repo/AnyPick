@@ -115,80 +115,7 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
-                  left: 10,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0), // Add border radius for rounded corners
-                    ),
-                    padding: const EdgeInsets.all(10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0), // Add border radius for the inner container
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding:  EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Column(
-                              children: [
-                                 Icon(
-                                  Icons.location_on,
-                                  color: Colors.black,
-                                  size: 24,
-                                ),
-                                SizedBox(height: 4),
-                                 Icon(
-                                      Icons.access_time_filled_sharp,
-                                      color: Colors.black,
-                                      size: 24,
-                                    ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const VerticalDivider(
-                                color: Colors.black, // Set the color of the vertical divider
-                                width: 100,
-                                thickness: 3,// Set the width of the vertical divider
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                child: Column(
-                                  children: [
-                                    
-                                    Text(
-                                  "1.4 Km",
-                                  style: APfontsStyle.customTextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                                    Text(
-                                      "Closes at 12:45 AM",
-                                      maxLines: 2,
-                                      style: APfontsStyle.customTextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-
-
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 20,
+                  left: 25,
                   bottom: 70,
                   child: Row(
                     children: [
@@ -226,31 +153,41 @@ class _MenuPageState extends State<MenuPage> {
                               ),
                             ],
                           ),
-                          Text(
-                            "American",
-                            style: APfontsStyle.customTextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                            ),
-                          ),
                           Row(
-                            children: [
-                              const Icon(
-                                Icons.delivery_dining_rounded,
-                                color: Colors.black,
-                                size: 24,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                "1 Riyal",
-                                style: APfontsStyle.customTextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  children: [
+                                          const Icon(
+                                            Icons.location_on,
+                                            color: Colors.black,
+                                            size: 24,
+                                          ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      "1.4 Km",
+                                      style: APfontsStyle.customTextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                          Row(
+                           children: [
+                            const Icon(
+                             Icons.access_time_filled_sharp,
+                           color: Colors.black,
+                            size: 24,
+                           ),
+                             const SizedBox(width: 10),
+                            Text(
+                              "12:45 AM",
+                              maxLines: 2,
+                              style: APfontsStyle.customTextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
                               ),
-                            ],
-                          ),
+                            ),
+                    ],
+                  ),
                         ],
                       )
 
@@ -267,7 +204,7 @@ class _MenuPageState extends State<MenuPage> {
 
           const SizedBox(height: 10),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(6, 0, 0, 0),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -326,7 +263,7 @@ class _MenuPageState extends State<MenuPage> {
                 return Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -354,6 +291,7 @@ class _MenuPageState extends State<MenuPage> {
                               child: Stack(
                                 children: [
                                   Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: Column(
