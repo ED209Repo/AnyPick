@@ -24,7 +24,7 @@ class _SlidingSegmentedControlDemoState
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: ButtonsTabBar(

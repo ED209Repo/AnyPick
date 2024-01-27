@@ -138,77 +138,7 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 Positioned(
-                  bottom: 0,
-                  left: 10,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0), // Add border radius for rounded corners
-                    ),
-                    padding: const EdgeInsets.all(10),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0), // Add border radius for the inner container
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Column(
-                              children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  color: Colors.black,
-                                  size: 24,
-                                ),
-                                Text(
-                                  "1.4 Km",
-                                  style: APfontsStyle.customTextStyle(
-                                    color: Colors.black,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const VerticalDivider(
-                                color: Colors.black, // Set the color of the vertical divider
-                                width: 100,
-                                thickness: 3,// Set the width of the vertical divider
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                child: Column(
-                                  children: [
-                                    const Icon(
-                                      Icons.access_time_filled_sharp,
-                                      color: Colors.black,
-                                      size: 24,
-                                    ),
-                                    Text(
-                                      "Closes at 12:45 AM",
-                                      style: APfontsStyle.customTextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-
-
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 20,
+                  left: 25,
                   bottom: 70,
                   child: Row(
                     children: [
@@ -246,31 +176,41 @@ class _MenuPageState extends State<MenuPage> {
                               ),
                             ],
                           ),
-                          Text(
-                            "American",
-                            style: APfontsStyle.customTextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                            ),
-                          ),
                           Row(
-                            children: [
-                              const Icon(
-                                Icons.delivery_dining_rounded,
-                                color: Colors.black,
-                                size: 24,
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                "1 Riyal",
-                                style: APfontsStyle.customTextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
+                                  children: [
+                                          const Icon(
+                                            Icons.location_on,
+                                            color: Colors.black,
+                                            size: 24,
+                                          ),
+                                    const SizedBox(width: 10),
+                                    Text(
+                                      "1.4 Km",
+                                      style: APfontsStyle.customTextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                          Row(
+                           children: [
+                            const Icon(
+                             Icons.access_time_filled_sharp,
+                           color: Colors.black,
+                            size: 24,
+                           ),
+                             const SizedBox(width: 10),
+                            Text(
+                              "12:45 AM",
+                              maxLines: 2,
+                              style: APfontsStyle.customTextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
                               ),
-                            ],
-                          ),
+                            ),
+                    ],
+                  ),
                         ],
                       )
 
@@ -370,7 +310,7 @@ class _MenuPageState extends State<MenuPage> {
                 return Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                       child: Container(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -378,6 +318,7 @@ class _MenuPageState extends State<MenuPage> {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            color: AppColors.themeColor,
                           ),
                         ),
                       ),
@@ -397,6 +338,7 @@ class _MenuPageState extends State<MenuPage> {
                               child: Stack(
                                 children: [
                                   Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: Column(
@@ -424,37 +366,46 @@ class _MenuPageState extends State<MenuPage> {
                                             ),
                                             Text(
                                               ' ${item.description}',
-                                              maxLines: 2,
+                                              maxLines: 3,
                                               overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.left,
                                               style: APfontsStyle.customTextStyle(
                                                 color: Colors.black,
+                                                fontSize: 15,
                                               ),
                                             ),
                                             const SizedBox(height: 10),
-                                            Text(
-                                              ' ${item.unit_PerPrice} SR',
-                                              style: APfontsStyle.customTextStyle(
-                                                color: Colors.black,
-                                              ),
-                                            ),
+                                            
                                           ],
                                         ),
                                       ),
-                                      // SizedBox(
-                                      //   width: 120.0,
-                                      //   height: 120.0,
-                                      //   child: ClipRRect(
-                                      //     borderRadius: BorderRadius.circular(12.0),
-                                      //     child: Image.network(
-                                      //       item.prepare_Time,
-                                      //       fit: BoxFit.cover,
-                                      //     ),
-                                      //   ),
-                                      // ),
+                                      Column(
+                                        children: [
+                                          SizedBox(
+                                            width: 100.0,
+                                            height: 100.0,
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.circular(12.0),
+                                              child: Image.network(
+                                                item.imageUrl,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                              ' ${item.price} SR',
+                                              textAlign: TextAlign.left,
+                                              style: APfontsStyle.customTextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600
+                                              ),
+                                            ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                   Positioned(
-                                    bottom: 0,
+                                    bottom: 20,
                                     right: 0,
                                     child: Container(
                                       width: 30,
