@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:anypickdemo/NewHomeScreen.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Widgets/AppColors.dart';
 import 'Widgets/CustomButton.dart';
 import 'homeScreen.dart';
+import 'package:http/http.dart' as http;
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -18,6 +21,7 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
   String _fullname ='';
   String _username ='';
   String _email ='';
@@ -110,6 +114,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       const SizedBox(height: 20.0),
                       TextFormField(
+                        controller: _emailController,
                         decoration:  InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -220,12 +225,27 @@ class _SignupPageState extends State<SignupPage> {
                           onPressed: () async {
                             if  (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
-                                CoolAlert.show(context: context, type: CoolAlertType.loading,
+                              http.Response? response = (await  register(_usernameController.text, _emailController.text , selectvalue)) as http.Response?;
+                               if(response?.statusCode==201){CoolAlert.show(context: context, type: CoolAlertType.loading,
                               text: AppLocalizations.of(context)!.signUpSuccessfull,
                               autoCloseDuration: const Duration(seconds: 2),
                               lottieAsset: "images/signup.json",
                               animType: CoolAlertAnimType.scale,
+                               );}else if(response?.statusCode==200){
+                                CoolAlert.show(context: context, type: CoolAlertType.loading,
+                              text: "User Already Exists",
+                              autoCloseDuration: const Duration(seconds: 2),
+                              lottieAsset: "images/signup.json",
+                              animType: CoolAlertAnimType.scale,
                                );
+                               }else{
+                                CoolAlert.show(context: context, type: CoolAlertType.loading,
+                              text: "Failed",
+                              autoCloseDuration: const Duration(seconds: 2),
+                              lottieAsset: "images/signup.json",
+                              animType: CoolAlertAnimType.scale,
+                               );
+                               }
                                _saveUsername(_usernameController.text);
                                await Future.delayed(const Duration(milliseconds: 2000));
                                  Navigator.push(
@@ -293,6 +313,47 @@ class _SignupPageState extends State<SignupPage> {
     setState(() {
       myAge = '$years years' ;
     });
+  }
+   register(String  email, userName, gender) async {
+    Map data = {
+      'userName': _usernameController.text,
+      'email': _emailController.text,
+      'gender': selectvalue,
+      'roleId': 2,
+      'phone': "090090909090",
+      'Dob':'2002',
+      'Address':"",
+      'CreatedAt':"2033333302",
+      'ProfileImage':"200999999992",
+      'LocationLatitude':"2002999999999",
+      'LocationLongitude':"200233232",
+      'anyPick_User':""
+
+    };
+    print(data);
+
+    String body = json.encode(data);
+     var client = http.Client();
+        var uri = Uri.parse('https://7fbd-206-84-149-102.ngrok-free.app/api/user/Signup');
+        var response = await http.post(
+       uri,
+       body: body,
+       headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+    );
+    print(response.body);
+    print(response.statusCode);
+    if (response.statusCode == 201) {
+      //Or put here your next screen using Navigator.push() method
+      print('success');
+    }else if(response.statusCode==200){
+      print("User Already Exists");
+    }else{
+      print("Failed ");
+    }
   }
 }
 

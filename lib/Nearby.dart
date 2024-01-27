@@ -1,3 +1,4 @@
+import 'package:anypickdemo/Request_Model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'Card_Swiper.dart';
@@ -62,10 +63,14 @@ class _NearByScreenState extends State<NearByScreen> {
         ? //--- true if UP swipe
     Future.delayed(const Duration(milliseconds: 1000), () {
       setState(() {
+        RestaurantModel restaurant = RestaurantModel(
+          rest_Cat: null
+  // initialize the properties with the required values
+);
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const MenuPage(),
+            builder: (context) =>  MenuPage(restaurant: restaurant,),
           ),
         );
       });
